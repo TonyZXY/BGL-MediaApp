@@ -18,7 +18,6 @@
 		1AFE40F320C4F7FE002D8137 /* ViewOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE404E20C4F7FC002D8137 /* ViewOptionsViewController.swift */; };
 		1AFE40F420C4F7FE002D8137 /* MoreOptionMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE404F20C4F7FC002D8137 /* MoreOptionMainViewController.swift */; };
 		1AFE40F520C4F7FE002D8137 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE405120C4F7FC002D8137 /* NotificationViewController.swift */; };
-		1AFE40F620C4F7FE002D8137 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE405220C4F7FC002D8137 /* Info.plist */; };
 		1AFE40F720C4F7FE002D8137 /* NewsHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE405520C4F7FC002D8137 /* NewsHomeViewController.swift */; };
 		1AFE40F820C4F7FE002D8137 /* NewsDetailWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE405620C4F7FC002D8137 /* NewsDetailWebViewController.swift */; };
 		1AFE40F920C4F7FE002D8137 /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE405720C4F7FC002D8137 /* VideoDetailViewController.swift */; };
@@ -137,6 +136,7 @@
 		1AFE416A20C4F7FE002D8137 /* ChangeRiseFallColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE40E820C4F7FD002D8137 /* ChangeRiseFallColor.swift */; };
 		1AFE416B20C4F7FE002D8137 /* ScientificMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE40E920C4F7FD002D8137 /* ScientificMethod.swift */; };
 		1AFE416C20C4F7FE002D8137 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE40EA20C4F7FD002D8137 /* ThemeColor.swift */; };
+		1AFE416D20C4FA87002D8137 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE405220C4F7FC002D8137 /* Info.plist */; };
 		65CA633090F1F7BCDAFE405B /* Pods_BGL_MediaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -826,7 +826,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AFE40F620C4F7FE002D8137 /* Info.plist in Resources */,
+				1AFE416D20C4FA87002D8137 /* Info.plist in Resources */,
 				1AFE410F20C4F7FE002D8137 /* LaunchScreen.storyboard in Resources */,
 				1AFE412320C4F7FE002D8137 /* SellTableViewCell.xib in Resources */,
 				1AFE411420C4F7FE002D8137 /* TimelineTableViewCell.xib in Resources */,
