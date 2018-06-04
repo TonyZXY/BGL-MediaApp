@@ -10,7 +10,8 @@ import UIKit
 
 // REVIEW: class name perhaps can be BGLNewsHomeViewController -Johnny Lin
 class NewsHomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    let cellId = "cellId"
+    let genuineController = GenuineListViewController()
+    let newsController = NewsListViewController()
 
     lazy var menuBar: NewsMenuBar = {
         let mb = NewsMenuBar()
@@ -45,6 +46,7 @@ class NewsHomeViewController: UIViewController, UICollectionViewDataSource, UICo
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        cv.backgroundColor = ThemeColor().themeColor()
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.dataSource = self
         cv.delegate = self
@@ -63,8 +65,7 @@ class NewsHomeViewController: UIViewController, UICollectionViewDataSource, UICo
         selectView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
         menuBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
 
-        selectView.register(NewsListViewCell.self, forCellWithReuseIdentifier: cellId)
-        selectView.register(GenuineListViewCell.self, forCellWithReuseIdentifier: "genuineCell")
+        selectView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "containerCell")
         selectView.dataSource = self
         selectView.delegate = self
         selectView.isPagingEnabled = true
@@ -91,15 +92,15 @@ class NewsHomeViewController: UIViewController, UICollectionViewDataSource, UICo
 
     // two cells 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "containerCell", for: indexPath)
         if (indexPath.item == 1) {
-            let genuinePageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "genuineCell", for: indexPath) as! GenuineListViewCell
-            genuinePageCell.homeViewController = self
-            return genuinePageCell
+            addChildViewController(childViewControllers: genuineController, cell: cell)
+            genuineController.homeViewController = self
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! NewsListViewCell
-            cell.homeViewController = self
-            return cell
+            addChildViewController(childViewControllers: newsController, cell: cell)
+            newsController.homeViewController = self
         }
+        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -114,6 +115,7 @@ class NewsHomeViewController: UIViewController, UICollectionViewDataSource, UICo
         let indexPath = IndexPath(item: menuIndex, section: 0)
         selectView.scrollToItem(at: indexPath, at: [], animated: true)
     }
+    
 }
 
 

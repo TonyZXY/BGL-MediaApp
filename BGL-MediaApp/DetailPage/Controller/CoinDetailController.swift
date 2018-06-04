@@ -95,20 +95,7 @@ class CoinDetailController: UIViewController,UICollectionViewDelegate,UICollecti
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
-    func addChildViewController(childViewControllers:UIViewController,cell:UICollectionViewCell){
-        addChildViewController(childViewControllers)
-        cell.contentView.addSubview(childViewControllers.view)
-        childViewControllers.view.frame = view.bounds
-        childViewControllers.view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        childViewControllers.didMove(toParentViewController: self)
-        
-        //Constraints
-        childViewControllers.view.translatesAutoresizingMaskIntoConstraints = false
-        childViewControllers.view.topAnchor.constraint(equalTo: cell.topAnchor).isActive = true
-        childViewControllers.view.leftAnchor.constraint(equalTo: cell.leftAnchor).isActive = true
-        childViewControllers.view.widthAnchor.constraint(equalTo: cell.widthAnchor).isActive = true
-        childViewControllers.view.heightAnchor.constraint(equalTo: cell.heightAnchor).isActive = true
-    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

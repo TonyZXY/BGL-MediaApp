@@ -69,6 +69,23 @@ extension String {
     }
 }
 
+public extension UIViewController {
+    func addChildViewController(childViewControllers:UIViewController,cell:UICollectionViewCell){
+        addChildViewController(childViewControllers)
+        cell.contentView.addSubview(childViewControllers.view)
+        childViewControllers.view.frame = view.bounds
+        childViewControllers.view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+        childViewControllers.didMove(toParentViewController: self)
+        
+        //Constraints
+        childViewControllers.view.translatesAutoresizingMaskIntoConstraints = false
+        childViewControllers.view.topAnchor.constraint(equalTo: cell.topAnchor).isActive = true
+        childViewControllers.view.leftAnchor.constraint(equalTo: cell.leftAnchor).isActive = true
+        childViewControllers.view.widthAnchor.constraint(equalTo: cell.widthAnchor).isActive = true
+        childViewControllers.view.heightAnchor.constraint(equalTo: cell.heightAnchor).isActive = true
+    }
+}
+
 
 public extension UIDevice {
 

@@ -10,7 +10,7 @@ import UIKit
 
 class NewsCell: BaseCell {
 
-    weak var homeViewController: NewsHomeViewController!
+//    weak var homeViewController: NewsHomeViewController!
 
     // set content of the cell
     var news: News? {
@@ -70,6 +70,7 @@ class NewsCell: BaseCell {
     }()
 
     override func setupViews() {
+
         addSubview(view)
         setupView()
     }
