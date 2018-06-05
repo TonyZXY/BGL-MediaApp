@@ -140,6 +140,8 @@
 		1AFE417120C50E9C002D8137 /* GenuineListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE417020C50E9C002D8137 /* GenuineListViewController.swift */; };
 		1AFE417320C5123C002D8137 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE417220C5123C002D8137 /* NewsListViewController.swift */; };
 		1AFE417720C51987002D8137 /* NewsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE417620C51986002D8137 /* NewsCellView.swift */; };
+		5765935E20C79B4E00298EF5 /* SearchNewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765935D20C79B4E00298EF5 /* SearchNewsController.swift */; };
+		5765936120C7AA3E00298EF5 /* DefaultLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */; };
 		65CA633090F1F7BCDAFE405B /* Pods_BGL_MediaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -280,6 +282,8 @@
 		1AFE417620C51986002D8137 /* NewsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellView.swift; sourceTree = "<group>"; };
 		52014D454945527EF240756D /* Pods-BGL-MediaApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.debug.xcconfig"; sourceTree = "<group>"; };
 		56D92E4D774CE980869C74BC /* Pods-BGL-MediaApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.release.xcconfig"; sourceTree = "<group>"; };
+		5765935D20C79B4E00298EF5 /* SearchNewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNewsController.swift; sourceTree = "<group>"; };
+		5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLanguageController.swift; sourceTree = "<group>"; };
 		EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BGL_MediaApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -335,6 +339,7 @@
 		1AFE404020C4F7FC002D8137 /* MoreOptions */ = {
 			isa = PBXGroup;
 			children = (
+				5765935F20C7AA0A00298EF5 /* DefaultLanague */,
 				1AFE404120C4F7FC002D8137 /* AboutUs */,
 				1AFE404320C4F7FC002D8137 /* DefaultCurrency */,
 				1AFE404620C4F7FC002D8137 /* OtherOptions */,
@@ -417,6 +422,7 @@
 				1AFE405720C4F7FC002D8137 /* VideoDetailViewController.swift */,
 				1AFE417020C50E9C002D8137 /* GenuineListViewController.swift */,
 				1AFE417220C5123C002D8137 /* NewsListViewController.swift */,
+				5765935D20C79B4E00298EF5 /* SearchNewsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -775,6 +781,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5765935F20C7AA0A00298EF5 /* DefaultLanague */ = {
+			isa = PBXGroup;
+			children = (
+				5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */,
+			);
+			path = DefaultLanague;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -933,6 +947,7 @@
 				1AFE410D20C4F7FE002D8137 /* news_app_for_blockchain.xcdatamodeld in Sources */,
 				1AFE413F20C4F7FE002D8137 /* CryptoCompareCoinsRealm.swift in Sources */,
 				1AFE415820C4F7FE002D8137 /* TickerDataFetcherV2.swift in Sources */,
+				5765936120C7AA3E00298EF5 /* DefaultLanguageController.swift in Sources */,
 				1AFE411120C4F7FE002D8137 /* TimelineTableViewCell.swift in Sources */,
 				1AFE415120C4F7FE002D8137 /* MarketCollectionViewCell.swift in Sources */,
 				1AFE413820C4F7FE002D8137 /* Endpoint.swift in Sources */,
@@ -976,6 +991,7 @@
 				1AFE410020C4F7FE002D8137 /* NewsCell.swift in Sources */,
 				1AFE413920C4F7FE002D8137 /* TransactionsController.swift in Sources */,
 				1AFE414220C4F7FE002D8137 /* TransactionFrom.swift in Sources */,
+				5765935E20C79B4E00298EF5 /* SearchNewsController.swift in Sources */,
 				1AFE414720C4F7FE002D8137 /* CryptoCompareCoin.swift in Sources */,
 				1AFE416A20C4F7FE002D8137 /* ChangeRiseFallColor.swift in Sources */,
 				1AFE40F120C4F7FE002D8137 /* WebDetailViewController.swift in Sources */,

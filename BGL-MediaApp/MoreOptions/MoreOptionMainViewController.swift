@@ -13,9 +13,9 @@ class MoreOptionMainViewController: UIViewController, UITableViewDataSource, UIT
     let sections = ["关于我们","应用设置选项"] // Two Sections' names
     let items = [
         ["关于Blockchain Global","Blockchain Global社区"], //About us list items
-        ["默认法定货币","应用通知选项","界面显示选项","其他选项"] // other app settings
+        ["默认法定货币","应用通知选项","界面显示选项","其他选项","语言设置"] // other app settings
     ]
-    let segueIdentities  = ["aboutUs","bglCommu","defaultCurrency","notifiOption","viewOption","otherOption"]
+    let segueIdentities  = ["aboutUs","bglCommu","defaultCurrency","notifiOption","viewOption","otherOption","defaultLanguage"]
 
     @IBOutlet weak var tableView00: UITableView!
     override func viewDidLoad() {

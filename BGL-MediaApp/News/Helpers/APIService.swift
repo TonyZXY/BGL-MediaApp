@@ -28,7 +28,10 @@ class APIService: NSObject {
     let newsLocaleQuery = "localeTag"
     let newsContentQuery = "contentTag"
     let genuineQuery = "genuineTag"
-
+    let languageQuery = "languageTag"
+    let english = "EN"
+    let chinese = "CN"
+    
     // fetch Offline News data (from database)
     func fetchNewsOffline(contentType: String, completion: @escaping (Results<News>) -> ()) {
         switch contentType {
@@ -66,7 +69,10 @@ class APIService: NSObject {
         switch contentType { // switch locale tag
         case "国内", "国际":
             let url = URL(string: urlString + localNews)
-            let para = [newsLocaleQuery: contentType, "skip": currentNumber] as [String: Any]
+            
+            let para = [newsLocaleQuery: contentType, "skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+            
+//            let para = [newsLocaleQuery: contentType, "skip": currentNumber] as [String: Any]
             Alamofire.request(url!, parameters: para).responseJSON { (responsein) in
                 switch responsein.result {
                 case .success(let value):
@@ -82,7 +88,8 @@ class APIService: NSObject {
             }
         default: // if content tag
             let url = URL(string: urlString + contentNews)
-            let para = [newsContentQuery: contentNews, "skip": currentNumber] as [String: Any]
+             let para = [newsContentQuery: contentNews, "skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+//            let para = [newsContentQuery: contentNews, "skip": currentNumber] as [String: Any]
             Alamofire.request(url!, parameters: para).responseJSON { (responsion) in
                 switch responsion.result {
                 case .success(let value):
@@ -102,7 +109,8 @@ class APIService: NSObject {
     // get Genuine data from API
     func fetchGenuineData(contentType: String, currentNumber: Int, completion: @escaping (Results<Genuine>) -> ()) {
         let url = URL(string: urlString + contentGenuine)
-        let para = [genuineQuery: contentType, "skip": currentNumber] as [String: Any]
+         let para = [genuineQuery: contentType, "skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+//        let para = [genuineQuery: contentType, "skip": currentNumber] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
             case .success(let value):
@@ -121,7 +129,8 @@ class APIService: NSObject {
     // get Video data from API
     func fetchVideoData(currentNumber: Int, completion: @escaping (Results<Video>) -> ()) {
         let url = URL(string: urlString + video)
-        let para = ["skip": currentNumber] as [String: Any]
+           let para = ["skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+//        let para = ["skip": currentNumber] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
             case .success(let value):

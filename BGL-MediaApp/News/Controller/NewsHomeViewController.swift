@@ -55,6 +55,9 @@ class NewsHomeViewController: UIViewController, UICollectionViewDataSource, UICo
 
     // constraints of the view
     func setupView() {
+        let navigationSearchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchNews))
+        self.navigationItem.setRightBarButton(navigationSearchButton, animated: true)
+        
         view.addSubview(menuBar)
         view.addSubview(selectView)
         view.addConstraintsWithFormat(format: "V:[v0(40)]-0-[v1]|", views: menuBar, selectView)
@@ -74,6 +77,11 @@ class NewsHomeViewController: UIViewController, UICollectionViewDataSource, UICo
         selectView.alwaysBounceHorizontal = false
     }
 
+    
+    @objc func searchNews(){
+        let searchPage = SearchNewsController()
+        navigationController?.pushViewController(searchPage, animated: true)
+    }
 
     // two cell represent NEWS and GENUINE
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

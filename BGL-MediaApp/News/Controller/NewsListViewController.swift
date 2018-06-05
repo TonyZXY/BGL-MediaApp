@@ -115,7 +115,6 @@ class NewsListViewController: UIViewController, UICollectionViewDataSource,UICol
     // cell of the item
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.cellListView { // if not tabbar
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "newsCell", for: indexPath)
             if indexPath.item == 0 { // if slider cell
                 let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "sliderCell", for: indexPath) as! NewsSliderViewCell
                 cell3.homeViewController = self.homeViewController
@@ -141,7 +140,7 @@ class NewsListViewController: UIViewController, UICollectionViewDataSource,UICol
         var size: CGSize
         if collectionView == self.cellListView {
             if indexPath.item == 0 {
-                size = CGSize(width: cellListView.frame.width, height: 150)
+                size = CGSize(width: cellListView.frame.width, height: 250)
             } else {
                 size = CGSize(width: cellListView.frame.width, height: 110)
             }

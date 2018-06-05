@@ -49,7 +49,7 @@ class DetailController: UIViewController{
     }
     
     //Remove the refresh notification (From market and tradingpairs change)
-    deinit {
+    deinit { 
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "setPriceChange"), object: nil)
     }
     
