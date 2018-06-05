@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A6AD41320C615FF00D1ADA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A6AD41120C615FF00D1ADA7 /* Main.storyboard */; };
 		1AFE40EB20C4F7FE002D8137 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE404220C4F7FC002D8137 /* AboutUsViewController.swift */; };
 		1AFE40EC20C4F7FE002D8137 /* DefaultCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE404420C4F7FC002D8137 /* DefaultCurrencyViewController.swift */; };
 		1AFE40ED20C4F7FE002D8137 /* defCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE404520C4F7FC002D8137 /* defCurrency.swift */; };
@@ -39,7 +40,6 @@
 		1AFE410920C4F7FE002D8137 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE406A20C4F7FC002D8137 /* APIService.swift */; };
 		1AFE410A20C4F7FE002D8137 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE406B20C4F7FC002D8137 /* Extensions.swift */; };
 		1AFE410B20C4F7FE002D8137 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE406C20C4F7FC002D8137 /* BaseCell.swift */; };
-		1AFE410C20C4F7FE002D8137 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE406E20C4F7FC002D8137 /* Main.storyboard */; };
 		1AFE410D20C4F7FE002D8137 /* news_app_for_blockchain.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE407120C4F7FC002D8137 /* news_app_for_blockchain.xcdatamodeld */; };
 		1AFE410E20C4F7FE002D8137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE407320C4F7FC002D8137 /* Assets.xcassets */; };
 		1AFE410F20C4F7FE002D8137 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE407420C4F7FC002D8137 /* LaunchScreen.storyboard */; };
@@ -144,6 +144,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A6AD41220C615FF00D1ADA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "BGL-MediaApp/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		1AFE402B20C4F7DC002D8137 /* BGL-MediaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BGL-MediaApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AFE404220C4F7FC002D8137 /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		1AFE404420C4F7FC002D8137 /* DefaultCurrencyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultCurrencyViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +179,6 @@
 		1AFE406A20C4F7FC002D8137 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		1AFE406B20C4F7FC002D8137 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1AFE406C20C4F7FC002D8137 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
-		1AFE406F20C4F7FC002D8137 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		1AFE407220C4F7FC002D8137 /* news_app_for_blockchain.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = news_app_for_blockchain.xcdatamodel; sourceTree = "<group>"; };
 		1AFE407320C4F7FC002D8137 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AFE407520C4F7FC002D8137 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -464,7 +464,7 @@
 		1AFE406D20C4F7FC002D8137 /* Base.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				1AFE406E20C4F7FC002D8137 /* Main.storyboard */,
+				1A6AD41120C615FF00D1ADA7 /* Main.storyboard */,
 			);
 			name = Base.lproj;
 			path = "../../bgl-media-team-ios/news app for blockchain/Base.lproj";
@@ -838,9 +838,9 @@
 				1AFE416D20C4FA87002D8137 /* Info.plist in Resources */,
 				1AFE410F20C4F7FE002D8137 /* LaunchScreen.storyboard in Resources */,
 				1AFE412320C4F7FE002D8137 /* SellTableViewCell.xib in Resources */,
+				1A6AD41320C615FF00D1ADA7 /* Main.storyboard in Resources */,
 				1AFE411420C4F7FE002D8137 /* TimelineTableViewCell.xib in Resources */,
 				1AFE410E20C4F7FE002D8137 /* Assets.xcassets in Resources */,
-				1AFE410C20C4F7FE002D8137 /* Main.storyboard in Resources */,
 				1AFE413520C4F7FE002D8137 /* README.md in Resources */,
 				1AFE412120C4F7FE002D8137 /* TimeHistoryTableViewCell.xib in Resources */,
 			);
@@ -1039,10 +1039,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1AFE406E20C4F7FC002D8137 /* Main.storyboard */ = {
+		1A6AD41120C615FF00D1ADA7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1AFE406F20C4F7FC002D8137 /* Base */,
+				1A6AD41220C615FF00D1ADA7 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
