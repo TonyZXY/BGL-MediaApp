@@ -171,7 +171,7 @@ class GenuineListViewController: UIViewController, UICollectionViewDelegate,UICo
         } else {
             if collectionView == self.cellListView {
                 if indexPath.item == 0 {
-                    size = CGSize(width: cellListView.frame.width, height: 150)
+                    size = CGSize(width: cellListView.frame.width, height: 250)
                 } else {
                     size = CGSize(width: cellListView.frame.width, height: 110)
                 }

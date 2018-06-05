@@ -71,7 +71,7 @@ class GenuineSliderCell: BaseCell {
         addConstraintsWithFormat(format: "V:|[v0]|", views: image)
         image.addSubview(textView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: textView)
-        addConstraintsWithFormat(format: "V:|-100-[v0]|", views: textView)
+        addConstraintsWithFormat(format: "V:|-195-[v0]|", views: textView)
     }
 
 

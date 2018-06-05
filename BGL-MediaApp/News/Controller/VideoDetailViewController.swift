@@ -95,7 +95,7 @@ class VideoDetailViewController: UIViewController {
         return sc
     }()
 
-    //     YouTube Player
+//         YouTube Player
     let videoplayer: YouTubePlayerView = {
         let player = YouTubePlayerView()
         player.translatesAutoresizingMaskIntoConstraints = false
