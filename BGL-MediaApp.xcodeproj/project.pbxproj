@@ -140,6 +140,7 @@
 		1AFE417120C50E9C002D8137 /* GenuineListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE417020C50E9C002D8137 /* GenuineListViewController.swift */; };
 		1AFE417320C5123C002D8137 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE417220C5123C002D8137 /* NewsListViewController.swift */; };
 		1AFE417720C51987002D8137 /* NewsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE417620C51986002D8137 /* NewsCellView.swift */; };
+		5451CFBC20C76E5700717536 /* FlashSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5451CFBB20C76E5700717536 /* FlashSearchController.swift */; };
 		65CA633090F1F7BCDAFE405B /* Pods_BGL_MediaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -279,6 +280,7 @@
 		1AFE417220C5123C002D8137 /* NewsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
 		1AFE417620C51986002D8137 /* NewsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellView.swift; sourceTree = "<group>"; };
 		52014D454945527EF240756D /* Pods-BGL-MediaApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5451CFBB20C76E5700717536 /* FlashSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashSearchController.swift; sourceTree = "<group>"; };
 		56D92E4D774CE980869C74BC /* Pods-BGL-MediaApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.release.xcconfig"; sourceTree = "<group>"; };
 		EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BGL_MediaApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -325,7 +327,6 @@
 				1AFE405320C4F7FC002D8137 /* News */,
 				1AFE40D020C4F7FD002D8137 /* NewsFlash */,
 				1AFE407020C4F7FC002D8137 /* Supporting Files */,
-				1AFE407720C4F7FD002D8137 /* Timeline */,
 				1AFE40E520C4F7FD002D8137 /* UI_Tools */,
 				1AFE409220C4F7FD002D8137 /* Wallet */,
 			);
@@ -479,17 +480,6 @@
 				1AFE407620C4F7FC002D8137 /* AppDelegate.swift */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1AFE407720C4F7FD002D8137 /* Timeline */ = {
-			isa = PBXGroup;
-			children = (
-				1AFE407820C4F7FD002D8137 /* TimelineTableViewCell.swift */,
-				1AFE407920C4F7FD002D8137 /* Timeline.swift */,
-				1AFE407A20C4F7FD002D8137 /* TimelinePoint.swift */,
-				1AFE407B20C4F7FD002D8137 /* TimelineTableViewCell.xib */,
-			);
-			path = Timeline;
 			sourceTree = "<group>";
 		};
 		1AFE407C20C4F7FD002D8137 /* DetailPage */ = {
@@ -688,9 +678,9 @@
 		1AFE40D020C4F7FD002D8137 /* NewsFlash */ = {
 			isa = PBXGroup;
 			children = (
-				1AFE40D120C4F7FD002D8137 /* TimelineTableViewController.swift */,
-				1AFE40D220C4F7FD002D8137 /* NewsFlash.swift */,
-				1AFE40D320C4F7FD002D8137 /* NewsFlashViewController.swift */,
+				5451CFBA20C76D1100717536 /* View */,
+				5451CFB920C76D0A00717536 /* Model */,
+				5451CFB820C76D0000717536 /* Controller */,
 			);
 			path = NewsFlash;
 			sourceTree = "<group>";
@@ -773,6 +763,35 @@
 				EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5451CFB820C76D0000717536 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1AFE40D320C4F7FD002D8137 /* NewsFlashViewController.swift */,
+				1AFE40D120C4F7FD002D8137 /* TimelineTableViewController.swift */,
+				5451CFBB20C76E5700717536 /* FlashSearchController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5451CFB920C76D0A00717536 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1AFE40D220C4F7FD002D8137 /* NewsFlash.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5451CFBA20C76D1100717536 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1AFE407A20C4F7FD002D8137 /* TimelinePoint.swift */,
+				1AFE407920C4F7FD002D8137 /* Timeline.swift */,
+				1AFE407820C4F7FD002D8137 /* TimelineTableViewCell.swift */,
+				1AFE407B20C4F7FD002D8137 /* TimelineTableViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1016,6 +1035,7 @@
 				1AFE40F020C4F7FE002D8137 /* OtherOptionViewController.swift in Sources */,
 				1AFE411620C4F7FE002D8137 /* DetailController.swift in Sources */,
 				1AFE40FA20C4F7FE002D8137 /* Genuine.swift in Sources */,
+				5451CFBC20C76E5700717536 /* FlashSearchController.swift in Sources */,
 				1AFE415720C4F7FE002D8137 /* CancelTouchKeyboard.swift in Sources */,
 				1AFE411E20C4F7FE002D8137 /* AllLossView.swift in Sources */,
 				1AFE412620C4F7FE002D8137 /* TransNumberCell.swift in Sources */,

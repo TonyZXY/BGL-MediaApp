@@ -13,6 +13,9 @@ import RealmSwift
 
 class TimelineTableViewController: UITableViewController {
     
+    var testCounter = 1
+    
+    
     let realm = try! Realm()
     var results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
     
@@ -54,6 +57,8 @@ class TimelineTableViewController: UITableViewController {
         cell.timeline.backColor = #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
         cell.titleLabel.text = dateFormatter.string(from: object.dateTime)
         cell.descriptionLabel.text = object.contents
+        
+        print(cell.descriptionLabel.text)
         
         return cell
     }
