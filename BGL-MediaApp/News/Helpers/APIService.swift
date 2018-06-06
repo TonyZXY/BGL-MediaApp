@@ -68,7 +68,7 @@ class APIService: NSObject {
     func fetchNewsData(contentType: String, currentNumber: Int, completion: @escaping (Results<News>) -> ()) {
         switch contentType { // switch locale tag
         case "国内", "国际":
-            let url = URL(string: urlString + localNews)
+            let url = URL(string: urlString + localNews) 
             
             let para = [newsLocaleQuery: contentType, "skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
             
