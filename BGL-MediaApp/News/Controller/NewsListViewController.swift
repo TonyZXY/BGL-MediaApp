@@ -115,6 +115,7 @@ class NewsListViewController: UIViewController, UICollectionViewDataSource,UICol
     // cell of the item
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.cellListView { // if not tabbar
+            
             if indexPath.item == 0 { // if slider cell
                 let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "sliderCell", for: indexPath) as! NewsSliderViewCell
                 cell3.homeViewController = self.homeViewController

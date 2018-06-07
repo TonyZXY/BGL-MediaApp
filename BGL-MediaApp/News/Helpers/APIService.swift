@@ -232,6 +232,7 @@ class APIService: NSObject {
                 if let collection = json.array {
                     for item in collection {
                         let searchObject = SearchObject()
+                        searchObject.type = "news"
                         searchObject.author = item["author"].string!
                         searchObject.title = item["title"].string!
                         searchObject.imageURL = item["imageURL"].string!
@@ -239,6 +240,7 @@ class APIService: NSObject {
                         searchObject.url = item["url"].string!
                         searchObject.description = item["newsDescription"].string!
                         searchArrayObject.append(searchObject)
+                        print(searchArrayObject[0].imageURL!+"fdsafsf")
                     }
                 }
                 DispatchQueue.main.async {
@@ -261,6 +263,7 @@ class APIService: NSObject {
                 if let collection = json.array {
                     for item in collection {
                         let searchObject = SearchObject()
+                        searchObject.type = "genuine"
                         searchObject.author = item["author"].string!
                         searchObject.title = item["title"].string!
                         searchObject.imageURL = item["imageURL"].string!
@@ -290,6 +293,7 @@ class APIService: NSObject {
                 if let collection = json.array {
                     for item in collection {
                         let searchObject = SearchObject()
+                        searchObject.type = "video"
                         searchObject.author = item["author"].string!
                         searchObject.title = item["title"].string!
                         searchObject.imageURL = item["imageURL"].string!

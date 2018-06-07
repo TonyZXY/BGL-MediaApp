@@ -9,6 +9,7 @@
 import Foundation
 
 class SearchObject{
+    var type:String?
     var title:String?
     var author:String?
     var imageURL:String?
