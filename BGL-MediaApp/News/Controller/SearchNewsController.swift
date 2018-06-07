@@ -8,34 +8,175 @@
 
 import UIKit
 
-class SearchNewsController: UIViewController,UISearchBarDelegate{
+class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate,UICollectionViewDelegateFlowLayout{
+    var searchNewsObject = [SearchObject]()
+    var searchGennieObject = [SearchObject]()
+    var searchVideoObject = [SearchObject]()
+    var isSearching = false
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        var totalCount = searchNewsObject.count + searchGennieObject.count + searchVideoObject.count
+        if searchNewsObject.count != 0{
+            totalCount = totalCount + 1
+        }
+        if searchGennieObject.count != 0{
+            totalCount = totalCount + 1
+        }
+        if searchVideoObject.count != 0{
+            totalCount = totalCount + 1
+        }
+        return searchNewsObject.count + searchGennieObject.count + searchVideoObject.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if searchNewsObject.count > indexPath.row{
+//            print(indexPath.row)
+//            if indexPath.row == 0{
+//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectionCell", for: indexPath) as! SectionCell
+//                cell.sectionLabel.text = "hahahah"
+//                cell.backgroundColor = UIColor.green
+//                return cell
+//            } else {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "newsCell", for: indexPath) as! NewsCell
+                let news = News()
+                let searhResult = searchNewsObject[indexPath.row]
+                news.author = searhResult.author
+                news.title = searhResult.title
+                news.newsDescription = searhResult.description
+                news.url = searhResult.url
+                news.imageURL = searhResult.imageURL
+                news.publishedTime = searhResult.publishedTime
+                cell.news = news
+                print("news")
+                return cell
+//            }
+        } else if (searchGennieObject.count + searchNewsObject.count) > indexPath.row {
+//            if indexPath.row == (searchGennieObject.count + searchNewsObject.count) {
+//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectionCell", for: indexPath) as! SectionCell
+//                cell.sectionLabel.text = "hahahah"
+//                cell.backgroundColor = UIColor.green
+//                return cell
+//            } else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "genuineCell", for: indexPath) as! GenuineCell
+                let genuine = Genuine()
+                let searhResult = searchGennieObject[indexPath.row-(searchNewsObject.count)]
+                genuine.author = searhResult.author
+                genuine.title = searhResult.title
+                genuine.genuineDescription = searhResult.description
+                genuine.url = searhResult.url
+                genuine.imageURL = searhResult.imageURL
+                genuine.publishedTime = searhResult.publishedTime
+                cell.genuine = genuine
+                return cell
+//            }
+        } else if (searchGennieObject.count + searchNewsObject.count + searchVideoObject.count) > indexPath.row{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath) as! VideoCell
+            let video = Video()
+            let searhResult = searchVideoObject[indexPath.row-(searchNewsObject.count + searchGennieObject.count)]
+            video.author = searhResult.author
+            video.title = searhResult.title
+            video.videoDescription = searhResult.description
+            video.url = searhResult.url
+            video.imageURL = searhResult.imageURL
+            video.publishedTime = searhResult.publishedTime
+            cell.video = video
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        // Do any additional setup after loading the view.
+        searchBar.becomeFirstResponder()
     }
 
     func setupView(){
         view.backgroundColor = ThemeColor().themeColor()
         view.addSubview(searchBar)
-//        view.addSubview(searchResult)
+        view.addSubview(cellListView)
+        
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar]))
-//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":searchResult]))
-//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":searchResult]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":cellListView]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-5-[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":cellListView]))
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if searchBar.text == nil || searchBar.text == ""{
-//            isSearching = false
-//            view.endEditing(true)
-//            searchResult.reloadData()
-//        } else{
-//            isSearching = true
-//            filterExchanges = allExchanges.filter{ name in return name.lowercased().contains(searchBar.text!.lowercased())}
-//            searchResult.reloadData()
-//        }
+        if searchBar.text == nil || searchBar.text == ""{
+            isSearching = false
+            view.endEditing(true)
+            self.searchNewsObject.removeAll()
+            self.searchGennieObject.removeAll()
+            self.searchVideoObject.removeAll()
+            cellListView.reloadData()
+        } else{
+            isSearching = true
+            let dispatchGroup = DispatchGroup()
+            
+            dispatchGroup.enter()
+            APIService.shardInstance.fetchSearchNews(keyword: searchBar.text!) { (searchResult) in
+                self.searchNewsObject.removeAll()
+                for value in searchResult{
+                    self.searchNewsObject.append(value)
+                }
+                print(self.searchNewsObject.count)
+                dispatchGroup.leave()
+            }
+            
+            dispatchGroup.enter()
+            APIService.shardInstance.fetchSearchGenuine(keyword: searchBar.text!) { (searchResult) in
+                self.searchGennieObject.removeAll()
+                for value in searchResult{
+                    self.searchGennieObject.append(value)
+                }
+                print(self.searchGennieObject.count)
+                dispatchGroup.leave()
+            }
+            
+            dispatchGroup.enter()
+            APIService.shardInstance.fetchSearchVideo(keyword: searchBar.text!) { (searchResult) in
+                self.searchVideoObject.removeAll()
+                for value in searchResult{
+                    self.searchVideoObject.append(value)
+                }
+                print(self.searchVideoObject.count)
+                dispatchGroup.leave()
+            }
+            
+            dispatchGroup.notify(queue:.main){
+                self.cellListView.reloadData()
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var size: CGSize
+        if collectionView == self.cellListView {
+            if searchNewsObject.count > indexPath.row{
+                if indexPath.row == 100{
+                    size = CGSize(width: cellListView.frame.width, height: 30)
+                    return size
+                } else{
+                    size = CGSize(width: cellListView.frame.width, height: 110)
+                    return size
+                }
+            } else if (searchGennieObject.count + searchNewsObject.count) > indexPath.row {
+                size = CGSize(width: cellListView.frame.width, height: 110)
+                return size
+            } else if (searchGennieObject.count + searchNewsObject.count + searchVideoObject.count) > indexPath.row{
+                let height = (view.frame.width - 30) * 9 / 16 + 75
+                size = CGSize(width: cellListView.frame.width, height: height)
+                return size
+            }
+        }
+        return CGSize()
     }
     
     lazy var searchBar:UISearchBar={
@@ -48,4 +189,42 @@ class SearchNewsController: UIViewController,UISearchBarDelegate{
         searchBar.backgroundColor = ThemeColor().fallColor()
         return searchBar
     }()
+    
+    lazy var cellListView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        layout.minimumLineSpacing = 5
+        cv.backgroundColor = ThemeColor().themeColor()
+        cv.register(NewsCell.self, forCellWithReuseIdentifier: "newsCell")
+        cv.register(GenuineCell.self,forCellWithReuseIdentifier:"genuineCell")
+        cv.register(VideoCell.self,forCellWithReuseIdentifier:"videoCell")
+//        cv.register(SectionCell.self, forCellWithReuseIdentifier: "sectionCell")
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
+    }()
+}
+
+class SectionCell:UICollectionViewCell{
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+    
+    func setupViews() {
+        addSubview(sectionLabel)
+        NSLayoutConstraint(item: sectionLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[v0]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":sectionLabel]))
+    }
+    
+    var sectionLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

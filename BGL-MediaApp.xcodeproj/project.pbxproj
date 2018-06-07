@@ -142,6 +142,7 @@
 		1AFE417720C51987002D8137 /* NewsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE417620C51986002D8137 /* NewsCellView.swift */; };
 		5765935E20C79B4E00298EF5 /* SearchNewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765935D20C79B4E00298EF5 /* SearchNewsController.swift */; };
 		5765936120C7AA3E00298EF5 /* DefaultLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */; };
+		5765936320C7C36900298EF5 /* SearchObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936220C7C36900298EF5 /* SearchObject.swift */; };
 		65CA633090F1F7BCDAFE405B /* Pods_BGL_MediaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -284,6 +285,7 @@
 		56D92E4D774CE980869C74BC /* Pods-BGL-MediaApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.release.xcconfig"; sourceTree = "<group>"; };
 		5765935D20C79B4E00298EF5 /* SearchNewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNewsController.swift; sourceTree = "<group>"; };
 		5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLanguageController.swift; sourceTree = "<group>"; };
+		5765936220C7C36900298EF5 /* SearchObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchObject.swift; sourceTree = "<group>"; };
 		EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BGL_MediaApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -433,6 +435,7 @@
 				1AFE405920C4F7FC002D8137 /* Genuine.swift */,
 				1AFE405A20C4F7FC002D8137 /* News.swift */,
 				1AFE405B20C4F7FC002D8137 /* Video.swift */,
+				5765936220C7C36900298EF5 /* SearchObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -948,6 +951,7 @@
 				1AFE413F20C4F7FE002D8137 /* CryptoCompareCoinsRealm.swift in Sources */,
 				1AFE415820C4F7FE002D8137 /* TickerDataFetcherV2.swift in Sources */,
 				5765936120C7AA3E00298EF5 /* DefaultLanguageController.swift in Sources */,
+				5765936320C7C36900298EF5 /* SearchObject.swift in Sources */,
 				1AFE411120C4F7FE002D8137 /* TimelineTableViewCell.swift in Sources */,
 				1AFE415120C4F7FE002D8137 /* MarketCollectionViewCell.swift in Sources */,
 				1AFE413820C4F7FE002D8137 /* Endpoint.swift in Sources */,
