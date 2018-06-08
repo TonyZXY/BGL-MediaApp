@@ -48,14 +48,12 @@ class TimelineTableViewController: UITableViewController {
         dateFormatter.dateFormat = "MMM d, yyyy, h:ma"
         
         let bglGreen = #colorLiteral(red: 0.5019607843, green: 0.8588235294, blue: 0.7176470588, alpha: 1)
+        
         cell.timelinePoint = TimelinePoint(diameter: CGFloat(16.0), color: bglGreen, filled: false)
         cell.timelinePointInside = TimelinePoint(diameter: CGFloat(4.0), color: bglGreen, filled: true, insidePoint: true)
         cell.timeline.backColor = #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
         cell.titleLabel.text = dateFormatter.string(from: object.dateTime)
         cell.descriptionLabel.text = object.contents
-        cell.tag = indexPath.row
-        cell.likeButton.tag = indexPath.row
-        cell.shareButton.tag = indexPath.row
         cell.likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: .touchUpInside)
         return cell
@@ -73,18 +71,38 @@ class TimelineTableViewController: UITableViewController {
 
     @objc func shareButtonClicked(sender: UIButton){
         //        let sharingObj = results[sender.tag].contents
-        //        let url = URL(string: "https://www.apple.com")
-        let index = IndexPath(row: sender.tag, section: 0)
-        let cell = self.tableView.cellForRow(at: index)
-        print(cell?.textLabel)
         
-        //screenshot
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        var image = UIGraphicsGetImageFromCurrentImageContext()
+        //get cell from indexPath
+        let buttonPosition:CGPoint = sender.convert(CGPoint(x: 0, y: 0), to:self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: buttonPosition)
+        let cell = tableView.cellForRow(at: indexPath!)! as! TimelineTableViewCell
+        let cellText = cell.descriptionLabel.text
+        
+        //TODO: create an image with logo, text(screenshot maybe?) and qr-code
+        
+        let topImage = cell.descriptionLabel.snapshot
+        let bottomImage = UIImage(named: "testImage_logo_qr.png")
+
+        let size = CGSize(width: (topImage?.size.width)!, height: (topImage?.size.height)! + (bottomImage?.size.height)!)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+
+        topImage?.draw(in: CGRect(x:0, y:0, width:size.width, height: (topImage?.size.height)!))
+        bottomImage?.draw(in: CGRect(x:0, y:(topImage?.size.height)!, width: size.width,  height: (bottomImage?.size.height)!))
+
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+
+        // I've added an UIImageView, You can change as per your requirement.
+        let mergeImageView = UIImageView(frame: CGRect(x:0, y: 200, width: 30, height: 20))
+
+        // Here is your final combined images into a single image view.
+        mergeImageView.image = newImage
+   
         
-        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities:nil)
+        
+        
+        
+        let activityVC = UIActivityViewController(activityItems: [mergeImageView.image], applicationActivities:nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC,animated: true, completion:nil)
     }
@@ -151,6 +169,17 @@ class TimelineTableViewController: UITableViewController {
         getNews()
         self.refresher.endRefreshing()
     }
-    
-   
+}
+
+extension UIView {
+    var snapshot : UIImage? {
+        var image: UIImage? = nil
+        UIGraphicsBeginImageContext(bounds.size)
+        if let context = UIGraphicsGetCurrentContext() {
+            self.layer.render(in: context)
+            image = UIGraphicsGetImageFromCurrentImageContext()
+        }
+        UIGraphicsEndImageContext()
+        return image
+    }
 }

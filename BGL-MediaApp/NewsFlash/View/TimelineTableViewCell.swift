@@ -19,6 +19,9 @@ open class TimelineTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     
+    
+    
+    
     open var timelinePoint = TimelinePoint() {
         didSet {
             self.setNeedsDisplay()
