@@ -20,7 +20,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     let cryptoCompareClient = CryptoCompareClient()
     var walletResults = [WalletDetail]()
     var displayType:String = "Percent"
-    let priceType:String = "AUD"
+    let priceType:[String] = ["AUD"]
     var refreshTimer: Timer!
     var coinDetail = SelectCoin()
     var profit:Double = 0
@@ -33,7 +33,8 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
         SetDataResult().writeJsonExchange()
         SetDataResult().writeMarketCapCoinList()
         GetDataResult().getCoinList()
-        
+        print(allResult)
+        print(all)
         if let defaultCurrency = UserDefaults.standard.value(forKey: "defaultCurrency") as? String{
             print(defaultCurrency)
         }
@@ -106,7 +107,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
                 marketSelectedData.tradingPairsName = value.tradingPairsName
             }
         }
-        marketSelectedData.priceType = priceType
+        marketSelectedData.priceType = priceType.first!
         marketSelectedData.transactionPrice = object.TransactionPrice
         cell.selectCoin.selectCoinAbbName = object.coinAbbName
         cell.selectCoin.selectCoinName = object.coinName
@@ -151,7 +152,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
                 realm.delete(statusItem)
                 realm.delete(marketResult)
             }
-            self.totalNumber.text = self.priceType + "$" + "0"
+            self.totalNumber.text = self.priceType.first! + "$" + "0"
             self.checkDataRiseFallColor(risefallnumber: 0, label: self.totalChange, type: "Percent")
             walletResults.remove(at: indexPath.row)
             refreshData()
@@ -197,13 +198,13 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
                     }
                 }
                 if value.status == "Buy"{
-                    if priceType == "AUD"{
+                    if priceType.first == "AUD"{
                         walletResults[indexs!].coinAmount += value.amount
                         walletResults[indexs!].TransactionPrice += value.audTotalPrice
                     }
                 }else if value.status == "Sell"{
                     walletResults[indexs!].coinAmount -= value.amount
-                    if priceType == "AUD"{
+                    if priceType.first == "AUD"{
                         walletResults[indexs!].TransactionPrice -= value.audTotalPrice
                     }
                 }
@@ -222,10 +223,14 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     //Transfer coin single trade price to same price type (etc, BTC -> AUD, USD -> AUD, CNY -> AUD)
-    func transferPriceType(priceType:String,walletData:MarketTradingPairs,single:Double,eachCell:WalletsCell,transactionPrice:Double){
-        GetDataResult().getCryptoCurrencyApi(from: walletData.tradingPairsName, to: priceType, price: single){success,price in
+    func transferPriceType(priceType:[String],walletData:MarketTradingPairs,single:Double,eachCell:WalletsCell,transactionPrice:Double){
+        GetDataResult().getCryptoCurrencyApi(from: walletData.tradingPairsName, to: priceType, price: single){success,jsonResult in
             if success{
                 DispatchQueue.main.async {
+                    var price:Double = 0
+                    for result in jsonResult{
+                        price = Double(result.value) * single
+                    }
                     walletData.singlePrice = price
                     walletData.totalPrice = Double(price) * Double(walletData.coinAmount)
                     walletData.totalRiseFallPercent = ((walletData.totalPrice - transactionPrice) / transactionPrice) * 100

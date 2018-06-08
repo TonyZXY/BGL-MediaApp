@@ -131,7 +131,7 @@ class DetailController: UIViewController{
             case .success(let resultData):
                 for results in resultData!{
                     let single = Double(results.value)
-                    self.transferPriceType(priceType: "AUD", walletData:self.marketSelectedData, single: single, eachCell: WalletsCell(), transactionPrice: self.marketSelectedData.transactionPrice)
+                    self.transferPriceType(priceType: ["AUD"], walletData:self.marketSelectedData, single: single, eachCell: WalletsCell(), transactionPrice: self.marketSelectedData.transactionPrice)
                     completion(true)
                 }
             case .failure(let error):
@@ -141,10 +141,14 @@ class DetailController: UIViewController{
     }
     
     //Get currency rate and transfer trading price to specific currency
-    func transferPriceType(priceType:String,walletData:MarketTradingPairs,single:Double,eachCell:WalletsCell,transactionPrice:Double){
-        GetDataResult().getCryptoCurrencyApi(from: walletData.tradingPairsName, to: priceType, price: single){success,price in
+    func transferPriceType(priceType:[String],walletData:MarketTradingPairs,single:Double,eachCell:WalletsCell,transactionPrice:Double){
+        GetDataResult().getCryptoCurrencyApi(from: walletData.tradingPairsName, to: priceType, price: single){success,jsonResult in
             if success{
                 DispatchQueue.main.async {
+                    var price:Double = 0
+                    for result in jsonResult{
+                        price = Double(result.value) * single
+                    }
                     walletData.singlePrice = price
                     walletData.totalPrice = Double(price) * Double(walletData.coinAmount)
                     walletData.totalRiseFallPercent = ((walletData.totalPrice - transactionPrice) / transactionPrice) * 100

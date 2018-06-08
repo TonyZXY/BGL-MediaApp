@@ -95,8 +95,6 @@ class CoinDetailController: UIViewController,UICollectionViewDelegate,UICollecti
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
