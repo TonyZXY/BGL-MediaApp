@@ -16,6 +16,9 @@ open class TimelineTableViewCell: UITableViewCell {
     @IBOutlet weak open var thumbnailImageView: UIImageView!
     @IBOutlet weak open var illustrationImageView: UIImageView!
     
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    
     open var timelinePoint = TimelinePoint() {
         didSet {
             self.setNeedsDisplay()
@@ -51,6 +54,7 @@ open class TimelineTableViewCell: UITableViewCell {
         lineInfoLabel.sizeToFit()
         titleLabel.sizeToFit()
         descriptionLabel.sizeToFit()
+    
         
         timelinePoint.position = CGPoint(x: timeline.leftMargin + timeline.width / 2, y: timelinePoint.lineWidth)
         

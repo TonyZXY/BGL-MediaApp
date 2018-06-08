@@ -13,9 +13,6 @@ import RealmSwift
 
 class TimelineTableViewController: UITableViewController {
     
-    var testCounter = 1
-    
-    
     let realm = try! Realm()
     var results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
     
@@ -29,8 +26,8 @@ class TimelineTableViewController: UITableViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = ThemeColor().themeColor()
         self.tableView.separatorStyle = .none
-        
         self.tableView.addSubview(self.refresher)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +42,6 @@ class TimelineTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineTableViewCell", for: indexPath) as! TimelineTableViewCell
-        
         let object = results[indexPath.row]
         
         let dateFormatter = DateFormatter()
@@ -57,10 +53,40 @@ class TimelineTableViewController: UITableViewController {
         cell.timeline.backColor = #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
         cell.titleLabel.text = dateFormatter.string(from: object.dateTime)
         cell.descriptionLabel.text = object.contents
-        
-        print(cell.descriptionLabel.text)
-        
+        cell.tag = indexPath.row
+        cell.likeButton.tag = indexPath.row
+        cell.shareButton.tag = indexPath.row
+        cell.likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
+        cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: .touchUpInside)
         return cell
+    }
+    
+    @objc func likeButtonClicked(sender: UIButton){
+        if sender.currentTitle == "♡" {
+            sender.setTitle("❤️", for: UIControlState.normal)
+            }else{
+            sender.setTitle("♡",for: UIControlState.normal)
+        }
+        
+    }
+//        let cell:TransPriceCell = self.transactionTableView.cellForRow(at: index) as! TransPriceCell
+
+    @objc func shareButtonClicked(sender: UIButton){
+        //        let sharingObj = results[sender.tag].contents
+        //        let url = URL(string: "https://www.apple.com")
+        let index = IndexPath(row: sender.tag, section: 0)
+        let cell = self.tableView.cellForRow(at: index)
+        print(cell?.textLabel)
+        
+        //screenshot
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        var image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities:nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.present(activityVC,animated: true, completion:nil)
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -69,7 +95,7 @@ class TimelineTableViewController: UITableViewController {
     }
     
     private func getNews() {
-        Alamofire.request("http://10.10.6.111:3000/api/flash", method: .get).validate().responseJSON { response in
+        Alamofire.request("http://10.10.6.111:3000/api/flash?languageTag=EN&CN", method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -120,8 +146,11 @@ class TimelineTableViewController: UITableViewController {
 //        }
     }
     
+    
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         getNews()
         self.refresher.endRefreshing()
     }
+    
+   
 }
