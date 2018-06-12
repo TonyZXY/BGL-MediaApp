@@ -17,7 +17,7 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
     var results = try! Realm().objects(AllTransactions.self)
     var indexSelected:Int = 0
     var generalData = generalDetail()
-    var priceType = "AUD"
+//    var priceType = "AUD"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +29,6 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadWallet"), object: nil)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,20 +98,19 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
     }
     
     @objc func deleteTransaction(sender:UIButton){
-        let filterName = "id = " + String(sender.tag)
-        var name:String = ""
-        let statusItem = realm.objects(AllTransactions.self).filter(filterName)
-        if statusItem.count == 1{
-            for value in statusItem{
-                name = "coinAbbName = '" + value.coinAbbName + "' "
-            }
-            let coinSelected = realm.objects(MarketTradingPairs.self).filter(name)
+        let filterId = "id = " + String(sender.tag)
+        let filterName = "coinAbbName = '" + generalData.coinAbbName + "' "
+        let statusItem = realm.objects(AllTransactions.self)
+        let specificTransaction = statusItem.filter(filterId)
+        let coinTransaction = statusItem.filter(filterName)
+        if coinTransaction.count == 1{
+            let coinSelected = realm.objects(MarketTradingPairs.self).filter(filterName)
             try! realm.write {
                 realm.delete(coinSelected)
             }
         }
         try! realm.write {
-            realm.delete(statusItem)
+            realm.delete(specificTransaction)
         }
         historyTableView.reloadData()
     }

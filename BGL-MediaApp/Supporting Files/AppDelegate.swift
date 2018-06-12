@@ -18,6 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.statusBarStyle = .lightContent
         UITabBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = ThemeColor().themeColor()
+        
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        
+        if launchedBefore{
+            print("launched")
+        } else{
+            UserDefaults.standard.set("AUD", forKey: "defaultCurrency")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+        }
+        
+        
         return true
     }
 }

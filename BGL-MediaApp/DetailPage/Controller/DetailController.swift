@@ -32,6 +32,19 @@ class DetailController: UIViewController{
     var globalMarketData = GlobalMarket.init()
     var refreshTimer: Timer!
     
+//    var priceType:String {
+//        get{
+//            var curreny:String = ""
+//            if let defaultCurrency = UserDefaults.standard.value(forKey: "defaultCurrency") as? String{
+//                curreny = defaultCurrency
+//                return curreny
+//            } else {
+//                return curreny
+//            }
+//        }
+//    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
@@ -61,10 +74,11 @@ class DetailController: UIViewController{
         generalPage.coinSymbol = coinDetails.selectCoinAbbName
         for value in selectItem{
             checkDataRiseFallColor(risefallnumber: value.totalRiseFall, label: allLossView.profitLoss,type:"Number")
-            mainView.portfolioResult.text = scientificMethod(number:value.coinAmount) + " " + value.coinAbbName
-            mainView.marketValueRsult.text = "A$"+scientificMethod(number:value.totalPrice)
-            mainView.netCostResult.text =  "A$"+scientificMethod(number:value.transactionPrice)
-            generalPage.totalNumber.text = "A$"+scientificMethod(number:value.singlePrice)
+            mainView.portfolioResult.text = scientificMethod(number:value.coinAmount) + " " + value.coinAbbName            
+            checkDataRiseFallColor(risefallnumber: value.totalPrice, label: mainView.marketValueRsult, type: "Default")
+            checkDataRiseFallColor(risefallnumber: value.transactionPrice, label: mainView.netCostResult, type: "Default")
+            checkDataRiseFallColor(risefallnumber: value.singlePrice, label:  generalPage.totalNumber, type: "Default")
+            generalPage.totalNumber.text = currencyName[priceType]! + generalPage.totalNumber.text!
             generalPage.tradingPairs.text = value.tradingPairsName
             generalPage.market.text = value.exchangeName
             general.coinAbbName = value.coinAbbName
@@ -92,7 +106,7 @@ class DetailController: UIViewController{
                 if coinNameId != 0 {
                     
                     //Get coin Market Data (Market Cap, Volume, Supply)
-                    GetDataResult().getMarketCapCoinDetail(coinId: coinNameId, priceType: "AUD"){(globalMarket,bool) in
+                    GetDataResult().getMarketCapCoinDetail(coinId: coinNameId, priceType: self.priceType){(globalMarket,bool) in
                         if bool {
                             DispatchQueue.main.async {
                                 self.globalMarketData = globalMarket!
@@ -131,7 +145,9 @@ class DetailController: UIViewController{
             case .success(let resultData):
                 for results in resultData!{
                     let single = Double(results.value)
-                    self.transferPriceType(priceType: ["AUD"], walletData:self.marketSelectedData, single: single, eachCell: WalletsCell(), transactionPrice: self.marketSelectedData.transactionPrice)
+                    
+                    
+                    self.transferPriceType(priceType: [self.priceType], walletData:self.marketSelectedData, single: single, eachCell: WalletsCell(), transactionPrice: self.marketSelectedData.transactionPrice)
                     completion(true)
                 }
             case .failure(let error):
@@ -145,15 +161,16 @@ class DetailController: UIViewController{
         GetDataResult().getCryptoCurrencyApi(from: walletData.tradingPairsName, to: priceType, price: single){success,jsonResult in
             if success{
                 DispatchQueue.main.async {
-                    var price:Double = 0
+                    var pricess:Double = 0
                     for result in jsonResult{
-                        price = Double(result.value) * single
+                        pricess = Double(result.value) * single
                     }
-                    walletData.singlePrice = price
-                    walletData.totalPrice = Double(price) * Double(walletData.coinAmount)
+                    walletData.singlePrice = pricess
+                    walletData.totalPrice = Double(pricess) * Double(walletData.coinAmount)
                     walletData.totalRiseFallPercent = ((walletData.totalPrice - transactionPrice) / transactionPrice) * 100
                     walletData.totalRiseFall = walletData.totalPrice - transactionPrice
                     self.realm.beginWrite()
+                    
                     if self.realm.object(ofType: MarketTradingPairs.self, forPrimaryKey: walletData.coinAbbName) == nil {
                         self.realm.create(MarketTradingPairs.self,value:[walletData.coinName,walletData.coinAbbName,walletData.exchangeName,walletData.tradingPairsName,walletData.coinAmount,walletData.totalRiseFall,walletData.singlePrice,walletData.totalPrice,walletData.totalRiseFallPercent,walletData.transactionPrice,walletData.priceType])
                     } else {

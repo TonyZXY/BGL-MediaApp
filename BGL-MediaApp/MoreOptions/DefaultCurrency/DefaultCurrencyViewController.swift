@@ -16,7 +16,7 @@ class DefaultCurrencyViewController: UIViewController, UITableViewDataSource, UI
     @IBOutlet weak var currencySearchBar: UISearchBar!
     
     let data = ["美元 USD","澳大利亚元 AUD","人民币 RMB","欧元 EURO","日元 JPY"]
-    let storeData = ["USD","AUD","RMB","EUR","JPY"]
+    let storeData = ["USD","AUD","CNY","EUR","JPY"]
     let realm = try! Realm()
     var filteredData: [String]!
     

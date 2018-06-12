@@ -143,6 +143,9 @@
 		5765935E20C79B4E00298EF5 /* SearchNewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765935D20C79B4E00298EF5 /* SearchNewsController.swift */; };
 		5765936120C7AA3E00298EF5 /* DefaultLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */; };
 		5765936320C7C36900298EF5 /* SearchObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936220C7C36900298EF5 /* SearchObject.swift */; };
+		5765936520CA3E9100298EF5 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936420CA3E9100298EF5 /* InitialView.swift */; };
+		5765936720CA46AD00298EF5 /* SDSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936620CA46AD00298EF5 /* SDSViewController.swift */; };
+		5765936920CA696100298EF5 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936820CA696100298EF5 /* test.swift */; };
 		65CA633090F1F7BCDAFE405B /* Pods_BGL_MediaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -286,6 +289,11 @@
 		5765935D20C79B4E00298EF5 /* SearchNewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNewsController.swift; sourceTree = "<group>"; };
 		5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLanguageController.swift; sourceTree = "<group>"; };
 		5765936220C7C36900298EF5 /* SearchObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchObject.swift; sourceTree = "<group>"; };
+		5765936420CA3E9100298EF5 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
+		5765936620CA46AD00298EF5 /* SDSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDSViewController.swift; sourceTree = "<group>"; };
+		5765936820CA696100298EF5 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		5765936A20CFA07100298EF5 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "BGL-MediaApp/zh-Hans-CN.lproj/Main.strings"; sourceTree = "<group>"; };
+		5765936B20CFA07100298EF5 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BGL_MediaApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -564,6 +572,7 @@
 				1AFE40A020C4F7FD002D8137 /* Wallet_Networking */,
 				1AFE40A920C4F7FD002D8137 /* Wallet_Controller */,
 				1AFE40AF20C4F7FD002D8137 /* Wallet_Models */,
+				5765936420CA3E9100298EF5 /* InitialView.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -617,6 +626,8 @@
 				1AFE40AC20C4F7FD002D8137 /* SearchTradingPairController.swift */,
 				1AFE40AD20C4F7FD002D8137 /* WalletController.swift */,
 				1AFE40AE20C4F7FD002D8137 /* SearchCoinController.swift */,
+				5765936620CA46AD00298EF5 /* SDSViewController.swift */,
+				5765936820CA696100298EF5 /* test.swift */,
 			);
 			path = Wallet_Controller;
 			sourceTree = "<group>";
@@ -938,6 +949,7 @@
 				1AFE416820C4F7FE002D8137 /* AppImage.swift in Sources */,
 				1AFE415920C4F7FE002D8137 /* TimelineTableViewController.swift in Sources */,
 				1AFE411920C4F7FE002D8137 /* TransactionsHistoryController.swift in Sources */,
+				5765936720CA46AD00298EF5 /* SDSViewController.swift in Sources */,
 				1AFE416120C4F7FE002D8137 /* YAxisLabelView.swift in Sources */,
 				1AFE40F920C4F7FE002D8137 /* VideoDetailViewController.swift in Sources */,
 				1AFE40FB20C4F7FE002D8137 /* News.swift in Sources */,
@@ -949,6 +961,7 @@
 				1AFE40F320C4F7FE002D8137 /* ViewOptionsViewController.swift in Sources */,
 				1AFE410D20C4F7FE002D8137 /* news_app_for_blockchain.xcdatamodeld in Sources */,
 				1AFE413F20C4F7FE002D8137 /* CryptoCompareCoinsRealm.swift in Sources */,
+				5765936520CA3E9100298EF5 /* InitialView.swift in Sources */,
 				1AFE415820C4F7FE002D8137 /* TickerDataFetcherV2.swift in Sources */,
 				5765936120C7AA3E00298EF5 /* DefaultLanguageController.swift in Sources */,
 				5765936320C7C36900298EF5 /* SearchObject.swift in Sources */,
@@ -1000,6 +1013,7 @@
 				1AFE416A20C4F7FE002D8137 /* ChangeRiseFallColor.swift in Sources */,
 				1AFE40F120C4F7FE002D8137 /* WebDetailViewController.swift in Sources */,
 				1AFE413020C4F7FE002D8137 /* CoinTypeTableViewCell.swift in Sources */,
+				5765936920CA696100298EF5 /* test.swift in Sources */,
 				1AFE412A20C4F7FE002D8137 /* TransDateCell.swift in Sources */,
 				1AFE414820C4F7FE002D8137 /* GetDataResult.swift in Sources */,
 				1AFE415A20C4F7FE002D8137 /* NewsFlash.swift in Sources */,
@@ -1063,6 +1077,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1A6AD41220C615FF00D1ADA7 /* Base */,
+				5765936A20CFA07100298EF5 /* zh-Hans-CN */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1071,6 +1086,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1AFE407520C4F7FC002D8137 /* Base */,
+				5765936B20CFA07100298EF5 /* zh-Hans-CN */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1082,6 +1098,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1142,6 +1159,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
