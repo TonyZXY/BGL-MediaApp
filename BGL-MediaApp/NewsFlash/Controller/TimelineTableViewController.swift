@@ -78,8 +78,9 @@ class TimelineTableViewController: UITableViewController {
         let size = cell.descriptionLabel.font.pointSize
         let textImage = self.textToImage(drawText: cellText!, inImage: cell.descriptionLabel.createImage!, atPoint: CGPoint(x:0, y:0), withSize:size)
         //original logo_qrCode image size = 580 * 290
-        let bottomImage = self.appendLeftAndRight(append: UIImage(named: "bcg_logo.png")!, with: UIImage(named: "sample_qr_code.png")!).resizeImage(CGSize(width: 324.5, height: 154))
-        let image = combineTopAndBottomImages(combine: textImage, with: (bottomImage)!)
+        let topImage = combineLogoWithText(combine: UIImage(named: "bcg_logo.png")!, with: textImage)
+        let bottomImage = UIImage(named: "sample_qr_code.png")
+        let image = combineImageWithQRCode(combine: topImage, with: (bottomImage)!)
         
         let activityVC = UIActivityViewController(activityItems: [image], applicationActivities:nil)
         activityVC.popoverPresentationController?.sourceView = self.view
@@ -108,14 +109,14 @@ class TimelineTableViewController: UITableViewController {
         
         return newImage!
     }
-    func appendLeftAndRight(append logo:UIImage, with qrCode:UIImage)-> UIImage{
-        let height = qrCode.size.height
-        let width = qrCode.size.width * 2
+    func combineImageWithQRCode(combine topImage:UIImage, with bottomImage:UIImage)-> UIImage{
+        let width = topImage.size.width
+        let height = topImage.size.height * 2
         let size = CGSize(width: width, height: height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         
-        logo.draw(in: CGRect(x:0, y:0, width:width/2, height:height))
-        qrCode.draw(in: CGRect(x:width/2, y:0, width: width/2,  height:height))
+        topImage.draw(in: CGRect(x:0, y:0, width:width, height: height/2 ))
+        bottomImage.draw(in: CGRect(x:(width-height/2)/2, y:height/2, width: height/2,  height:height/2 ))
         
         let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
@@ -128,14 +129,14 @@ class TimelineTableViewController: UITableViewController {
         return mergeImageView.image!
     }
     
-    func combineTopAndBottomImages(combine topImage:UIImage, with bottomImage:UIImage)-> UIImage{
-        print(topImage.size)
-        print(bottomImage.size)
-        let size = CGSize(width: (topImage.size.width), height: (topImage.size.height) + (bottomImage.size.height))
+    func combineLogoWithText(combine topImage:UIImage, with bottomImage:UIImage)-> UIImage{
+        let width = bottomImage.size.width
+        let height = bottomImage.size.height * 2
+        let size = CGSize(width: width, height: height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         
-        topImage.draw(in: CGRect(x:0, y:0, width:size.width, height: (topImage.size.height)))
-        bottomImage.draw(in: CGRect(x:0, y:(topImage.size.height), width: size.width,  height: (bottomImage.size.height)))
+        topImage.draw(in: CGRect(x:(width-height/2)/2, y:0, width:height/2, height: height/2 ))
+        bottomImage.draw(in: CGRect(x:0, y:height/2, width: width,  height:height/2 ))
         
         let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
