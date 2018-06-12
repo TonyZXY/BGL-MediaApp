@@ -29,8 +29,8 @@ class MarketSelectController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     func setUpView(){
-        let item2 = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
-        self.navigationItem.setRightBarButton(item2, animated: true)
+        let navigationDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        self.navigationItem.setRightBarButton(navigationDoneButton, animated: true)
         view.addSubview(marketTableView)
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":marketTableView]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":marketTableView]))

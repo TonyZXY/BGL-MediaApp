@@ -163,9 +163,18 @@ class TransactionsController: UIViewController, UITableViewDelegate, UITableView
         newTransaction.status = transaction
         if newTransaction.coinName != "" && newTransaction.coinName != "" && newTransaction.exchangName != "" && newTransaction.tradingPairsName != "" && String(newTransaction.amount) != "0.0" && String(newTransaction.singlePrice) != "0.0"{
             transactionButton.setTitle("加载中...", for: .normal)
-            GetDataResult().getCryptoCurrencyApi(from: self.newTransaction.tradingPairsName, to: "AUD", price: self.newTransaction.singlePrice){success,price in
+            GetDataResult().getCryptoCurrencyApi(from: self.newTransaction.tradingPairsName, to: ["AUD","USD","JPY","EUR","CNY"], price: self.newTransaction.singlePrice){success,jsonResult in
                 if success{
-                    self.newTransaction.audSinglePrice = price
+                    let allCurrencys = List<Currencys>()
+                    for result in jsonResult{
+                        let currencys = Currencys()
+                        currencys.name = result.key
+                        currencys.price = Double(result.value) * self.newTransaction.singlePrice
+                        allCurrencys.append(currencys)
+                    }
+                    
+                    self.newTransaction.audSinglePrice = 0
+                    self.newTransaction.currency = allCurrencys
                     self.newTransaction.audTotalPrice = self.newTransaction.audSinglePrice * Double(self.newTransaction.amount)
                     DispatchQueue.main.sync{
                         self.writeToRealm()
@@ -192,7 +201,7 @@ class TransactionsController: UIViewController, UITableViewDelegate, UITableView
                 currentTransactionId = 1
             }
         }
-        let realmData:[Any] = [currentTransactionId,newTransaction.status,newTransaction.coinName,newTransaction.coinAbbName,newTransaction.exchangName, newTransaction.tradingPairsName,newTransaction.singlePrice,newTransaction.totalPrice,newTransaction.amount,newTransaction.date,newTransaction.time,newTransaction.expenses,newTransaction.additional,newTransaction.usdSinglePrice,newTransaction.usdTotalPrice,newTransaction.audSinglePrice,newTransaction.audTotalPrice]
+        let realmData:[Any] = [currentTransactionId,newTransaction.status,newTransaction.coinName,newTransaction.coinAbbName,newTransaction.exchangName, newTransaction.tradingPairsName,newTransaction.singlePrice,newTransaction.totalPrice,newTransaction.amount,newTransaction.date,newTransaction.time,newTransaction.expenses,newTransaction.additional,newTransaction.usdSinglePrice,newTransaction.usdTotalPrice,newTransaction.audSinglePrice,newTransaction.audTotalPrice,newTransaction.currency]
         if realm.object(ofType: AllTransactions.self, forPrimaryKey: currentTransactionId) == nil {
             realm.create(AllTransactions.self, value: realmData)
         } else {

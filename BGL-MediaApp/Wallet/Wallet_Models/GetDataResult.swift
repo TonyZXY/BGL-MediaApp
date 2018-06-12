@@ -132,30 +132,29 @@ class GetDataResult{
     }
     
     
-    typealias StringCompletion = (_ success: Bool, _ Double: Double) -> Void
+    typealias StringCompletion = (_ success: Bool, _ jsonResult: [String:Double]) -> Void
     
     //Get currency rate and transfer the coin trading price to specific price type
-    func getCryptoCurrencyApi(from:String,to:String,price:Double,completion: @escaping StringCompletion){
-        var transferPrice:Double = 0
+    func getCryptoCurrencyApi(from:String,to:[String],price:Double,completion: @escaping StringCompletion){
         let baseUrl = "https://min-api.cryptocompare.com/data/price?"
-        let currencyPairs = "fsym="+from + "&" + "tsyms=" + to
+        var currencyPairs = "fsym=" + from + "&" + "tsyms="
+        for value in to{
+            currencyPairs = currencyPairs + value + ","
+        }
         let urlString = baseUrl + currencyPairs
         
         let queue = DispatchQueue(label: "currency rate")
         
         queue.sync {
-            guard let url = URL(string: urlString) else { return completion(false,0)}
+            guard let url = URL(string: urlString) else { return completion(false,["":0])}
             let transferPrices = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                guard let data = data else { return completion(false,0)}
+                guard let data = data else { return completion(false,["":0])}
                 do{
                     let json = try JSONDecoder().decode([String:Double].self, from: data)
-                    for n in json{
-                        transferPrice = Double(n.value) * price
-                    }
-                    completion(true,transferPrice)
+                    completion(true,json)
                 } catch let jsonErr{
                     print("Error serializing json:",jsonErr)
-//                    completion(false,transferPrice)
+                    completion(false,["":0])
                 }
             }
             transferPrices.resume()

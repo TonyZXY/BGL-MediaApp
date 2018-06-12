@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="es6-dM-P9s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="es6-dM-P9s">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Market Controller-->
         <scene sceneID="nXS-Ae-Pgy">
             <objects>
-                <viewController id="d4b-Vg-VbT" customClass="MarketController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="d4b-Vg-VbT" customClass="MarketController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DS6-bt-1Nm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,7 +29,7 @@
         <!--News Home View Controller-->
         <scene sceneID="iDc-km-PSG">
             <objects>
-                <viewController id="izm-yd-kfl" customClass="NewsHomeViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="izm-yd-kfl" customClass="NewsHomeViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Br7-Qz-w9l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,7 +45,7 @@
         <!--Wallet Controller-->
         <scene sceneID="g3K-Nq-zyc">
             <objects>
-                <viewController id="A4p-NS-O0W" customClass="WalletController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="A4p-NS-O0W" customClass="WalletController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dTU-nN-lcr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,7 +121,7 @@
         <!--快讯-->
         <scene sceneID="mFb-ab-Uso">
             <objects>
-                <viewController id="KOa-Tr-5Hc" customClass="NewsFlashViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KOa-Tr-5Hc" customClass="NewsFlashViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3XO-na-vOv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -174,7 +174,7 @@
         <!--Timeline Table View Controller-->
         <scene sceneID="ZZH-d2-Jqm">
             <objects>
-                <tableViewController id="AMK-Dr-eDh" customClass="TimelineTableViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="AMK-Dr-eDh" customClass="TimelineTableViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B3F-MS-ozY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="630"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -212,7 +212,7 @@
         <!--About Us View Controller-->
         <scene sceneID="sQG-yX-RmZ">
             <objects>
-                <viewController id="g1r-7I-sY5" customClass="AboutUsViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="g1r-7I-sY5" customClass="AboutUsViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GZQ-mj-YNj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -293,7 +293,7 @@
         <!--Default Currency View Controller-->
         <scene sceneID="SQa-IN-azJ">
             <objects>
-                <viewController id="cKZ-vp-xcx" customClass="DefaultCurrencyViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cKZ-vp-xcx" customClass="DefaultCurrencyViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sJI-Rn-xZd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -343,7 +343,7 @@
         <!--View Options View Controller-->
         <scene sceneID="bAA-dT-XDY">
             <objects>
-                <viewController id="VY1-iF-tz5" customClass="ViewOptionsViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VY1-iF-tz5" customClass="ViewOptionsViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Umx-KZ-mUh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -373,7 +373,7 @@
         <!--Notification View Controller-->
         <scene sceneID="Rxb-zg-YHs">
             <objects>
-                <viewController id="MFK-H8-Jps" customClass="NotificationViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="MFK-H8-Jps" customClass="NotificationViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RPZ-l1-Udh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -700,7 +700,7 @@
         <!--Other Option View Controller-->
         <scene sceneID="rDZ-Fb-nYE">
             <objects>
-                <viewController id="9gs-ku-6Bq" customClass="OtherOptionViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9gs-ku-6Bq" customClass="OtherOptionViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fwZ-ms-RNc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -755,7 +755,7 @@
         <!--Other Detail View Controller-->
         <scene sceneID="VuK-Bb-MIZ">
             <objects>
-                <viewController id="FUn-dB-Sl0" customClass="OtherDetailViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FUn-dB-Sl0" customClass="OtherDetailViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xKn-dK-Ete">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -798,7 +798,7 @@
         <!--Web Main View Controller-->
         <scene sceneID="50o-4C-Y99">
             <objects>
-                <viewController id="ZcG-lb-PCg" customClass="WebMainViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZcG-lb-PCg" customClass="WebMainViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sRJ-bV-dlO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -844,7 +844,7 @@
         <!--Web Detail View Controller-->
         <scene sceneID="Ui0-kd-6zm">
             <objects>
-                <viewController id="6Tf-yj-zFA" customClass="WebDetailViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6Tf-yj-zFA" customClass="WebDetailViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qDS-Lx-npJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -878,7 +878,7 @@
         <!--More Option Main View Controller-->
         <scene sceneID="ZpI-iE-Onq">
             <objects>
-                <viewController id="nY7-hC-uc2" customClass="MoreOptionMainViewController" customModule="news_app_for_blockchain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nY7-hC-uc2" customClass="MoreOptionMainViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Hd-XQ-Zk9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -934,11 +934,12 @@
                         <segue destination="VY1-iF-tz5" kind="show" identifier="viewOption" id="OSj-mH-sOA"/>
                         <segue destination="MFK-H8-Jps" kind="show" identifier="notifiOption" id="IPd-Vp-UeJ"/>
                         <segue destination="9gs-ku-6Bq" kind="show" identifier="otherOption" id="h01-JX-SOA"/>
+                        <segue destination="BmY-4x-KTT" kind="show" identifier="defaultLanguage" id="Dah-BA-3au"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Udf-dj-9iX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2743" y="1954"/>
+            <point key="canvasLocation" x="-3998" y="1745"/>
         </scene>
         <!--更多-->
         <scene sceneID="Uir-4m-Jw5">
@@ -962,6 +963,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajf-Qb-cEL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2743" y="790"/>
+        </scene>
+        <!--Default Language Controller-->
+        <scene sceneID="0xO-W7-Et8">
+            <objects>
+                <viewController id="BmY-4x-KTT" customClass="DefaultLanguageController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yws-ht-eHW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BVR-AU-Hqr">
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                                <color key="backgroundColor" red="0.1843137255" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.1843137255" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="yjX-Q3-Jcv">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="barTintColor" red="0.12549019610000001" green="0.1333333333" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="languageTableCell" id="N0K-Sw-kRc">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N0K-Sw-kRc" id="5Gd-M3-cmB">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.21176470589999999" green="0.22352941179999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BVR-AU-Hqr" firstAttribute="leading" secondItem="0ih-Us-ln3" secondAttribute="leading" id="OOX-3l-L2N"/>
+                            <constraint firstItem="BVR-AU-Hqr" firstAttribute="top" secondItem="0ih-Us-ln3" secondAttribute="top" id="Sdi-D6-aSZ"/>
+                            <constraint firstItem="BVR-AU-Hqr" firstAttribute="trailing" secondItem="0ih-Us-ln3" secondAttribute="trailing" id="Uex-OE-prb"/>
+                            <constraint firstAttribute="bottom" secondItem="BVR-AU-Hqr" secondAttribute="bottom" id="kCV-Ym-Tck"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0ih-Us-ln3"/>
+                    </view>
+                    <connections>
+                        <outlet property="languageSearchBar" destination="yjX-Q3-Jcv" id="U5o-HH-eJQ"/>
+                        <outlet property="languageTableView" destination="BVR-AU-Hqr" id="22y-zt-uX1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IcV-lU-e4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7066" y="2696"/>
         </scene>
     </scenes>
     <resources>

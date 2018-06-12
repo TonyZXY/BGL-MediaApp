@@ -9,28 +9,31 @@
 import UIKit
 import RealmSwift
 
-class DefaultCurrencyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate{
+class DefaultLanguageController: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate{
+    
 
-    @IBOutlet weak var currencyTableView: UITableView!
+    @IBOutlet weak var languageTableView: UITableView!
     
-    @IBOutlet weak var currencySearchBar: UISearchBar!
+    @IBOutlet weak var languageSearchBar: UISearchBar!
     
-    let data = ["美元 USD","澳大利亚元 AUD","人民币 RMB","欧元 EURO","日元 JPY"]
-    let storeData = ["USD","AUD","CNY","EUR","JPY"]
+    
+    let data = ["中文 Chinese","英文 English"]
+    let storeData = ["CN","EN"]
     let realm = try! Realm()
     var filteredData: [String]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
-        currencyTableView.dataSource = self
-        currencyTableView.delegate = self
-        currencySearchBar.delegate = self
+        languageTableView.dataSource = self
+        languageTableView.delegate = self
+        languageSearchBar.delegate = self
         filteredData = data
         let label10 = UILabel(frame: CGRect(x: 0, y: 0, width: 250, height: 50))
         label10.textAlignment = .center
         label10.textColor = UIColor.white
-        label10.text = "默认法定货币"
+        label10.text = "语言"
         self.navigationItem.titleView = label10
         
     }
@@ -40,7 +43,7 @@ class DefaultCurrencyViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "currencyTableCell", for: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "languageTableCell", for: indexPath) as UITableViewCell
         cell.textLabel?.text = filteredData[indexPath.row]
         cell.textLabel?.textColor = #colorLiteral(red: 0.3294117647, green: 0.7019607843, blue: 0.6901960784, alpha: 0.8015839041)
         return cell
@@ -52,7 +55,7 @@ class DefaultCurrencyViewController: UIViewController, UITableViewDataSource, UI
             // If dataItem matches the searchText, return true to include it
             return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
-        currencyTableView.reloadData()
+        languageTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -61,10 +64,10 @@ class DefaultCurrencyViewController: UIViewController, UITableViewDataSource, UI
         UserDefaults.standard.set(str, forKey: "defaultCurrency")
         navigationController?.popToRootViewController(animated: true)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }

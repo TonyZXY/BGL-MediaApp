@@ -27,8 +27,14 @@ class AllTransactions:Object{
     @objc dynamic var usdTotalPrice:Double = 0
     @objc dynamic var audSinglePrice:Double = 0
     @objc dynamic var audTotalPrice:Double = 0
+    var currency = List<Currencys>()
     
     override class func primaryKey() -> String {
         return "id"
     }
+}
+
+class Currencys:Object{
+    @objc dynamic var name:String = ""
+    @objc dynamic var price:Double = 0
 }

@@ -57,4 +57,10 @@ class ThemeColor:UIColor{
         let color = UIColor.init(red:229.0/255.0, green:28.0/255.0, blue:35.0/255.0, alpha:0.8)
         return color
     }
+    
+    func bglColor() -> UIColor {
+        _ = #colorLiteral(red: 0.2078431373, green: 0.8549019608, blue: 0.7254901961, alpha: 0.5)
+        let color = UIColor.init(red:53.0/255.0, green:218.0/255.0, blue:185.0/255.0, alpha:0.8)
+        return color
+    }
 }

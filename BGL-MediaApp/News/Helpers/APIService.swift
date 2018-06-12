@@ -16,7 +16,6 @@ import RealmSwift
 class APIService: NSObject {
     static let shardInstance = APIService()
 
-
     let realm = try! Realm()
 
     //Connection Strings
@@ -28,7 +27,13 @@ class APIService: NSObject {
     let newsLocaleQuery = "localeTag"
     let newsContentQuery = "contentTag"
     let genuineQuery = "genuineTag"
-
+    let languageQuery = "languageTag"
+    let english = "EN"
+    let chinese = "CN"
+    let searchNews = "searchnews"
+    let searchGenuine = "searchgenuine"
+    let searchVideo = "searchvideo"
+    
     // fetch Offline News data (from database)
     func fetchNewsOffline(contentType: String, completion: @escaping (Results<News>) -> ()) {
         switch contentType {
@@ -66,7 +71,10 @@ class APIService: NSObject {
         switch contentType { // switch locale tag
         case "国内", "国际":
             let url = URL(string: urlString + localNews)
-            let para = [newsLocaleQuery: contentType, "skip": currentNumber] as [String: Any]
+            
+            let para = [newsLocaleQuery: contentType, "skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+            
+//            let para = [newsLocaleQuery: contentType, "skip": currentNumber] as [String: Any]
             Alamofire.request(url!, parameters: para).responseJSON { (responsein) in
                 switch responsein.result {
                 case .success(let value):
@@ -82,7 +90,8 @@ class APIService: NSObject {
             }
         default: // if content tag
             let url = URL(string: urlString + contentNews)
-            let para = [newsContentQuery: contentNews, "skip": currentNumber] as [String: Any]
+             let para = [newsContentQuery: contentNews, "skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+//            let para = [newsContentQuery: contentNews, "skip": currentNumber] as [String: Any]
             Alamofire.request(url!, parameters: para).responseJSON { (responsion) in
                 switch responsion.result {
                 case .success(let value):
@@ -102,7 +111,8 @@ class APIService: NSObject {
     // get Genuine data from API
     func fetchGenuineData(contentType: String, currentNumber: Int, completion: @escaping (Results<Genuine>) -> ()) {
         let url = URL(string: urlString + contentGenuine)
-        let para = [genuineQuery: contentType, "skip": currentNumber] as [String: Any]
+         let para = [genuineQuery: contentType, "skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+//        let para = [genuineQuery: contentType, "skip": currentNumber] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
             case .success(let value):
@@ -121,7 +131,8 @@ class APIService: NSObject {
     // get Video data from API
     func fetchVideoData(currentNumber: Int, completion: @escaping (Results<Video>) -> ()) {
         let url = URL(string: urlString + video)
-        let para = ["skip": currentNumber] as [String: Any]
+           let para = ["skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+//        let para = ["skip": currentNumber] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
             case .success(let value):
@@ -207,6 +218,98 @@ class APIService: NSObject {
             }
         }
         try! realm.commitWrite()
+    }
+
+    
+    func fetchSearchNews(keyword:String, completion: @escaping ([SearchObject]) -> ()) {
+        let url = URL(string: urlString + searchNews)
+        let para = ["patten": keyword, languageQuery: [english,chinese]] as [String: Any]
+        Alamofire.request(url!, parameters: para).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                var searchArrayObject = [SearchObject]()
+                if let collection = json.array {
+                    for item in collection {
+                        let searchObject = SearchObject()
+                        searchObject.type = "news"
+                        searchObject.author = item["author"].string!
+                        searchObject.title = item["title"].string!
+                        searchObject.imageURL = item["imageURL"].string!
+                        searchObject.publishedTime = item["publishedTime"].string!
+                        searchObject.url = item["url"].string!
+                        searchObject.description = item["newsDescription"].string!
+                        searchArrayObject.append(searchObject)
+                        print(searchArrayObject[0].imageURL!+"fdsafsf")
+                    }
+                }
+                DispatchQueue.main.async {
+                    completion(searchArrayObject)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fetchSearchGenuine(keyword:String, completion: @escaping ([SearchObject]) -> ()) {
+        let url = URL(string: urlString + searchGenuine)
+        let para = ["patten": keyword, languageQuery: [english,chinese]] as [String: Any]
+        Alamofire.request(url!, parameters: para).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                var searchArrayObject = [SearchObject]()
+                if let collection = json.array {
+                    for item in collection {
+                        let searchObject = SearchObject()
+                        searchObject.type = "genuine"
+                        searchObject.author = item["author"].string!
+                        searchObject.title = item["title"].string!
+                        searchObject.imageURL = item["imageURL"].string!
+                        searchObject.publishedTime = item["publishedTime"].string!
+                        searchObject.url = item["url"].string!
+                        searchObject.description = item["genuineDescription"].string!
+                        searchArrayObject.append(searchObject)
+                    }
+                }
+                DispatchQueue.main.async {
+                    completion(searchArrayObject)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fetchSearchVideo(keyword:String, completion: @escaping ([SearchObject]) -> ()) {
+        let url = URL(string: urlString + searchVideo)
+        let para = ["patten": keyword, languageQuery: [english,chinese]] as [String: Any]
+        Alamofire.request(url!, parameters: para).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                var searchArrayObject = [SearchObject]()
+                if let collection = json.array {
+                    for item in collection {
+                        let searchObject = SearchObject()
+                        searchObject.type = "video"
+                        searchObject.author = item["author"].string!
+                        searchObject.title = item["title"].string!
+                        searchObject.imageURL = item["imageURL"].string!
+                        searchObject.publishedTime = item["publishedTime"].string!
+                        searchObject.url = item["url"].string!
+                        searchObject.description = item["videoDescription"].string!
+                        searchArrayObject.append(searchObject)
+                    }
+                }
+                DispatchQueue.main.async {
+                    completion(searchArrayObject)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
 }
