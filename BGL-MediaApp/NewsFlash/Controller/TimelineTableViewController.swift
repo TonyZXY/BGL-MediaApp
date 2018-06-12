@@ -27,7 +27,7 @@ class TimelineTableViewController: UITableViewController {
         self.tableView.backgroundColor = ThemeColor().themeColor()
         self.tableView.separatorStyle = .none
         self.tableView.addSubview(self.refresher)
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,55 +56,96 @@ class TimelineTableViewController: UITableViewController {
         cell.descriptionLabel.text = object.contents
         cell.likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: .touchUpInside)
+        
         return cell
     }
     
     @objc func likeButtonClicked(sender: UIButton){
         if sender.currentTitle == "♡" {
             sender.setTitle("❤️", for: UIControlState.normal)
-            }else{
+        }else{
             sender.setTitle("♡",for: UIControlState.normal)
         }
         
     }
-//        let cell:TransPriceCell = self.transactionTableView.cellForRow(at: index) as! TransPriceCell
-
+    
     @objc func shareButtonClicked(sender: UIButton){
-        //        let sharingObj = results[sender.tag].contents
         
-        //get cell from indexPath
         let buttonPosition:CGPoint = sender.convert(CGPoint(x: 0, y: 0), to:self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: buttonPosition)
         let cell = tableView.cellForRow(at: indexPath!)! as! TimelineTableViewCell
         let cellText = cell.descriptionLabel.text
+        let size = cell.descriptionLabel.font.pointSize
+        let textImage = self.textToImage(drawText: cellText!, inImage: cell.descriptionLabel.createImage!, atPoint: CGPoint(x:0, y:0), withSize:size)
+        //original logo_qrCode image size = 580 * 290
+        let bottomImage = self.appendLeftAndRight(append: UIImage(named: "bcg_logo.png")!, with: UIImage(named: "sample_qr_code.png")!).resizeImage(CGSize(width: 324.5, height: 154))
+        let image = combineTopAndBottomImages(combine: textImage, with: (bottomImage)!)
         
-        //TODO: create an image with logo, text(screenshot maybe?) and qr-code
-        
-        let topImage = cell.descriptionLabel.snapshot
-        let bottomImage = UIImage(named: "testImage_logo_qr.png")
-
-        let size = CGSize(width: (topImage?.size.width)!, height: (topImage?.size.height)! + (bottomImage?.size.height)!)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-
-        topImage?.draw(in: CGRect(x:0, y:0, width:size.width, height: (topImage?.size.height)!))
-        bottomImage?.draw(in: CGRect(x:0, y:(topImage?.size.height)!, width: size.width,  height: (bottomImage?.size.height)!))
-
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-
-        // I've added an UIImageView, You can change as per your requirement.
-        let mergeImageView = UIImageView(frame: CGRect(x:0, y: 200, width: 30, height: 20))
-
-        // Here is your final combined images into a single image view.
-        mergeImageView.image = newImage
-   
-        
-        
-        
-        
-        let activityVC = UIActivityViewController(activityItems: [mergeImageView.image], applicationActivities:nil)
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities:nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC,animated: true, completion:nil)
+    }
+    
+    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint, withSize size: CGFloat) -> UIImage {
+        let textColor = UIColor.black
+        
+        let textFont = UIFont.systemFont(ofSize: size)
+        
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
+        
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: textColor,
+            ] as [NSAttributedStringKey : Any]
+        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+        
+        let rect = CGRect(origin: point, size: image.size)
+        text.draw(in: rect, withAttributes: textFontAttributes)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    func appendLeftAndRight(append logo:UIImage, with qrCode:UIImage)-> UIImage{
+        let height = qrCode.size.height
+        let width = qrCode.size.width * 2
+        let size = CGSize(width: width, height: height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        logo.draw(in: CGRect(x:0, y:0, width:width/2, height:height))
+        qrCode.draw(in: CGRect(x:width/2, y:0, width: width/2,  height:height))
+        
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        // Change UIImageView requirements here
+        let mergeImageView = UIImageView(frame: CGRect(x:0, y: 200, width: 30, height: 20))
+        
+        //Combine images into a single image view.
+        mergeImageView.image = newImage
+        return mergeImageView.image!
+    }
+    
+    func combineTopAndBottomImages(combine topImage:UIImage, with bottomImage:UIImage)-> UIImage{
+        print(topImage.size)
+        print(bottomImage.size)
+        let size = CGSize(width: (topImage.size.width), height: (topImage.size.height) + (bottomImage.size.height))
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        topImage.draw(in: CGRect(x:0, y:0, width:size.width, height: (topImage.size.height)))
+        bottomImage.draw(in: CGRect(x:0, y:(topImage.size.height), width: size.width,  height: (bottomImage.size.height)))
+        
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        // Change UIImageView requirements here
+        let mergeImageView = UIImageView(frame: CGRect(x:0, y: 200, width: 30, height: 20))
+        
+        //Combine images into a single image view.
+        mergeImageView.image = newImage
+        return mergeImageView.image!
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -156,12 +197,12 @@ class TimelineTableViewController: UITableViewController {
     }()
     
     func cleanOldNewsFlash() {
-//        let oneWeekBefore = Date.init(timeIntervalSinceNow: -(86400*7))
-//        let oldObjects = realm.objects(NewsFlash.self).filter("dateTime < %@", oneWeekBefore)
-//
-//        try! realm.write {
-//            realm.delete(oldObjects)
-//        }
+        //        let oneWeekBefore = Date.init(timeIntervalSinceNow: -(86400*7))
+        //        let oldObjects = realm.objects(NewsFlash.self).filter("dateTime < %@", oneWeekBefore)
+        //
+        //        try! realm.write {
+        //            realm.delete(oldObjects)
+        //        }
     }
     
     
@@ -172,14 +213,54 @@ class TimelineTableViewController: UITableViewController {
 }
 
 extension UIView {
-    var snapshot : UIImage? {
-        var image: UIImage? = nil
-        UIGraphicsBeginImageContext(bounds.size)
-        if let context = UIGraphicsGetCurrentContext() {
-            self.layer.render(in: context)
-            image = UIGraphicsGetImageFromCurrentImageContext()
-        }
+    //    var snapshot : UIImage? {
+    //        var image: UIImage? = nil
+    //        UIGraphicsBeginImageContext(bounds.size)
+    //        if let context = UIGraphicsGetCurrentContext() {
+    //            self.layer.render(in: context)
+    //            image = UIGraphicsGetImageFromCurrentImageContext()
+    //        }
+    //        UIGraphicsEndImageContext()
+    //        return image
+    //    }
+    var createImage : UIImage? {
+        
+        let rect = CGRect(x:0, y:0, width:bounds.size.width, height:bounds.size.height)
+        
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0)
+        UIColor.white.set()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
+        
+    }
+}
+
+extension UIImage {
+    func resizeImage(_ newSize: CGSize) -> UIImage? {
+        func isSameSize(_ newSize: CGSize) -> Bool {
+            return size == newSize
+        }
+        
+        func scaleImage(_ newSize: CGSize) -> UIImage? {
+            func getScaledRect(_ newSize: CGSize) -> CGRect {
+                let ratio   = max(newSize.width / size.width, newSize.height / size.height)
+                let width   = size.width * ratio
+                let height  = size.height * ratio
+                return CGRect(x: 0, y: 0, width: width, height: height)
+            }
+            
+            func _scaleImage(_ scaledRect: CGRect) -> UIImage? {
+                UIGraphicsBeginImageContextWithOptions(scaledRect.size, false, 0.0);
+                draw(in: scaledRect)
+                let image = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
+                UIGraphicsEndImageContext()
+                return image
+            }
+            return _scaleImage(getScaledRect(newSize))
+        }
+        
+        return isSameSize(newSize) ? self : scaleImage(newSize)!
     }
 }
