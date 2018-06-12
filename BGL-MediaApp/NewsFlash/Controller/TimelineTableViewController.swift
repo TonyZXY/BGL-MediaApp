@@ -16,6 +16,8 @@ class TimelineTableViewController: UITableViewController {
     let realm = try! Realm()
     var results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
     
+    var inSearchMode = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +38,9 @@ class TimelineTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if inSearchMode {
+            return 4
+        }
         return results.count
     }
     
@@ -77,7 +82,7 @@ class TimelineTableViewController: UITableViewController {
         let cellText = cell.descriptionLabel.text
         let size = cell.descriptionLabel.font.pointSize
         let textImage = self.textToImage(drawText: cellText!, inImage: cell.descriptionLabel.createImage!, atPoint: CGPoint(x:0, y:0), withSize:size)
-        //original logo_qrCode image size = 580 * 290
+    
         let topImage = combineLogoWithText(combine: UIImage(named: "bcg_logo.png")!, with: textImage)
         let bottomImage = UIImage(named: "sample_qr_code.png")
         let image = combineImageWithQRCode(combine: topImage, with: (bottomImage)!)
@@ -153,6 +158,7 @@ class TimelineTableViewController: UITableViewController {
         cell.backgroundColor = UIColor.clear
         cell.selectionStyle = .none
     }
+  
     
     private func getNews() {
         Alamofire.request("http://10.10.6.111:3000/api/flash?languageTag=EN&CN", method: .get).validate().responseJSON { response in
@@ -211,19 +217,27 @@ class TimelineTableViewController: UITableViewController {
         getNews()
         self.refresher.endRefreshing()
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text == nil || searchBar.text == "" {
+            
+            inSearchMode = false
+            
+            view.endEditing(true)
+            
+            tableView.reloadData()
+            
+        } else {
+            
+            inSearchMode = true
+            
+            tableView.reloadData()
+        }
+    }
 }
 
 extension UIView {
-    //    var snapshot : UIImage? {
-    //        var image: UIImage? = nil
-    //        UIGraphicsBeginImageContext(bounds.size)
-    //        if let context = UIGraphicsGetCurrentContext() {
-    //            self.layer.render(in: context)
-    //            image = UIGraphicsGetImageFromCurrentImageContext()
-    //        }
-    //        UIGraphicsEndImageContext()
-    //        return image
-    //    }
     var createImage : UIImage? {
         
         let rect = CGRect(x:0, y:0, width:bounds.size.width, height:bounds.size.height)

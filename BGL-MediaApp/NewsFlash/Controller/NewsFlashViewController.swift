@@ -12,6 +12,8 @@ class NewsFlashViewController: UIViewController {
     @IBOutlet weak var dateAndTimeLabel: UILabel!
         
     @IBOutlet weak var timelineView: UIView!
+
+    @IBOutlet weak var searchBar: UISearchBar!
     
 
     @IBAction func newsFlashSearchButton(_ sender: Any) {
@@ -38,9 +40,10 @@ class NewsFlashViewController: UIViewController {
         view.backgroundColor = ThemeColor().themeColor()
         titleLabel.textColor = UIColor.white
         navigationItem.titleView = titleLabel
-
         navigationController?.navigationBar.barTintColor =  ThemeColor().themeColor()
         navigationController?.navigationBar.isTranslucent = false
+        
+        searchBar.backgroundColor = ThemeColor().themeColor()
     }
 
     

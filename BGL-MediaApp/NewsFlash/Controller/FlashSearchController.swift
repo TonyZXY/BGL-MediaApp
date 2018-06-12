@@ -9,7 +9,7 @@
 import UIKit
 
 class FlashSearchController: UIViewController {
-
+    //}
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,7 +21,8 @@ class FlashSearchController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-     
+    
+    
 
     /*
     // MARK: - Navigation
