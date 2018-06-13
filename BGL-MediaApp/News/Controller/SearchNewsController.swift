@@ -28,7 +28,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
         if searchNewsObject.count > indexPath.row{
             if indexPath.row == 0{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectionCell", for: indexPath) as! SectionCell
-                cell.sectionLabel.text = "新闻"
+                cell.sectionLabel.text = textValue(name: "<#T##String#>")
                 cell.backgroundColor = ThemeColor().bglColor()
                 return cell
             } else {

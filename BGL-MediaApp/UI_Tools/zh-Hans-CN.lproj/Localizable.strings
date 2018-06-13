@@ -5,3 +5,99 @@
   Created by Bruce Feng on 12/6/18.
   Copyright © 2018 Xuyang Zheng. All rights reserved.
 */
+mainHint = "开始你的货币交易管理！";
+hintLabel = "我们只需要一个或者多个交易，请通过点击 + 按钮添加你的第一个交易";
+
+//Assets Page
+mainBalance = "总资产";
+totalNumber = "涨幅";
+totalPercent = "总数";
+
+
+//Transaction Page
+buy = "买入";
+sell = "卖出";
+addTransaction = "添加交易";
+updateTransaction = "更新交易";
+loading = "加载中...";
+
+//Transaciton Page Table View
+coinForm = "币种";
+exchangeForm = "交易市场";
+tradingPairForm = "兑换币种";
+buyPriceForm = "买入价格(单价)";
+sellPriceForm = "卖出价格(单价)";
+amountBoughtForm = "买入数量";
+amountSoldForm = "出售数量";
+buyDateForm = "购买日期";
+sellDateForm = "出售日期";
+buyTimeForm = "购买时间";
+sellTimeForm = "出售时间";
+trasactionFeeForm = "交易费用";
+transactionFeeButtonForm = "币种 ▼";
+additionalForm = "附加信息";
+
+//Market Page
+globalMarket = "市场行情";
+watchlistMarket = "收藏列表";
+marketCap_Market = "市场总资产";
+market_24hVolume = "24小时交易量";
+btcDominance_market = "BTC占比";
+sortByLetter_market = "按字母排序";
+sortByHighestPrice_market = "按最高价排序";
+filterByWeek_market = "1周";
+filterByDay_market = "1天";
+filterByHour_market = "1小时";
+globalAverage_market = "全球平均价格";
+
+//WatchList Page
+sortByLetter_watchlist = "按字母排序";
+sortByHighestPrice_watchlist = "按最高价排序";
+filterByWeek_watchlist = "1周";
+filterByDay_watchlist = "1天";
+filterByHour_watchlist = "1小时";
+
+//News Page
+news_newsPage = "新闻";
+origin_newsPage = "原创";
+
+//Detail Page
+allTimeProfit_detail_detail = "总收益";
+portfolio_detail = "数量";
+marketValue_detail = "市值";
+netCost_detail = "净值";
+general_detail = "详细";
+transaction_detail = "交易";
+alerts_detail = "提醒";
+marketCap_detail = "市场总值";
+volume_detail = "24小时成交量";
+circulatingSupply_detail = "流动供给";
+
+//Transaction History Page
+tradingMarket_history = "交易市场";
+buyPirce = "买入价格";
+buyTradingPair = "兑换币种";
+boughtAmount = "买入数量";
+buyCost = "成本";
+buyWorth = "收益";
+buyDelta = "收益率";
+
+sellPirce = "卖出价格";
+sellTradingPair = "兑换币种";
+soldAmount = "数量";
+sellProceeds = "收益";
+
+//Setting Page
+aboutUs_section = "Blockchain Global";
+setting_section = "应用设置选项";
+aboutUs_cell = "关于我们";
+community_cell = "BGL社区";
+defaultCurrency_cell = "默认法定货币";
+notification_cell = "应用通知选项";
+display_cell = "界面显示选项";
+other_cell = "其他选项";
+language_cell = "语言设置";
+
+//Language Page
+chinese_language = "中文";
+english_language = "英文";

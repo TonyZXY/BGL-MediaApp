@@ -11,7 +11,7 @@ import UIKit
 class MarketFilterCollectionView:UICollectionViewCell{
 
     var color = ThemeColor()
-    var sortdate = ["1W","1D","1H"]
+    var sortdate = [String]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,6 +39,10 @@ class MarketFilterCollectionView:UICollectionViewCell{
     
     func setupView(){
         addSubview(label)
+        
+        sortdate.append(textValue(name: "filterByWeek_market"))
+        sortdate.append(textValue(name: "filterByDay_market"))
+        sortdate.append(textValue(name: "filterByHour_market"))
         label.translatesAutoresizingMaskIntoConstraints = false
         addConstraint(NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))

@@ -23,11 +23,13 @@ class NewsMenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
 
     let cellId = "cdllId"
 
-    let barItemName = ["新闻", "原创"]
+    var barItemName = [String]()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(collectionView)
+        barItemName.append(textValue(name: "news_newsPage"))
+        barItemName.append(textValue(name: "origin_newsPage"))
         // REVIEW: put in a separate method -Johnny Lin
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)

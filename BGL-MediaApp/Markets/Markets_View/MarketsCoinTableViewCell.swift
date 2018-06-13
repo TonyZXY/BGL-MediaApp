@@ -77,6 +77,9 @@ class MarketsCoinTableViewCell:UITableViewCell{
         addSubview(coinType)
         addSubview(coinNumber)
         addSubview(addWish)
+        self.selectionStyle = .none
+        
+        coinType.text = textValue(name: "globalAverage_market")
         addWish.addTarget(self, action: #selector(MarketsCoinTableViewCell.removeWatch), for: .touchUpInside)
         
         //coinImage
@@ -105,7 +108,6 @@ class MarketsCoinTableViewCell:UITableViewCell{
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[v5]-16-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":coinImage,"v1":coinLabel,"v2":coinChange,"v3":coinType,"v4":coinNumber,"v5":addWish]))
         NSLayoutConstraint(item: addWish, attribute:.centerY , relatedBy: NSLayoutRelation.equal, toItem: coinImage, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0).isActive = true
     }
-    
     
     @objc func removeWatch(sender: UIButton) {
         let realm = try! Realm()

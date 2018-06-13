@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class MarketSortPickerView:UITextField,UIPickerViewDelegate, UIPickerViewDataSource{
-    var sortItems = ["按字母排序","按最高价排序"]
+    var sortItems = [String]()
     let pickerview = UIPickerView()
     
     weak var sortPickerViewDelegate: SortPickerViewDelegate?
@@ -26,6 +26,9 @@ class MarketSortPickerView:UITextField,UIPickerViewDelegate, UIPickerViewDataSou
         tintColor = .clear
         layer.borderColor = UIColor.white.cgColor
         textColor = UIColor.white
+        
+        sortItems.append(textValue(name: "sortByLetter_market"))
+        sortItems.append(textValue(name: "sortByHighestPrice_market"))
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

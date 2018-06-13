@@ -10,16 +10,21 @@ import UIKit
 
 class MoreOptionMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
-    let sections = ["关于我们","应用设置选项"] // Two Sections' names
-    let items = [
-        ["关于Blockchain Global","Blockchain Global社区"], //About us list items
-        ["默认法定货币","应用通知选项","界面显示选项","其他选项","语言设置"] // other app settings
-    ]
+    var sections = [String]() // Two Sections' names
+    var items = [[String]]()
+//    var items = [
+//        ["关于Blockchain Global","Blockchain Global社区"], //About us list items
+//        ["默认法定货币","应用通知选项","界面显示选项","其他选项","语言设置"] // other app settings
+//    ]
     let segueIdentities  = ["aboutUs","bglCommu","defaultCurrency","notifiOption","viewOption","otherOption","defaultLanguage"]
 
     @IBOutlet weak var tableView00: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        sections.append(textValue(name: "aboutUs_section"))
+        sections.append(textValue(name: "setting_section"))
+        items = [[textValue(name: "aboutUs_cell"),textValue(name: "community_cell")],[textValue(name: "defaultCurrency_cell"),textValue(name: "notification_cell"),textValue(name: "display_cell"),textValue(name: "other_cell"),textValue(name: "language_cell")]]
+        
         // Do any additional setup after loading the view, typically from a nib.
         tableView00.delegate = self
         tableView00.dataSource = self

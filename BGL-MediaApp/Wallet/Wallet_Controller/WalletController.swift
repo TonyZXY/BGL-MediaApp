@@ -15,7 +15,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     var color = ThemeColor()
     var image = AppImage()
     let realm = try! Realm()
-    var allResult = try! Realm().objects(AllTransactions.self)
+//    var allResult = try! Realm().objects(AllTransactions.self)
     var all = try! Realm().objects(MarketTradingPairs.self)
     let cryptoCompareClient = CryptoCompareClient()
     var walletResults = [MarketTradingPairs]()
@@ -31,33 +31,24 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     //    var walletResults = [MarketTradingPairs]()
     
     
+    var allResult:Results<AllTransactions> {
+        return try! Realm().objects(AllTransactions.self)
+    }
+    
     var allTransactions: Results<MarketTradingPairs> {
         get {
             return try! Realm().objects(MarketTradingPairs.self)
         }
     }
     
-//    var priceType:String {
-//        get{
-//            var curreny:String = ""
-//            if let defaultCurrency = UserDefaults.standard.value(forKey: "defaultCurrency") as? String{
-//                curreny = defaultCurrency
-//                return curreny
-//            } else {
-//                return curreny
-//            }
-//        }
-//    }
-    
-    
     //The First Time load the Page
     override func viewDidLoad() {
         super.viewDidLoad()
         setWalletData()
         setUpBasicView()
-        SetDataResult().writeJsonExchange()
-        SetDataResult().writeMarketCapCoinList()
-        GetDataResult().getCoinList()
+//        SetDataResult().writeJsonExchange()
+//        SetDataResult().writeMarketCapCoinList()
+//        GetDataResult().getCoinList()
         print(allResult)
         print(all)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: NSNotification.Name(rawValue: "reloadWallet"), object: nil)
@@ -68,11 +59,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     
     //Every Time the Page appear will active this method
     override func viewWillAppear(_ animated: Bool) {
-        if allResult.count == 0{
-            setUpInitialView()
-        } else {
-            setupView()
-        }
+        checkTransaction()
         setWalletData()
         reloadData()
         tabBarController?.tabBar.isHidden = false
@@ -81,7 +68,13 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     // Refresh Table View Data
     
     
-    
+    func checkTransaction(){
+        if allResult.count == 0{
+            setUpInitialView()
+        } else {
+            setupView()
+        }
+    }
     
     //TableView Cell Number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -238,6 +231,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
                 realm.delete(statusItem)
                 realm.delete(marketResult)
             }
+            checkTransaction()
             refreshData()
         }
     }

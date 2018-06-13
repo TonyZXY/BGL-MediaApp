@@ -17,14 +17,14 @@ class DefaultLanguageController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var languageSearchBar: UISearchBar!
     
     
-    let data = ["中文 Chinese","英文 English"]
+    var data = [String]()
     let storeData = ["CN","EN"]
     let realm = try! Realm()
     var filteredData: [String]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        data = [textValue(name: "chinese_language"),textValue(name: "english_language")]
         // Do any additional setup after loading the view.
         languageTableView.dataSource = self
         languageTableView.delegate = self
@@ -61,7 +61,7 @@ class DefaultLanguageController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let str = storeData[indexPath.row]
         print(realm.configuration.fileURL ?? "")
-        UserDefaults.standard.set(str, forKey: "defaultCurrency")
+        UserDefaults.standard.set(str, forKey: "defaultLanguage")
         navigationController?.popToRootViewController(animated: true)
     }
     

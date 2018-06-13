@@ -40,12 +40,13 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
         //Create buy transaction cell
         if object.status == "Buy"{
             let cell = tableView.dequeueReusableCell(withIdentifier: "BuyHistory", for: indexPath) as! HistoryTableViewCell
+            cell.buyLanguage()
             cell.dateLabel.textColor = UIColor.white
             cell.buyMarket.textColor = UIColor.white
             cell.labelPoint.text = "B"
             cell.labelPoint.layer.backgroundColor = ThemeColor().greenColor().cgColor
             cell.dateLabel.text = object.date + " " + object.time
-            cell.buyMarket.text = "交易市场:" + object.exchangName
+            cell.buyMarket.text = textValue(name: "tradingMarket_history") + ":" + object.exchangName
             cell.SinglePriceResult.text = scientificMethod(number:object.audSinglePrice)
             cell.tradingPairsResult.text = object.coinAbbName + "/" + object.tradingPairsName
             cell.amountResult.text = scientificMethod(number:object.amount)
@@ -67,6 +68,7 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
         } else if object.status == "Sell"{
              //Create sell transaction cell
             let cell = tableView.dequeueReusableCell(withIdentifier: "SellHistory", for: indexPath) as! HistoryTableViewCell
+            cell.sellLanguage()
             cell.sellDateLabel.textColor = UIColor.white
             cell.sellMarket.textColor = UIColor.white
             cell.labelPoint.text = "S"

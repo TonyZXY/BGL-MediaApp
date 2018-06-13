@@ -1,24 +1,27 @@
 //
-//  MarketsCell.swift
+//  MarketView.swift
 //  news app for blockchain
 //
-//  Created by Bruce Feng on 30/4/18.
+//  Created by Bruce Feng on 4/6/18.
 //  Copyright © 2018 Sheng Li. All rights reserved.
 //
+
+import Foundation
 
 import UIKit
 import RealmSwift
 
-class MarketsCell: UICollectionViewCell {
+class MarketView: UIView {
     
     var color = ThemeColor()
     var sortItems = [String]()
-    var filterDateitems = ["1W","1D","1H"]
+    var filterDateitems = [String]()
+    var coinItems = ["bitcoin","haha"]
     let general = generalDetail()
-    //排序窗口 sort window
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
         setupView()
     }
     
@@ -50,6 +53,7 @@ class MarketsCell: UICollectionViewCell {
     lazy var searchBar:UISearchBar={
         var searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
+//        searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.barTintColor = color.themeColor()
         searchBar.tintColor = color.themeColor()
@@ -74,39 +78,42 @@ class MarketsCell: UICollectionViewCell {
         addSubview(searchBar)
         addSubview(coinList)
         
-        
+//        sortItems.append(textValue(name: "sortByLetter_market"))
+//        sortItems.append(textValue(name: "sortByHighestPrice_market"))
+//        filterDateitems.append(textValue(name: "filterByWeek_market"))
+//        filterDateitems.append(textValue(name: "filterByDay_market"))
+//        filterDateitems.append(textValue(name: "filterByHour_market"))
+
         
         //总额View
         totalCollectionView.translatesAutoresizingMaskIntoConstraints = false
         totalCollectionView.register(MarketsTotalView.self, forCellWithReuseIdentifier: "CellId")
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[v0]-5-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":totalCollectionView]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[v0(80)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":totalCollectionView]))
-        
+
         //排序按钮
         sortCoin.translatesAutoresizingMaskIntoConstraints = false
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[v0]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":sortCoin,"v1":totalCollectionView]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v1]-10-[v0(20)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":sortCoin,"v1":totalCollectionView]))
-        
+
         //时间分类 Constraints
         filterDate.translatesAutoresizingMaskIntoConstraints = false
         filterDate.register(MarketFilterCollectionView.self, forCellWithReuseIdentifier: "SortDate")
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[v0(200)]-10-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":filterDate,"v1":sortCoin]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v1]-10-[v0(20)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":filterDate,"v1":totalCollectionView]))
-        
+
         //搜索栏
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":sortCoin]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v1]-10-[v0(30)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":sortCoin]))
-        
+
         //币种列表
         coinList.translatesAutoresizingMaskIntoConstraints = false
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":coinList,"v1":searchBar]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v1]-0-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":coinList,"v1":searchBar]))
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

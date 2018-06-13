@@ -24,11 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if launchedBefore{
             print("launched")
         } else{
+            SetDataResult().writeJsonExchange()
+            SetDataResult().writeMarketCapCoinList()
+            GetDataResult().getCoinList()
             UserDefaults.standard.set("AUD", forKey: "defaultCurrency")
+            UserDefaults.standard.set("CN", forKey: "defaultLanguage")
             UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
-        
-        
         return true
     }
 }

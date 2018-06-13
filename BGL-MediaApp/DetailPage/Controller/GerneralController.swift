@@ -147,6 +147,9 @@ class GerneralController: UIViewController {
         vc.coinSymbol = coinSymbol
         vc.didMove(toParentViewController: self)
         
+        marketCap.text = textValue(name: "marketCap_detail")
+        volume.text = textValue(name: "volume_detail")
+        circulatingSupply.text = textValue(name: "circulatingSupply_detail")
     }
     
     override func didReceiveMemoryWarning() {
@@ -255,7 +258,6 @@ class GerneralController: UIViewController {
     
     var marketCap:UILabel = {
         var label = UILabel()
-        label.text = "市场总值"
         label.font = label.font.withSize(18)
         label.textColor = UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -289,7 +291,6 @@ class GerneralController: UIViewController {
     
     var volume:UILabel = {
         var label = UILabel()
-        label.text = "24小时成交量"
         label.font = label.font.withSize(18)
         label.textColor = UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -313,7 +314,6 @@ class GerneralController: UIViewController {
     
     var circulatingSupply:UILabel = {
         var label = UILabel()
-        label.text = "流动供给"
         label.font = label.font.withSize(18)
         label.textColor = UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false

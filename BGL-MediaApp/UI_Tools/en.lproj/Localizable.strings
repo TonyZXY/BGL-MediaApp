@@ -39,6 +39,67 @@ trasactionFeeForm = "Transaction Fee";
 transactionFeeButtonForm = "Currency ▼";
 additionalForm = "Notes";
 
-//Market Cell
+//Market Page
+globalMarket = "Markets";
+watchlistMarket = "Watchlist";
+marketCap_Market = "Market Cap";
+market_24hVolume = "24h Volume";
+btcDominance_market = "BTC Dominance";
+sortByLetter_market = "Alphabetical";
+sortByHighestPrice_market = "Highest Price";
+filterByWeek_market = "1W";
+filterByDay_market = "1D";
+filterByHour_market = "1H";
+globalAverage_market = "Global Average";
 
+//WatchList Page
+sortByLetter_watchlist = "Alphabetical";
+sortByHighestPrice_watchlist = "Highest Price";
+filterByWeek_watchlist = "1W";
+filterByDay_watchlist = "1D";
+filterByHour_watchlist = "1H";
 
+//News Page
+news_newsPage = "News";
+origin_newsPage = "Origin";
+
+//Detail Page
+allTimeProfit_detail_detail = "All Time Profit";
+portfolio_detail = "Portfolio";
+marketValue_detail = "Market Value";
+netCost_detail = "Net Cost";
+general_detail = "General";
+transaction_detail = "Transactions";
+alerts_detail = "Alerts";
+marketCap_detail = "Market Cap";
+volume_detail = "Volume(24h)";
+circulatingSupply_detail = "Circulating Supply";
+
+//Transaction History Page
+tradingMarket_history = "Market";
+buyPirce = "Buy Price";
+buyTradingPair = "Trading Pair";
+boughtAmount = "Amount";
+buyCost = "Cost";
+buyWorth = "Worth";
+buyDelta = "Delta";
+
+sellPirce = "Buy Price";
+sellTradingPair = "Trading Pair";
+soldAmount = "Amount";
+sellProceeds = "Proceeds";
+
+//Setting Page
+aboutUs_section = "Blockchain Global";
+setting_section = "Setting";
+aboutUs_cell = "About Us";
+community_cell = "BGL Community";
+defaultCurrency_cell = "Default Currency";
+notification_cell = "Notification Option";
+display_cell = "Display Option";
+other_cell = "Other Option";
+language_cell = "Language";
+
+//Language Page
+chinese_language = "Chinese";
+english_language = "English";
