@@ -254,18 +254,6 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
         navigationController?.pushViewController(detailPage, animated: true)
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
     //TableView Refresh Spinnner
     lazy var refresher: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -297,6 +285,8 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
         buttonView.addSubview(addTransactionButton)
         hintView.addSubview(hintLabel)
         hintMainView.addSubview(hintMainLabel)
+        
+        hintLanguageLabel()
         
         //View No transactions
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":invisibleView]))
@@ -350,6 +340,8 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
         totalProfitView.addSubview(totalChange)
         buttonView.addSubview(addTransactionButton)
         
+         languageLabel()
+        
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":existTransactionView]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":existTransactionView]))
         
@@ -392,10 +384,20 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
         
     }
     
+    func languageLabel(){
+        totalLabel.text = textValue(name:"mainBalance")
+        filterButtonNumber.setTitle(textValue(name:"totalNumber"), for: .normal)
+        filterButtonPercent.setTitle(textValue(name:"totalPercent"), for: .normal)
+    }
+    
+    func hintLanguageLabel(){
+        hintMainLabel.text = textValue(name: "mainHint")
+        hintLabel.text = textValue(name: "hintLabel")
+    }
+    
     var hintMainLabel:UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Your portfolio starts here!"
         label.textColor = UIColor.white
         label.numberOfLines = 0
         label.font = label.font.withSize(23)
@@ -403,7 +405,6 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         return label
     }()
-    
     
     var hintMainView:UIView = {
         var view = UIView()
@@ -415,7 +416,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     var hintLabel:UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "We just need one or more transactions.Add your first transaction via the + button below"
+//        label.text = "We just need one or more transactions.Add your first transaction via the + button below"
         label.textColor = UIColor.white
         label.numberOfLines = 0
         label.font = label.font.withSize(13)
@@ -454,7 +455,6 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     
     var totalLabel:UILabel = {
         var label = UILabel()
-        label.text = "总资产"
         label.font = label.font.withSize(20)
         label.textColor = UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false

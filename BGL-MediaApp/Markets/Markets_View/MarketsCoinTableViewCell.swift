@@ -106,6 +106,7 @@ class MarketsCoinTableViewCell:UITableViewCell{
         NSLayoutConstraint(item: addWish, attribute:.centerY , relatedBy: NSLayoutRelation.equal, toItem: coinImage, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0).isActive = true
     }
     
+    
     @objc func removeWatch(sender: UIButton) {
         let realm = try! Realm()
         let watchList = realm.objects(CoinsInWatchListRealm.self).filter("symbol = %@", object!.symbol)

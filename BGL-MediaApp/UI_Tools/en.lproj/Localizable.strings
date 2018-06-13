@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  BGL-MediaApp
+
+  Created by Bruce Feng on 12/6/18.
+  Copyright © 2018 Xuyang Zheng. All rights reserved.
+*/
+
+//Assets Page Hint page
+mainHint = "Your portfolio starts here!";
+hintLabel = "We just need one or more transactions.Add your first transaction via the + button below";
+
+//Assets Page
+mainBalance = "Main Portfolio Balance";
+totalNumber = "Number";
+totalPercent = "Percent";
+
+
+//Transaction Page
+buy = "Buy";
+sell = "Sell";
+addTransaction = "Add Transaction";
+updateTransaction = "Update Transaction";
+loading = "Loading...";
+
+//Transaciton Page Table View
+coinForm = "Coin";
+exchangeForm = "Exchange";
+tradingPairForm = "Trading Pair";
+buyPriceForm = "Buy Price(per coin)";
+sellPriceForm = "Sell Price(per coin)";
+amountBoughtForm = "Amout Bought";
+amountSoldForm = "Amount Sold";
+buyDateForm = "Date";
+sellDateForm = "Date";
+buyTimeForm = "Time";
+sellTimeForm = "Time";
+trasactionFeeForm = "Transaction Fee";
+transactionFeeButtonForm = "Currency ▼";
+additionalForm = "Notes";
+
+//Market Cell
+
+

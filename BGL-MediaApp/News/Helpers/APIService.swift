@@ -240,7 +240,6 @@ class APIService: NSObject {
                         searchObject.url = item["url"].string!
                         searchObject.description = item["newsDescription"].string!
                         searchArrayObject.append(searchObject)
-                        print(searchArrayObject[0].imageURL!+"fdsafsf")
                     }
                 }
                 DispatchQueue.main.async {

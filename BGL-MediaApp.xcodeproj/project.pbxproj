@@ -146,6 +146,8 @@
 		5765936520CA3E9100298EF5 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936420CA3E9100298EF5 /* InitialView.swift */; };
 		5765936720CA46AD00298EF5 /* SDSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936620CA46AD00298EF5 /* SDSViewController.swift */; };
 		5765936920CA696100298EF5 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936820CA696100298EF5 /* test.swift */; };
+		5765937620CFA90B00298EF5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5765937820CFA90B00298EF5 /* Localizable.strings */; };
+		5765937B20CFABF700298EF5 /* LanguagePackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765937A20CFABF700298EF5 /* LanguagePackage.swift */; };
 		65CA633090F1F7BCDAFE405B /* Pods_BGL_MediaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -292,8 +294,10 @@
 		5765936420CA3E9100298EF5 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		5765936620CA46AD00298EF5 /* SDSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDSViewController.swift; sourceTree = "<group>"; };
 		5765936820CA696100298EF5 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
-		5765936A20CFA07100298EF5 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "BGL-MediaApp/zh-Hans-CN.lproj/Main.strings"; sourceTree = "<group>"; };
 		5765936B20CFA07100298EF5 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		5765937720CFA90B00298EF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5765937920CFA90F00298EF5 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5765937A20CFABF700298EF5 /* LanguagePackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePackage.swift; sourceTree = "<group>"; };
 		EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BGL_MediaApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -774,6 +778,8 @@
 				1AFE40E820C4F7FD002D8137 /* ChangeRiseFallColor.swift */,
 				1AFE40E920C4F7FD002D8137 /* ScientificMethod.swift */,
 				1AFE40EA20C4F7FD002D8137 /* ThemeColor.swift */,
+				5765937820CFA90B00298EF5 /* Localizable.strings */,
+				5765937A20CFABF700298EF5 /* LanguagePackage.swift */,
 			);
 			path = UI_Tools;
 			sourceTree = "<group>";
@@ -847,6 +853,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans-CN",
 			);
 			mainGroup = 1AFE402220C4F7DC002D8137;
 			productRefGroup = 1AFE402C20C4F7DC002D8137 /* Products */;
@@ -867,6 +874,7 @@
 				1AFE410F20C4F7FE002D8137 /* LaunchScreen.storyboard in Resources */,
 				1AFE412320C4F7FE002D8137 /* SellTableViewCell.xib in Resources */,
 				1A6AD41320C615FF00D1ADA7 /* Main.storyboard in Resources */,
+				5765937620CFA90B00298EF5 /* Localizable.strings in Resources */,
 				1AFE411420C4F7FE002D8137 /* TimelineTableViewCell.xib in Resources */,
 				1AFE410E20C4F7FE002D8137 /* Assets.xcassets in Resources */,
 				1AFE413520C4F7FE002D8137 /* README.md in Resources */,
@@ -1028,6 +1036,7 @@
 				1AFE411320C4F7FE002D8137 /* TimelinePoint.swift in Sources */,
 				1AFE413620C4F7FE002D8137 /* CryptoCompareClient.swift in Sources */,
 				1AFE410620C4F7FE002D8137 /* NewsListViewCell.swift in Sources */,
+				5765937B20CFABF700298EF5 /* LanguagePackage.swift in Sources */,
 				1AFE414420C4F7FE002D8137 /* SetDataResult.swift in Sources */,
 				1AFE414A20C4F7FE002D8137 /* Exchange.swift in Sources */,
 				1AFE40F420C4F7FE002D8137 /* MoreOptionMainViewController.swift in Sources */,
@@ -1077,7 +1086,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				1A6AD41220C615FF00D1ADA7 /* Base */,
-				5765936A20CFA07100298EF5 /* zh-Hans-CN */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1089,6 +1097,15 @@
 				5765936B20CFA07100298EF5 /* zh-Hans-CN */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		5765937820CFA90B00298EF5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5765937720CFA90B00298EF5 /* en */,
+				5765937920CFA90F00298EF5 /* zh-Hans-CN */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
