@@ -12,6 +12,7 @@ import Kingfisher
 
 class MarketCollectionViewCell:UICollectionViewCell{
     var color = ThemeColor()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -34,10 +35,8 @@ class MarketCollectionViewCell:UICollectionViewCell{
             } else {
                 coinChange.textColor = .red
             }
-            
 //            coinImageSetter(coinImage: coinImage, coinName: object!.symbol)
             coinImage.coinImageSetter(coinName: object!.symbol)
-            
             let watchList = try! Realm().objects(CoinsInWatchListRealm.self).filter("symbol = %@", object!.symbol)
 //            print(watchList)
             if watchList.count == 1 {
@@ -141,8 +140,8 @@ class MarketCollectionViewCell:UICollectionViewCell{
     
     @objc func addOrRemoveWatch(sender: UIButton) {
         let realm = try! Realm()
-        
         let watchList = try! Realm().objects(CoinsInWatchListRealm.self).filter("symbol = %@", object!.symbol)
+
         realm.beginWrite()
         if watchList.count == 1 {
             addWish.setTitle("☆", for: .normal)

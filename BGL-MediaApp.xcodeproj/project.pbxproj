@@ -142,6 +142,7 @@
 		544D9AD920CF9DF8008DC97F /* DataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D9AD820CF9DF8008DC97F /* DataCell.swift */; };
 		5451CFBC20C76E5700717536 /* FlashSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5451CFBB20C76E5700717536 /* FlashSearchController.swift */; };
 		54C25A2D20D0C17C001DA789 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE407320C4F7FC002D8137 /* Assets.xcassets */; };
+		54C25A2F20D0D4B8001DA789 /* NewsInFlashNewsRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C25A2E20D0D4B8001DA789 /* NewsInFlashNewsRealm.swift */; };
 		65CA633090F1F7BCDAFE405B /* Pods_BGL_MediaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -283,6 +284,7 @@
 		52014D454945527EF240756D /* Pods-BGL-MediaApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.debug.xcconfig"; sourceTree = "<group>"; };
 		544D9AD820CF9DF8008DC97F /* DataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCell.swift; sourceTree = "<group>"; };
 		5451CFBB20C76E5700717536 /* FlashSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashSearchController.swift; sourceTree = "<group>"; };
+		54C25A2E20D0D4B8001DA789 /* NewsInFlashNewsRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsInFlashNewsRealm.swift; sourceTree = "<group>"; };
 		56D92E4D774CE980869C74BC /* Pods-BGL-MediaApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.release.xcconfig"; sourceTree = "<group>"; };
 		EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BGL_MediaApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -680,6 +682,7 @@
 		1AFE40D020C4F7FD002D8137 /* NewsFlash */ = {
 			isa = PBXGroup;
 			children = (
+				54C25A3120D0EAEE001DA789 /* Helers */,
 				5451CFBA20C76D1100717536 /* View */,
 				5451CFB920C76D0A00717536 /* Model */,
 				5451CFB820C76D0000717536 /* Controller */,
@@ -781,6 +784,7 @@
 			isa = PBXGroup;
 			children = (
 				1AFE40D220C4F7FD002D8137 /* NewsFlash.swift */,
+				54C25A2E20D0D4B8001DA789 /* NewsInFlashNewsRealm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -795,6 +799,13 @@
 				1AFE407B20C4F7FD002D8137 /* TimelineTableViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		54C25A3120D0EAEE001DA789 /* Helers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -999,6 +1010,7 @@
 				1AFE410020C4F7FE002D8137 /* NewsCell.swift in Sources */,
 				1AFE413920C4F7FE002D8137 /* TransactionsController.swift in Sources */,
 				1AFE414220C4F7FE002D8137 /* TransactionFrom.swift in Sources */,
+				54C25A2F20D0D4B8001DA789 /* NewsInFlashNewsRealm.swift in Sources */,
 				1AFE414720C4F7FE002D8137 /* CryptoCompareCoin.swift in Sources */,
 				1AFE416A20C4F7FE002D8137 /* ChangeRiseFallColor.swift in Sources */,
 				1AFE40F120C4F7FE002D8137 /* WebDetailViewController.swift in Sources */,

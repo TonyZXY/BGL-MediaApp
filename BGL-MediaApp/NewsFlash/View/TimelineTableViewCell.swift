@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 open class TimelineTableViewCell: UITableViewCell {
     
@@ -18,10 +19,18 @@ open class TimelineTableViewCell: UITableViewCell {
     
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
-    
-    
-    
-    
+
+    var object: NewsFlash?{
+        didSet{
+            let watchList = try!Realm().objects(NewsInFlashNewsRealm.self).filter("symbol = %@",object!.id)
+            if watchList.count == 1 {
+                likeButton.setTitle("❤️", for: .normal)
+            } else {
+                likeButton.setTitle("♡", for: .normal)
+            }
+        }
+    }
+
     open var timelinePoint = TimelinePoint() {
         didSet {
             self.setNeedsDisplay()
@@ -54,6 +63,10 @@ open class TimelineTableViewCell: UITableViewCell {
             }
         }
         
+//        likeButton.setTitle("♡", for: .normal)
+        
+        likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
+        
         lineInfoLabel.sizeToFit()
         titleLabel.sizeToFit()
         descriptionLabel.sizeToFit()
@@ -73,4 +86,28 @@ open class TimelineTableViewCell: UITableViewCell {
             timelinePointInside.draw(view: self.contentView)
         }
     }
+    @objc func likeButtonClicked(){
+
+        let realm = try! Realm()
+        let watchList = try! Realm().objects(NewsInFlashNewsRealm.self).filter("symbol = %@", object!.id)
+        print(object?.contents ?? "Empty")
+        realm.beginWrite()
+        print(watchList.count)
+        if watchList.count == 1 {
+//        if likeButton.currentTitle == "❤️"{
+            likeButton.setTitle("♡", for: .normal)
+//            realm.delete(watchList[0])
+            print("detected - remove like")
+            realm.delete(watchList[0])
+            
+        } else {
+            likeButton.setTitle("❤️", for: .normal)
+            
+            print("no item found - add like")
+            realm.create(NewsInFlashNewsRealm.self, value: [object!.id])
+            
+        }
+        try! realm.commitWrite()
+    }
+
 }
