@@ -59,6 +59,7 @@ class TimelineTableViewController: UITableViewController {
         cell.timeline.backColor = #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
         cell.titleLabel.text = dateFormatter.string(from: object.dateTime)
         cell.descriptionLabel.text = object.contents
+        cell.likeButton.tag = indexPath.row
         cell.likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: .touchUpInside)
         
@@ -66,10 +67,16 @@ class TimelineTableViewController: UITableViewController {
     }
     
     @objc func likeButtonClicked(sender: UIButton){
-        if sender.currentTitle == "♡" {
-            sender.setTitle("❤️", for: UIControlState.normal)
+//        print(sender.tag)
+        
+        let index = IndexPath(row: sender.tag, section: 0)
+        let cell:TimelineTableViewCell = self.tableView.cellForRow(at: index) as! TimelineTableViewCell
+        
+//        print(cell.likeButton.currentTitle)
+        if cell.likeButton.currentTitle == "♡" {
+            cell.likeButton.setTitle("❤️", for: UIControlState.normal)
         }else{
-            sender.setTitle("♡",for: UIControlState.normal)
+            cell.likeButton.setTitle("♡",for: UIControlState.normal)
         }
         
     }

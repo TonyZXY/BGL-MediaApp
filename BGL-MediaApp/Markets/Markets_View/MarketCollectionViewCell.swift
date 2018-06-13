@@ -39,6 +39,7 @@ class MarketCollectionViewCell:UICollectionViewCell{
             coinImage.coinImageSetter(coinName: object!.symbol)
             
             let watchList = try! Realm().objects(CoinsInWatchListRealm.self).filter("symbol = %@", object!.symbol)
+//            print(watchList)
             if watchList.count == 1 {
                 addWish.setTitle("★", for: .normal)
             } else {

@@ -74,6 +74,7 @@ class MarketsCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionV
         setSortbutton()
         sortdoneclick()
         refreshGlobalData()
+       
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadDataAfterUpdateWatchList), name: NSNotification.Name(rawValue: "removeWatchInMarketsCell"), object: nil)
         

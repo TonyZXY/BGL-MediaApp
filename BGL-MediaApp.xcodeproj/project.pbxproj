@@ -41,7 +41,6 @@
 		1AFE410A20C4F7FE002D8137 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE406B20C4F7FC002D8137 /* Extensions.swift */; };
 		1AFE410B20C4F7FE002D8137 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE406C20C4F7FC002D8137 /* BaseCell.swift */; };
 		1AFE410D20C4F7FE002D8137 /* news_app_for_blockchain.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE407120C4F7FC002D8137 /* news_app_for_blockchain.xcdatamodeld */; };
-		1AFE410E20C4F7FE002D8137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE407320C4F7FC002D8137 /* Assets.xcassets */; };
 		1AFE410F20C4F7FE002D8137 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE407420C4F7FC002D8137 /* LaunchScreen.storyboard */; };
 		1AFE411020C4F7FE002D8137 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE407620C4F7FC002D8137 /* AppDelegate.swift */; };
 		1AFE411120C4F7FE002D8137 /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE407820C4F7FD002D8137 /* TimelineTableViewCell.swift */; };
@@ -142,6 +141,7 @@
 		1AFE417720C51987002D8137 /* NewsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE417620C51986002D8137 /* NewsCellView.swift */; };
 		544D9AD920CF9DF8008DC97F /* DataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D9AD820CF9DF8008DC97F /* DataCell.swift */; };
 		5451CFBC20C76E5700717536 /* FlashSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5451CFBB20C76E5700717536 /* FlashSearchController.swift */; };
+		54C25A2D20D0C17C001DA789 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE407320C4F7FC002D8137 /* Assets.xcassets */; };
 		65CA633090F1F7BCDAFE405B /* Pods_BGL_MediaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -857,12 +857,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54C25A2D20D0C17C001DA789 /* Assets.xcassets in Resources */,
 				1AFE416D20C4FA87002D8137 /* Info.plist in Resources */,
 				1AFE410F20C4F7FE002D8137 /* LaunchScreen.storyboard in Resources */,
 				1AFE412320C4F7FE002D8137 /* SellTableViewCell.xib in Resources */,
 				1A6AD41320C615FF00D1ADA7 /* Main.storyboard in Resources */,
 				1AFE411420C4F7FE002D8137 /* TimelineTableViewCell.xib in Resources */,
-				1AFE410E20C4F7FE002D8137 /* Assets.xcassets in Resources */,
 				1AFE413520C4F7FE002D8137 /* README.md in Resources */,
 				1AFE412120C4F7FE002D8137 /* TimeHistoryTableViewCell.xib in Resources */,
 			);
