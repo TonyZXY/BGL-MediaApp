@@ -8,7 +8,7 @@
 
 import Foundation
 import RealmSwift
-//
+
 class NewsFlash: Object {
     @objc dynamic var id = ""
     @objc dynamic var dateTime = Date()
