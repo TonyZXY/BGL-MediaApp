@@ -48,7 +48,7 @@ class NewsFlashViewController: UIViewController {
     }
 
     @objc func searchResult(){
-        let search = SearchNewsController()
+        let search = SearchNewsFlashController()
         navigationController?.pushViewController(search, animated: true)
     }
     

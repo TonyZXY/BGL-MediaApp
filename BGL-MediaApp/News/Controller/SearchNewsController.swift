@@ -28,7 +28,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
         if searchNewsObject.count > indexPath.row{
             if indexPath.row == 0{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectionCell", for: indexPath) as! SectionCell
-                cell.sectionLabel.text = textValue(name: "<#T##String#>")
+                cell.sectionLabel.text = textValue(name: "news_searchNews")
                 cell.backgroundColor = ThemeColor().bglColor()
                 return cell
             } else {
@@ -47,7 +47,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
         } else if (searchGennieObject.count + searchNewsObject.count) > indexPath.row {
             if indexPath.row == (searchNewsObject.count) {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectionCell", for: indexPath) as! SectionCell
-                cell.sectionLabel.text = "原创"
+                cell.sectionLabel.text = textValue(name: "origin_searchNews")
                 cell.backgroundColor = ThemeColor().bglColor()
                 return cell
             } else{
@@ -66,7 +66,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
         } else if (searchGennieObject.count + searchNewsObject.count + searchVideoObject.count) > indexPath.row{
             if indexPath.row == (searchNewsObject.count + searchGennieObject.count) {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectionCell", for: indexPath) as! SectionCell
-                cell.sectionLabel.text = "视频"
+                cell.sectionLabel.text = textValue(name: "video_searchNews")
                 cell.backgroundColor = ThemeColor().bglColor()
                 return cell
             } else{

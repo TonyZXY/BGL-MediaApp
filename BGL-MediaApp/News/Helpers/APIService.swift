@@ -33,6 +33,7 @@ class APIService: NSObject {
     let searchNews = "searchnews"
     let searchGenuine = "searchgenuine"
     let searchVideo = "searchvideo"
+    let searchFlash = "searchFlash"
     
     // fetch Offline News data (from database)
     func fetchNewsOffline(contentType: String, completion: @escaping (Results<News>) -> ()) {
@@ -299,6 +300,34 @@ class APIService: NSObject {
                         searchObject.publishedTime = item["publishedTime"].string!
                         searchObject.url = item["url"].string!
                         searchObject.description = item["videoDescription"].string!
+                        searchArrayObject.append(searchObject)
+                    }
+                }
+                DispatchQueue.main.async {
+                    completion(searchArrayObject)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fetchSearchFlash(keyword:String, completion: @escaping ([NewsFlash]) -> ()) {
+        let url = URL(string: urlString + searchFlash)
+        let para = ["patten": keyword, languageQuery: [english,chinese]] as [String: Any]
+        Alamofire.request(url!, parameters: para).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                var searchArrayObject = [NewsFlash]()
+                if let collection = json.array {
+                    for item in collection {
+                        let searchObject = NewsFlash()
+                        searchObject.id = item["_id"].string!
+                        searchObject.contents = item["shortMassage"].string!
+                        searchObject.dateTime = dateFormatter.date(from: item["publishedTime"].string!)!
                         searchArrayObject.append(searchObject)
                     }
                 }

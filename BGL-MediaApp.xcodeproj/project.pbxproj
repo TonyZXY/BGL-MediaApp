@@ -132,6 +132,7 @@
 		5750AC6F20D1022D00ACDABE /* TimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5750AC6C20D1022D00ACDABE /* TimelineTableViewController.swift */; };
 		5750AC7020D1022D00ACDABE /* FlashSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5750AC6D20D1022D00ACDABE /* FlashSearchController.swift */; };
 		5750AC7220D103B800ACDABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5750AC7120D103B800ACDABE /* Assets.xcassets */; };
+		5750AC7420D1F48700ACDABE /* SearchNewsFlashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5750AC7320D1F48700ACDABE /* SearchNewsFlashController.swift */; };
 		5765935E20C79B4E00298EF5 /* SearchNewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765935D20C79B4E00298EF5 /* SearchNewsController.swift */; };
 		5765936120C7AA3E00298EF5 /* DefaultLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */; };
 		5765936320C7C36900298EF5 /* SearchObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936220C7C36900298EF5 /* SearchObject.swift */; };
@@ -288,6 +289,7 @@
 		5750AC6C20D1022D00ACDABE /* TimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableViewController.swift; sourceTree = "<group>"; };
 		5750AC6D20D1022D00ACDABE /* FlashSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashSearchController.swift; sourceTree = "<group>"; };
 		5750AC7120D103B800ACDABE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5750AC7320D1F48700ACDABE /* SearchNewsFlashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNewsFlashController.swift; sourceTree = "<group>"; };
 		5765935D20C79B4E00298EF5 /* SearchNewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNewsController.swift; sourceTree = "<group>"; };
 		5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLanguageController.swift; sourceTree = "<group>"; };
 		5765936220C7C36900298EF5 /* SearchObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchObject.swift; sourceTree = "<group>"; };
@@ -823,6 +825,7 @@
 				5750AC6D20D1022D00ACDABE /* FlashSearchController.swift */,
 				5750AC6B20D1022D00ACDABE /* NewsFlashViewController.swift */,
 				5750AC6C20D1022D00ACDABE /* TimelineTableViewController.swift */,
+				5750AC7320D1F48700ACDABE /* SearchNewsFlashController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1090,6 +1093,7 @@
 				5765939320D0AEC400298EF5 /* MarketFilterCollectionView.swift in Sources */,
 				1AFE414A20C4F7FE002D8137 /* Exchange.swift in Sources */,
 				1AFE40F420C4F7FE002D8137 /* MoreOptionMainViewController.swift in Sources */,
+				5750AC7420D1F48700ACDABE /* SearchNewsFlashController.swift in Sources */,
 				1AFE414920C4F7FE002D8137 /* AllTransactions.swift in Sources */,
 				1AFE410320C4F7FE002D8137 /* GenuineCell.swift in Sources */,
 				5750AC6220D1021A00ACDABE /* DataCell.swift in Sources */,

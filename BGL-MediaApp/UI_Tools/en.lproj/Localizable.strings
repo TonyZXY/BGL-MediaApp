@@ -63,6 +63,11 @@ filterByHour_watchlist = "1H";
 news_newsPage = "News";
 origin_newsPage = "Origin";
 
+//News Search Page
+news_searchNews = "News";
+origin_searchNews = "Origin";
+video_searchNews = "Video";
+
 //Detail Page
 allTimeProfit_detail_detail = "All Time Profit";
 portfolio_detail = "Portfolio";

@@ -61,6 +61,11 @@ filterByHour_watchlist = "1小时";
 news_newsPage = "新闻";
 origin_newsPage = "原创";
 
+//News Search Page
+news_searchNews = "新闻";
+origin_searchNews = "原创";
+video_searchNews = "视频";
+
 //Detail Page
 allTimeProfit_detail_detail = "总收益";
 portfolio_detail = "数量";
