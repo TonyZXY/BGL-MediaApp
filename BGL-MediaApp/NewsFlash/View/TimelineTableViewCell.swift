@@ -89,21 +89,19 @@ open class TimelineTableViewCell: UITableViewCell {
     @objc func likeButtonClicked(){
 
         let realm = try! Realm()
-        let watchList = try! Realm().objects(NewsInFlashNewsRealm.self).filter("symbol = %@", object!.id)
-        print(object?.contents ?? "Empty")
+        let likedList = try! Realm().objects(NewsInFlashNewsRealm.self).filter("symbol = %@", object!.id)
+//        print(object?.contents ?? "Empty")
         realm.beginWrite()
-        print(watchList.count)
-        if watchList.count == 1 {
-//        if likeButton.currentTitle == "❤️"{
+//        print(likedList.count)
+        if likedList.count == 1 {
             likeButton.setTitle("♡", for: .normal)
-//            realm.delete(watchList[0])
-            print("detected - remove like")
-            realm.delete(watchList[0])
+//            print("detected - remove like")
+            realm.delete(likedList[0])
             
         } else {
             likeButton.setTitle("❤️", for: .normal)
             
-            print("no item found - add like")
+//            print("no item found - add like")
             realm.create(NewsInFlashNewsRealm.self, value: [object!.id])
             
         }

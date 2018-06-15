@@ -16,7 +16,8 @@ class TimelineTableViewController: UITableViewController {
     let realm = try! Realm()
     var results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
     
-    var inSearchMode = false
+    var sectionArray = [Int]()
+    var dates = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,52 +40,127 @@ class TimelineTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if inSearchMode {
-            return 4
+        
+        var previousDate = "empty"
+        for result in results{
+            let date = result.dateTime.description.components(separatedBy: " ")[0]
+            if previousDate != "empty"{
+                if date == previousDate{
+                    sectionArray[sectionArray.count-1] = sectionArray.last! + 1
+                }else{
+                    previousDate = date
+                    sectionArray.append(1)
+                }
+            }else{
+                previousDate = date
+                sectionArray.append(1)
+            }
         }
-        return results.count
+        return sectionArray[section]
+//        return results.count
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+    
+        for result in results{
+            let timeArr = result.dateTime.description.components(separatedBy: " ")
+            if !dates.contains(timeArr[0]){
+                dates.append(timeArr[0])
+            }
+        }
+        return dates.count
+    
+    }
+    
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Test String for Section Header: \(section)"
+//    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let width =  tableView.frame.size.width
+        let sectionHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: tableView.sectionHeaderHeight))
+        sectionHeaderView.backgroundColor = ThemeColor().themeColor()
+        
+//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.sectionHeaderHeight))
+       let label = UILabel(frame: CGRect(x: 20, y: 0, width: width-2*20, height: tableView.sectionHeaderHeight))
+        
+        
+        label.textColor = #colorLiteral(red: 0.5019607843, green: 0.8588235294, blue: 0.7176470588, alpha: 1)
+        label.textAlignment = .center
+        label.text = convertDateForDisplay(convert: dates[section])
+        label.layer.cornerRadius = tableView.sectionHeaderHeight/2
+        label.clipsToBounds = true
+        label.layer.borderWidth = 3
+        label.layer.borderColor = #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
+
+        
+        sectionHeaderView.addSubview(label)
+        return sectionHeaderView
+        
+//        let label = UILabel()
+//        label.text = convertDateForDisplay(convert: dates[section])
+//        label.textColor = #colorLiteral(red: 0.5019607843, green: 0.8588235294, blue: 0.7176470588, alpha: 1)
+//        label.textAlignment = .center
+//        label.backgroundColor = ThemeColor().themeColor()
+//
+//        label.layer.cornerRadius = tableView.sectionHeaderHeight/2
+//        label.clipsToBounds = true
+//        label.layer.borderWidth = 3
+//        label.layer.borderColor = #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
+
+//        return label
+    }
+    
+    private func convertDateForDisplay(convert date:String) -> String{
+        let dateArr = date.components(separatedBy: "-")
+        let year = "\(Int(dateArr[0])!)"
+        let month = "\(Int(dateArr[1])!)"
+        let day = "\(Int(dateArr[2])!)"
+        if Date().description.components(separatedBy: " ")[0] == date{
+            return "今天\(month)月\(day)日"
+        }else{
+            return "\(year)年\(month)月\(day)日"
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineTableViewCell", for: indexPath) as! TimelineTableViewCell
-        let object = results[indexPath.row]
+//        var numberOfSkips = 0
+//        if indexPath.section != 0{
+        let numberOfSkips = sectionArray.prefix(indexPath.section).reduce(0,+)
+//        }
+//        print("abracadabra")
+//        print(numberOfSkips)
+        
+        let object = results[indexPath.row + numberOfSkips]
+        
+//        if indexPath.section == 1{
+//            object = results[indexPath.row+8]
+//        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy, h:ma"
         
         let bglGreen = #colorLiteral(red: 0.5019607843, green: 0.8588235294, blue: 0.7176470588, alpha: 1)
         
+//        print(cell.illustrationImageView.frame.size)
+//        print(cell.descriptionLabel.frame.size)
+        
         cell.timelinePoint = TimelinePoint(diameter: CGFloat(16.0), color: bglGreen, filled: false)
         cell.timelinePointInside = TimelinePoint(diameter: CGFloat(4.0), color: bglGreen, filled: true, insidePoint: true)
         cell.timeline.backColor = #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
         cell.titleLabel.text = dateFormatter.string(from: object.dateTime)
         cell.descriptionLabel.text = object.contents
-//        cell.likeButton.tag = indexPath.row
-//        cell.likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         cell.object = object
         cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: .touchUpInside)
         
         return cell
     }
     
-    @objc func likeButtonClicked(sender: UIButton){
-//        print(sender.tag)
-        
-        let index = IndexPath(row: sender.tag, section: 0)
-        let cell:TimelineTableViewCell = self.tableView.cellForRow(at: index) as! TimelineTableViewCell
-        
-//        print(cell.likeButton.currentTitle)
-        if cell.likeButton.currentTitle == "♡" {
-            cell.likeButton.setTitle("❤️", for: UIControlState.normal)
-        }else{
-            cell.likeButton.setTitle("♡",for: UIControlState.normal)
-        }
-        
-    }
     
     @objc func shareButtonClicked(sender: UIButton){
-        
+    
         let buttonPosition:CGPoint = sender.convert(CGPoint(x: 0, y: 0), to:self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: buttonPosition)
         let cell = tableView.cellForRow(at: indexPath!)! as! TimelineTableViewCell
@@ -170,7 +246,7 @@ class TimelineTableViewController: UITableViewController {
   
     
     private func getNews() {
-        Alamofire.request("http://10.10.6.111:3000/api/flash?languageTag=EN&CN", method: .get).validate().responseJSON { response in
+        Alamofire.request("http://10.10.6.111:3000/api/flash?languageTag=EN&languageTag=CN", method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -225,24 +301,6 @@ class TimelineTableViewController: UITableViewController {
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         getNews()
         self.refresher.endRefreshing()
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        if searchBar.text == nil || searchBar.text == "" {
-            
-            inSearchMode = false
-            
-            view.endEditing(true)
-            
-            tableView.reloadData()
-            
-        } else {
-            
-            inSearchMode = true
-            
-            tableView.reloadData()
-        }
     }
 }
 

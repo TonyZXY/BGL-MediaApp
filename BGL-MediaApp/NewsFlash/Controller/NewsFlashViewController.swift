@@ -10,7 +10,7 @@ import UIKit
 
 class NewsFlashViewController: UIViewController {
     @IBOutlet weak var dateAndTimeLabel: UILabel!
-        
+    
     @IBOutlet weak var timelineView: UIView!
 
     
@@ -26,7 +26,8 @@ class NewsFlashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initLabel()
+//        initLabel()
+//        dateAndTimeLabel.removeFromSuperview()
         initView()
         
     }
