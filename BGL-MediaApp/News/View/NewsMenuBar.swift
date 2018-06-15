@@ -23,13 +23,15 @@ class NewsMenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
 
     let cellId = "cdllId"
 
-    var barItemName = [String]()
+    var barItemName:[String]{
+        get{
+            return [textValue(name: "news_newsPage"),textValue(name: "origin_newsPage")]
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(collectionView)
-        barItemName.append(textValue(name: "news_newsPage"))
-        barItemName.append(textValue(name: "origin_newsPage"))
         // REVIEW: put in a separate method -Johnny Lin
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
@@ -77,6 +79,10 @@ class NewsMenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func changeLangugage(){
+        collectionView.reloadData()
     }
 
 }

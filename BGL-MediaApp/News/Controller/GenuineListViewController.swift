@@ -222,12 +222,12 @@ class GenuineListViewController: UIViewController, UICollectionViewDelegate,UICo
     // load data online whit no arguement
     func fetchData() {
         if (position != 1) {
-            APIService.shardInstance.fetchGenuineData(contentType: selectionOtherTwo[position], currentNumber: 0) { (gens: Results<Genuine>) in
+            APIService.shardInstance.fetchGenuineData(contentType: selectionOtherTwo[position], currentNumber: 0,language: defaultLanguage) { (gens: Results<Genuine>) in
                 self.newsArrayList = gens
                 self.cellListView.reloadData()
             }
         } else {
-            APIService.shardInstance.fetchVideoData(currentNumber: 0) { (video: Results<Video>) in
+            APIService.shardInstance.fetchVideoData(currentNumber: 0,language: defaultLanguage) { (video: Results<Video>) in
                 self.videoArrayList = video
                 self.cellListView.reloadData()
             }
@@ -252,12 +252,12 @@ class GenuineListViewController: UIViewController, UICollectionViewDelegate,UICo
     // load data when load more data (with arguement)
     func fetchData(skip: Int) {
         if (position != 1) {
-            APIService.shardInstance.fetchGenuineData(contentType: selectionOtherTwo[position], currentNumber: skip) { (gens: Results<Genuine>) in
+            APIService.shardInstance.fetchGenuineData(contentType: selectionOtherTwo[position], currentNumber: skip,language: defaultLanguage) { (gens: Results<Genuine>) in
                 self.newsArrayList = gens
                 self.cellListView.reloadData()
             }
         } else {
-            APIService.shardInstance.fetchVideoData(currentNumber: 0) { (video: Results<Video>) in
+            APIService.shardInstance.fetchVideoData(currentNumber: 0,language: defaultLanguage) { (video: Results<Video>) in
                 self.videoArrayList = video
                 self.cellListView.reloadData()
             }

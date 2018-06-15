@@ -13,8 +13,19 @@ class GlobalMarketController: UIViewController, UICollectionViewDelegate, UIColl
     let marketCell = MarketView()
 
     var color = ThemeColor()
-    var sortItems = [String]()
-    var filterDateitems = [String]()
+    
+    var sortItems:[String]{
+        get{
+            return [textValue(name: "sortByLetter_market"),textValue(name: "sortByHighestPrice_market")]
+        }
+    }
+    
+    var filterDateitems:[String]{
+        get{
+            return [textValue(name: "filterByWeek_market"),textValue(name: "filterByDay_market"),textValue(name: "filterByHour_market")]
+        }
+    }
+    
     let general = generalDetail()
     //排序窗口 sort window
     let sortPickerView = UIPickerView()
@@ -79,8 +90,14 @@ class GlobalMarketController: UIViewController, UICollectionViewDelegate, UIColl
         refreshTimer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(refreshGlobalData), userInfo: nil, repeats: true)
         
         marketCell.coinList.addSubview(refresher)
-
     }
+    
+    func changeLanguage(){
+        marketCell.totalCollectionView.reloadData()
+        marketCell.coinList.reloadData()
+        marketCell.filterDate.reloadData()
+    }
+    
     
     func setUpView(){
         view.addSubview(marketCell)
@@ -93,11 +110,6 @@ class GlobalMarketController: UIViewController, UICollectionViewDelegate, UIColl
         marketCell.coinList.delegate = self
         marketCell.coinList.dataSource = self
         
-        sortItems.append(textValue(name: "sortByLetter_market"))
-        sortItems.append(textValue(name: "sortByHighestPrice_market"))
-        filterDateitems.append(textValue(name: "filterByWeek_market"))
-        filterDateitems.append(textValue(name: "filterByDay_market"))
-        filterDateitems.append(textValue(name: "filterByHour_market"))
         
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":marketCell]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":marketCell]))
@@ -168,6 +180,7 @@ class GlobalMarketController: UIViewController, UICollectionViewDelegate, UIColl
             if isSearching {
                 object = filteredCoinList[indexPath.row]
             }
+            cell.coinType.text = textValue(name: "globalAverage_market")
             cell.priceChange = [object.percent_change_7d, object.percent_change_24h, object.percent_change_1h][filterDateSelection ?? 0]
             cell.object = object
             

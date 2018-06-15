@@ -34,6 +34,8 @@ class APIService: NSObject {
     let searchGenuine = "searchgenuine"
     let searchVideo = "searchvideo"
     let searchFlash = "searchFlash"
+    let selectLanguage:[String:[String]] = ["EN":["EN"],"CN":["CN","EN"]]
+    
     
     // fetch Offline News data (from database)
     func fetchNewsOffline(contentType: String, completion: @escaping (Results<News>) -> ()) {
@@ -68,12 +70,12 @@ class APIService: NSObject {
     }
 
     // Fetch News data from API
-    func fetchNewsData(contentType: String, currentNumber: Int, completion: @escaping (Results<News>) -> ()) {
+    func fetchNewsData(contentType: String, currentNumber: Int, language:String, completion: @escaping (Results<News>) -> ()) {
         switch contentType { // switch locale tag
         case "国内", "国际":
             let url = URL(string: urlString + localNews)
             
-            let para = [newsLocaleQuery: contentType, "skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+            let para = [newsLocaleQuery: contentType, "skip": currentNumber, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
             
 //            let para = [newsLocaleQuery: contentType, "skip": currentNumber] as [String: Any]
             Alamofire.request(url!, parameters: para).responseJSON { (responsein) in
@@ -91,7 +93,7 @@ class APIService: NSObject {
             }
         default: // if content tag
             let url = URL(string: urlString + contentNews)
-             let para = [newsContentQuery: contentNews, "skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+             let para = [newsContentQuery: contentNews, "skip": currentNumber, languageQuery: language] as [String: Any]
 //            let para = [newsContentQuery: contentNews, "skip": currentNumber] as [String: Any]
             Alamofire.request(url!, parameters: para).responseJSON { (responsion) in
                 switch responsion.result {
@@ -110,9 +112,9 @@ class APIService: NSObject {
     }
 
     // get Genuine data from API
-    func fetchGenuineData(contentType: String, currentNumber: Int, completion: @escaping (Results<Genuine>) -> ()) {
+    func fetchGenuineData(contentType: String, currentNumber: Int, language:String,completion: @escaping (Results<Genuine>) -> ()) {
         let url = URL(string: urlString + contentGenuine)
-         let para = [genuineQuery: contentType, "skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+         let para = [genuineQuery: contentType, "skip": currentNumber, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
 //        let para = [genuineQuery: contentType, "skip": currentNumber] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
@@ -130,9 +132,9 @@ class APIService: NSObject {
     }
 
     // get Video data from API
-    func fetchVideoData(currentNumber: Int, completion: @escaping (Results<Video>) -> ()) {
+    func fetchVideoData(currentNumber: Int,language:String, completion: @escaping (Results<Video>) -> ()) {
         let url = URL(string: urlString + video)
-           let para = ["skip": currentNumber, languageQuery: [english,chinese]] as [String: Any]
+           let para = ["skip": currentNumber, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
 //        let para = ["skip": currentNumber] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
@@ -222,9 +224,9 @@ class APIService: NSObject {
     }
 
     
-    func fetchSearchNews(keyword:String, completion: @escaping ([SearchObject]) -> ()) {
+    func fetchSearchNews(keyword:String,language:String, completion: @escaping ([SearchObject]) -> ()) {
         let url = URL(string: urlString + searchNews)
-        let para = ["patten": keyword, languageQuery: [english,chinese]] as [String: Any]
+        let para = ["patten": keyword, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
             case .success(let value):
@@ -252,9 +254,9 @@ class APIService: NSObject {
         }
     }
     
-    func fetchSearchGenuine(keyword:String, completion: @escaping ([SearchObject]) -> ()) {
+    func fetchSearchGenuine(keyword:String,language:String, completion: @escaping ([SearchObject]) -> ()) {
         let url = URL(string: urlString + searchGenuine)
-        let para = ["patten": keyword, languageQuery: [english,chinese]] as [String: Any]
+        let para = ["patten": keyword, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
             case .success(let value):
@@ -282,9 +284,9 @@ class APIService: NSObject {
         }
     }
     
-    func fetchSearchVideo(keyword:String, completion: @escaping ([SearchObject]) -> ()) {
+    func fetchSearchVideo(keyword:String,language:String, completion: @escaping ([SearchObject]) -> ()) {
         let url = URL(string: urlString + searchVideo)
-        let para = ["patten": keyword, languageQuery: [english,chinese]] as [String: Any]
+        let para = ["patten": keyword, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
             case .success(let value):
@@ -312,9 +314,9 @@ class APIService: NSObject {
         }
     }
     
-    func fetchSearchFlash(keyword:String, completion: @escaping ([NewsFlash]) -> ()) {
+    func fetchSearchFlash(keyword:String,language:String, completion: @escaping ([NewsFlash]) -> ()) {
         let url = URL(string: urlString + searchFlash)
-        let para = ["patten": keyword, languageQuery: [english,chinese]] as [String: Any]
+        let para = ["patten": keyword, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
             case .success(let value):

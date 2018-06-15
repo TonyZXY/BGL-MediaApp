@@ -149,7 +149,7 @@ class SearchNewsFlashController: UIViewController,UISearchBarDelegate,UITableVie
             newsFlashResult.removeAll()
             flashTableView.reloadData()
         } else{
-            APIService.shardInstance.fetchSearchFlash(keyword: searchBar.text!) { (searchResult) in
+            APIService.shardInstance.fetchSearchFlash(keyword: searchBar.text!,language: defaultLanguage) { (searchResult) in
                 self.newsFlashResult.removeAll()
                 print(searchResult.count)
                 if searchResult.count != 0{

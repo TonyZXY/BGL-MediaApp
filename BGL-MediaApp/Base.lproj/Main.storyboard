@@ -202,80 +202,7 @@
         <!--About Us View Controller-->
         <scene sceneID="sQG-yX-RmZ">
             <objects>
-                <viewController id="g1r-7I-sY5" customClass="AboutUsViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="GZQ-mj-YNj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Elp-iU-USp">
-                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jyg-eo-eeW">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1100"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bcg_new_white01" translatesAutoresizingMaskIntoConstraints="NO" id="5MM-pY-BRY">
-                                                <rect key="frame" x="25" y="15" width="325" height="155"/>
-                                                <color key="backgroundColor" red="0.21176470589999999" green="0.22352941179999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blockchain Global 简介" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPe-mQ-fTm">
-                                                <rect key="frame" x="20" y="180" width="176" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeO-S6-BJG">
-                                                <rect key="frame" x="20" y="210.99999999999997" width="335" height="507.33333333333326"/>
-                                                <string key="text">Blockchain Global is a leading multi-national enterprise in blockchain technology commercialisation and investment. It plays a vital role in international blockchain audit and network infrastructure services. Blockchain Global operates ACX.io, the biggest blockchain asset exchange platform in Australia. Meanwhile, it provides technical support to eight other exchange platforms overseas, including the operation of NEM Foundation Exchange, the world’s sixth biggest encrypto currency exchange platform with a market capitalisation of 2.5 trillion US dollars. AAAAA Blockchain Global是Blockshine位于澳洲的母公司。作为一家全球领先的跨国企业，公司致力于区块链技术商业化和投资。已经投资并孵化了超过60家区块链技术初创公司和项目，累计投资额超过2亿美金。控股多家纳斯达克及ASX上市公司，专注于传统上市公司与区块链技术之结合，其中旗下控股公司DigitalX（ASX：DCC）为全球首家区块链上市企业。在全球已布局澳大利亚，美国，马来西亚，中国，瑞士。</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="谢谢你的支持" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeV-lH-WQa">
-                                                <rect key="frame" x="120" y="976" width="122.66666666666669" height="24"/>
-                                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.21176470589999999" green="0.22352941179999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="ZPe-mQ-fTm" firstAttribute="leading" secondItem="jyg-eo-eeW" secondAttribute="leading" constant="20" id="0N8-TK-W4g"/>
-                                            <constraint firstItem="ZPe-mQ-fTm" firstAttribute="top" secondItem="5MM-pY-BRY" secondAttribute="bottom" constant="10" id="1Ig-aI-Oa7"/>
-                                            <constraint firstAttribute="trailing" secondItem="LeO-S6-BJG" secondAttribute="trailing" constant="20" id="2bB-lf-tpe"/>
-                                            <constraint firstAttribute="bottom" secondItem="NeV-lH-WQa" secondAttribute="bottom" constant="100" id="2kP-Vq-TeL"/>
-                                            <constraint firstAttribute="trailing" secondItem="5MM-pY-BRY" secondAttribute="trailing" constant="25" id="3lV-80-91Z"/>
-                                            <constraint firstItem="5MM-pY-BRY" firstAttribute="top" secondItem="jyg-eo-eeW" secondAttribute="top" constant="15" id="Csa-2S-4II"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NeV-lH-WQa" secondAttribute="trailing" id="DQf-1B-2mP"/>
-                                            <constraint firstItem="5MM-pY-BRY" firstAttribute="leading" secondItem="jyg-eo-eeW" secondAttribute="leading" constant="25" id="Ljc-I8-PH4"/>
-                                            <constraint firstItem="LeO-S6-BJG" firstAttribute="top" secondItem="ZPe-mQ-fTm" secondAttribute="bottom" constant="10" id="SoY-qa-eKr"/>
-                                            <constraint firstItem="ZPe-mQ-fTm" firstAttribute="top" secondItem="5MM-pY-BRY" secondAttribute="bottom" constant="10" id="VRq-8Y-elF"/>
-                                            <constraint firstAttribute="height" constant="1100" id="ZI7-PK-PzG"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZPe-mQ-fTm" secondAttribute="trailing" id="bz3-om-aTu"/>
-                                            <constraint firstItem="LeO-S6-BJG" firstAttribute="leading" secondItem="jyg-eo-eeW" secondAttribute="leading" constant="20" id="dhl-lH-snV"/>
-                                            <constraint firstItem="NeV-lH-WQa" firstAttribute="leading" secondItem="jyg-eo-eeW" secondAttribute="leading" constant="120" id="fxq-QM-Tq2"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="jyg-eo-eeW" firstAttribute="top" secondItem="Elp-iU-USp" secondAttribute="top" id="BBQ-9n-rwj"/>
-                                    <constraint firstAttribute="bottom" secondItem="jyg-eo-eeW" secondAttribute="bottom" id="H2K-ht-Wer"/>
-                                    <constraint firstItem="jyg-eo-eeW" firstAttribute="centerX" secondItem="Elp-iU-USp" secondAttribute="centerX" id="QGV-l3-1BB"/>
-                                    <constraint firstItem="jyg-eo-eeW" firstAttribute="leading" secondItem="Elp-iU-USp" secondAttribute="leading" id="VbM-cI-aCD"/>
-                                    <constraint firstAttribute="trailing" secondItem="jyg-eo-eeW" secondAttribute="trailing" id="t0H-Re-hk7"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Elp-iU-USp" firstAttribute="leading" secondItem="5IA-Et-wgi" secondAttribute="leading" id="LKI-Ak-kf0"/>
-                            <constraint firstItem="Elp-iU-USp" firstAttribute="top" secondItem="5IA-Et-wgi" secondAttribute="top" id="YNe-pv-cQd"/>
-                            <constraint firstAttribute="bottom" secondItem="Elp-iU-USp" secondAttribute="bottom" id="pfM-SK-ByG"/>
-                            <constraint firstItem="Elp-iU-USp" firstAttribute="trailing" secondItem="5IA-Et-wgi" secondAttribute="trailing" id="xbH-NB-AbC"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="5IA-Et-wgi"/>
-                    </view>
-                </viewController>
+                <viewController id="g1r-7I-sY5" customClass="AboutUsViewController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="93Y-zt-AWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-754" y="1954"/>
@@ -300,11 +227,11 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="currencyTableCell" id="gU5-O4-4be">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="currencyTableCell" id="gU5-O4-4be">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gU5-O4-4be" id="Lod-OG-bMP">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.21176470589999999" green="0.22352941179999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -756,11 +683,11 @@
                                 <color key="separatorColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.12549019610000001" green="0.1333333333" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="otherDCell" id="w0y-6J-51g">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="otherDCell" id="w0y-6J-51g">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w0y-6J-51g" id="9lk-Jo-O3Y">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.21176470589999999" green="0.22352941179999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -917,6 +844,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="6cy-iK-iLe"/>
                     <connections>
+                        <outlet property="settingTitle" destination="mip-1a-OdJ" id="cdD-Tt-n79"/>
                         <outlet property="tableView00" destination="xkt-cV-sW5" id="qu0-rZ-TDE"/>
                         <segue destination="g1r-7I-sY5" kind="show" identifier="aboutUs" id="NKD-Sp-7nR"/>
                         <segue destination="ZcG-lb-PCg" kind="show" identifier="bglCommu" id="nKE-2o-7O7"/>
@@ -974,11 +902,11 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="languageTableCell" id="N0K-Sw-kRc">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="languageTableCell" id="N0K-Sw-kRc">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N0K-Sw-kRc" id="5Gd-M3-cmB">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.21176470589999999" green="0.22352941179999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1025,7 +953,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bcg_new_white01" width="420" height="155"/>
         <image name="icons8-market-25" width="25" height="25"/>
         <image name="icons8-mywallet-25" width="25" height="25"/>
         <image name="icons8-news-25" width="25" height="25"/>

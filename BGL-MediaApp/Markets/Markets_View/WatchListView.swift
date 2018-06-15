@@ -12,11 +12,22 @@ import RealmSwift
 class WatchListView: UIView{
     
     var marketSortPickerView = MarketSortPickerView()
-    var sortitems = [String]()
-    var sortdate = ["1W","1D","1H"]
+    var sortitems:[String]{
+        get{
+            return [textValue(name: "sortByLetter_market"),textValue(name: "sortByHighestPrice_market")]
+        }
+    }
+    
+    var sortdate:[String]{
+        get{
+            return [textValue(name: "filterByWeek_market"),textValue(name: "filterByDay_market"),textValue(name: "filterByHour_market")]
+        }
+    }
     let pickerview = UIPickerView()
     let general = generalDetail()
     var color = ThemeColor()
+    
+    
     
     var coinSymbolInWatchListRealm = try! Realm().objects(CoinsInWatchListRealm.self)
     var tickerDataRealmObjects = try! Realm().objects(TickerDataRealm.self)
@@ -72,11 +83,7 @@ class WatchListView: UIView{
         addSubview(sortDate)
         addSubview(coinList)
         
-        sortitems.append(textValue(name: "sortByLetter_market"))
-        sortitems.append(textValue(name: "sortByHighestPrice_market"))
-        sortdate.append(textValue(name: "filterByWeek_market"))
-        sortdate.append(textValue(name: "filterByDay_market"))
-        sortdate.append(textValue(name: "filterByHour_market"))
+        
         
         //排序按钮
         marketSortPickerView.translatesAutoresizingMaskIntoConstraints = false

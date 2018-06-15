@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class NewsListViewController: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
-    
+    var language = ["CN":["english","chinese"],"EN":["english"]]
     // tabbar position, change when tab the bar, refresh page data when changed
     var position: Int = 0 {
         didSet {
@@ -183,7 +183,7 @@ class NewsListViewController: UIViewController, UICollectionViewDataSource,UICol
     
     // fetch data without arguement
     func fetchData() {
-        APIService.shardInstance.fetchNewsData(contentType: selectionOptionOne[position], currentNumber: 0) { (news: Results<News>) in
+        APIService.shardInstance.fetchNewsData(contentType: selectionOptionOne[position], currentNumber: 0,language: defaultLanguage) { (news: Results<News>) in
             self.newsArrayList = news
             self.cellListView.reloadData()
         }
@@ -199,7 +199,7 @@ class NewsListViewController: UIViewController, UICollectionViewDataSource,UICol
     
     // fetch data with arguement, used when load more data
     func fetchData(skip: Int) {
-        APIService.shardInstance.fetchNewsData(contentType: selectionOptionOne[position], currentNumber: skip) { (news: Results<News>) in
+        APIService.shardInstance.fetchNewsData(contentType: selectionOptionOne[position], currentNumber: skip,language: defaultLanguage) { (news: Results<News>) in
             self.newsArrayList = news
             self.cellListView.reloadData()
         }

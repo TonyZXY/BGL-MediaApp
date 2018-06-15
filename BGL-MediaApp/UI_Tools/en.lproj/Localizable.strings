@@ -95,6 +95,7 @@ soldAmount = "Amount";
 sellProceeds = "Proceeds";
 
 //Setting Page
+settingTitle = "More Options";
 aboutUs_section = "Blockchain Global";
 setting_section = "Setting";
 aboutUs_cell = "About Us";
@@ -105,6 +106,28 @@ display_cell = "Display Option";
 other_cell = "Other Option";
 language_cell = "Language";
 
+//About Us Page
+title_about = "About Blockchain Global";
+introduction_about = "Blockchain Global Introduction";
+description_about = "Blockchain Global is a leading multi-national enterprise in blockchain technology commercialisation and investment. It plays a vital role in international blockchain audit and network infrastructure services. Blockchain Global operates ACX.io, the biggest blockchain asset exchange platform in Australia. Last year,  Blockchain Global has invested money and technology to acquire a 40% interest in DigitalX (ASX: DCC), the world's first listed company in blockchain industry. From the beginning of this year,  Blockchain Global has invested in several listed companies which includes First Growth Funds (FGF:ASX).\n\nBacked by core competencies of understanding blockchain technology, Blockchain Global developed into 5 key business directories: M&A, investment and incubating blockchain start-ups and projects, researching and developing innovative blockchain services and solutions, industrialising blockchain technology application, management consulting and corporate advisory and lastly,  industry consulting, marketing and media.\n\nAs the largest enterprise in blockchain industry in Australia, Blockchain Global is committed to the promotion and education of blockchain technology and its commercialised value by joining hands with local governments, industries, and the society. It will continue to be the building block, revolutionary practitioner, and the key opinion leader in blockchain and digital currency territory.\n\n";
+
+//Community Page
+bgl_community = "BGL Community";
+weibo_community = "Weibo";
+wechat_community = "Wechat";
+twitter_community = "Twitter";
+facebook_community = "Facebook";
+youtube_community = "Youtube";
+
+//Default Currency Page
+usd_default = "U.S dollar (USD)";
+aud_default = "Australian dollar (AUD)";
+rmb_default = "RenMinBi Yuan (CNY)";
+eur_default = "European Dollar (EUR)";
+jpy_default = "Japanese Yen (JPY)";
+
 //Language Page
 chinese_language = "Chinese";
 english_language = "English";
+
+

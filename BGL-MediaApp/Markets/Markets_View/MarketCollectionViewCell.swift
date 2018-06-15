@@ -104,7 +104,7 @@ class MarketCollectionViewCell:UICollectionViewCell{
         addSubview(coinType)
         addSubview(coinNumber)
         addSubview(addWish)
-        coinType.text = textValue(name: "globalAverage_market")
+
         addWish.addTarget(self, action: #selector(MarketCollectionViewCell.addOrRemoveWatch), for: .touchUpInside)
         
         //coinImage

@@ -172,7 +172,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
             let dispatchGroup = DispatchGroup()
             
             dispatchGroup.enter()
-            APIService.shardInstance.fetchSearchNews(keyword: searchBar.text!) { (searchResult) in
+            APIService.shardInstance.fetchSearchNews(keyword: searchBar.text!,language: defaultLanguage) { (searchResult) in
                 self.searchNewsObject.removeAll()
                 if searchResult.count != 0{
                     let section = SearchObject()
@@ -187,7 +187,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
             }
             
             dispatchGroup.enter()
-            APIService.shardInstance.fetchSearchGenuine(keyword: searchBar.text!) { (searchResult) in
+            APIService.shardInstance.fetchSearchGenuine(keyword: searchBar.text!,language: defaultLanguage) { (searchResult) in
                 self.searchGennieObject.removeAll()
                 if searchResult.count != 0{
                     let section = SearchObject()
@@ -202,7 +202,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
             }
             
             dispatchGroup.enter()
-            APIService.shardInstance.fetchSearchVideo(keyword: searchBar.text!) { (searchResult) in
+            APIService.shardInstance.fetchSearchVideo(keyword: searchBar.text!,language: defaultLanguage) { (searchResult) in
                 self.searchVideoObject.removeAll()
                 if searchResult.count != 0{
                     let section = SearchObject()
