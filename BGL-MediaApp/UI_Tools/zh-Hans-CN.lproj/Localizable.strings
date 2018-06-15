@@ -57,9 +57,24 @@ filterByWeek_watchlist = "1周";
 filterByDay_watchlist = "1天";
 filterByHour_watchlist = "1小时";
 
+//Flash News Page
+navigationTitle_flash = "快讯";
+timeToday_flash = "今天";
+timeYear_flash = "年";
+timeMonth_flash = "月";
+timeDay_flash = "日";
+
 //News Page
 news_newsPage = "新闻";
 origin_newsPage = "原创";
+native_newsPage = "国内";
+international_newsPage = "国际";
+deep_newsPage = "深度";
+trend_newsPage = "趋势";
+originArticle_newsPage = "原创文章";
+video_newsPage = "原创视频";
+encyclopedia_newsPage = "百科";
+analyse_newsPage = "分析";
 
 //News Search Page
 news_searchNews = "新闻";
@@ -91,6 +106,11 @@ sellPirce = "卖出价格";
 sellTradingPair = "兑换币种";
 soldAmount = "数量";
 sellProceeds = "收益";
+
+alertTitle_history = "交易历史";
+alertHint_history = "是否删除这条交易历史记录";
+alertCancel_history = "取消";
+alertDelete_history = "删除";
 
 //Setting Page
 settingTitle = "更多设置选项";
@@ -127,3 +147,7 @@ jpy_default = "日元 (JPY)";
 //Language Page
 chinese_language = "中文";
 english_language = "英文";
+alertTitle_language = "语言设置";
+alertHint_language = "请确认是否改变应用语言";
+alertCancel_language = "取消";
+alertChange_language = "确认";

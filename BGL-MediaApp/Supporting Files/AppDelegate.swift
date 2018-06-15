@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SetDataResult().writeMarketCapCoinList()
             GetDataResult().getCoinList()
             UserDefaults.standard.set("AUD", forKey: "defaultCurrency")
-            UserDefaults.standard.set("CN", forKey: "defaultLanguage")
+            UserDefaults.standard.set("EN", forKey: "defaultLanguage")
             UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
         return true

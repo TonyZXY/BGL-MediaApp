@@ -13,7 +13,7 @@ class NewsFlash: Object {
     @objc dynamic var id = ""
     @objc dynamic var dateTime = Date()
     @objc dynamic var contents = ""
-//    @objc dynamic var languageTag = ""
+    @objc dynamic var languageTag = ""
     
     
     override class func primaryKey() -> String {

@@ -64,8 +64,8 @@ class DefaultLanguageController: UIViewController, UITableViewDataSource, UITabl
         let str = storeData[indexPath.row]
         print(realm.configuration.fileURL ?? "")
         
-        let confirmAlertCtrl = UIAlertController(title: NSLocalizedString("Change Language", comment: ""), message: NSLocalizedString("Do you want to change the language", comment: ""), preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: NSLocalizedString("Change", comment: ""), style: .destructive) { (_) in
+        let confirmAlertCtrl = UIAlertController(title: NSLocalizedString(textValue(name: "alertTitle_language"), comment: ""), message: NSLocalizedString(textValue(name: "alertHint_language"), comment: ""), preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: NSLocalizedString(textValue(name: "alertChange_language"), comment: ""), style: .destructive) { (_) in
             UserDefaults.standard.set(str, forKey: "defaultLanguage")
             UserDefaults.standard.synchronize()
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
@@ -73,7 +73,7 @@ class DefaultLanguageController: UIViewController, UITableViewDataSource, UITabl
         }
         
         confirmAlertCtrl.addAction(confirmAction)
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler:nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString(textValue(name: "alertCancel_language"), comment: ""), style: .cancel, handler:nil)
         confirmAlertCtrl.addAction(cancelAction)
         self.present(confirmAlertCtrl, animated: true, completion: nil)
     }

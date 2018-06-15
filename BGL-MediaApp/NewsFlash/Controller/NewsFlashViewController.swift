@@ -36,7 +36,7 @@ class NewsFlashViewController: UIViewController {
     func initView(){
         view.backgroundColor = ThemeColor().themeColor()
         let titleLabel = UILabel()
-        titleLabel.text = "快讯"
+        titleLabel.text = textValue(name: "navigationTitle_flash")
         view.backgroundColor = ThemeColor().themeColor()
         titleLabel.textColor = UIColor.white
         navigationItem.titleView = titleLabel

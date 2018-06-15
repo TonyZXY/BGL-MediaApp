@@ -99,8 +99,8 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
     }
     
     @objc func deleteTransaction(sender:UIButton){
-        let confirmAlertCtrl = UIAlertController(title: NSLocalizedString("Delete Transaction", comment: ""), message: NSLocalizedString("Do you want to change the language", comment: ""), preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive) { (_) in
+        let confirmAlertCtrl = UIAlertController(title: NSLocalizedString(textValue(name: "alertTitle_history"), comment: ""), message: NSLocalizedString(textValue(name: "alertHint_history"), comment: ""), preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: NSLocalizedString(textValue(name: "alertDelete_history"), comment: ""), style: .destructive) { (_) in
             let filterId = "id = " + String(sender.tag)
             let filterName = "coinAbbName = '" + self.generalData.coinAbbName + "' "
             let statusItem = self.realm.objects(AllTransactions.self)
@@ -118,7 +118,7 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
             self.historyTableView.reloadData()
         }
         confirmAlertCtrl.addAction(confirmAction)
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler:nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString(textValue(name: "alertCancel_history"), comment: ""), style: .cancel, handler:nil)
         confirmAlertCtrl.addAction(cancelAction)
         self.present(confirmAlertCtrl, animated: true, completion: nil)
         

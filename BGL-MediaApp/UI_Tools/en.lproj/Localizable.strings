@@ -59,9 +59,26 @@ filterByWeek_watchlist = "1W";
 filterByDay_watchlist = "1D";
 filterByHour_watchlist = "1H";
 
+//Flash News Page
+navigationTitle_flash = "Flash News";
+timeToday_flash = "Today ";
+timeYear_flash = "-";
+timeMonth_flash = "-";
+timeDay_flash = "";
+
 //News Page
 news_newsPage = "News";
 origin_newsPage = "Origin";
+native_newsPage = "Native";
+international_newsPage = "intl.";
+deep_newsPage = "Deep";
+trend_newsPage = "Trend";
+originArticle_newsPage = "Origin";
+video_newsPage = "Video";
+encyclopedia_newsPage = "Enc";
+analyse_newsPage = "Analyse";
+
+
 
 //News Search Page
 news_searchNews = "News";
@@ -93,6 +110,11 @@ sellPirce = "Buy Price";
 sellTradingPair = "Trading Pair";
 soldAmount = "Amount";
 sellProceeds = "Proceeds";
+
+alertTitle_history = "Transaction History";
+alertHint_history = "Do you want to delete this transaction record";
+alertCancel_history = "Cancel";
+alertChange_history = "Delete";
 
 //Setting Page
 settingTitle = "More Options";
@@ -129,5 +151,7 @@ jpy_default = "Japanese Yen (JPY)";
 //Language Page
 chinese_language = "Chinese";
 english_language = "English";
-
-
+alertTitle_language = "Change Language";
+alertHint_language = "Do you want to change application language";
+alertCancel_language = "Cancel";
+alertChange_language = "Change";

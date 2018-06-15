@@ -36,6 +36,7 @@ class APIService: NSObject {
     let searchFlash = "searchFlash"
     let flash = "flash"
     let selectLanguage:[String:[String]] = ["EN":["EN"],"CN":["CN","EN"]]
+
     
     
     // fetch Offline News data (from database)

@@ -26,6 +26,11 @@ class GenuineListViewController: UIViewController, UICollectionViewDelegate,UICo
     var newsArrayList: Results<Genuine>?
     var videoArrayList: Results<Video>?
     var selectionOtherTwo: [String] = ["原创文章", "原创视频", "百科", "分析"]
+    var selectionTag:[String]{
+        get{
+            return [textValue(name: "originArticle_newsPage"),textValue(name: "video_newsPage"),textValue(name: "encyclopedia_newsPage"),textValue(name: "analyse_newsPage")]
+        }
+    }
     
     lazy var selectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -153,7 +158,7 @@ class GenuineListViewController: UIViewController, UICollectionViewDelegate,UICo
             }
         } else { // selection list
             let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: "selectionCell", for: indexPath) as! SelectionViewCell
-            cell1.textLabel.text = selectionOtherTwo[indexPath.item]
+            cell1.textLabel.text = selectionTag[indexPath.item]
             return cell1
         }
     }

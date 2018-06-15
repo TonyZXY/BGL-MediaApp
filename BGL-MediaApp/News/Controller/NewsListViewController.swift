@@ -29,6 +29,9 @@ class NewsListViewController: UIViewController, UICollectionViewDataSource,UICol
     var newsArrayList: Results<News>?
     
     var selectionOptionOne: [String] = ["国内", "国际", "深度", "趋势"]
+    var selectionTag:[String]{
+        return [textValue(name: "native_newsPage"),textValue(name: "international_newsPage"),textValue(name: "deep_newsPage"),textValue(name: "trend_newsPage")]
+    }
     
     lazy var selectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -131,7 +134,7 @@ class NewsListViewController: UIViewController, UICollectionViewDataSource,UICol
             }
         } else { // tabbar cell
             let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: "selectionCell", for: indexPath) as! SelectionViewCell
-            cell1.textLabel.text = selectionOptionOne[indexPath.item]
+            cell1.textLabel.text = selectionTag[indexPath.item]
             return cell1
         }
     }

@@ -16,6 +16,13 @@ class TimelineTableViewController: UITableViewController {
     let realm = try! Realm()
     var results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
     
+//    var results:Results<NewsFlash>{
+//        get{
+//            let filterName = "languageTag = '" + self.defaultLanguage + "' "
+//            return try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false).filter(filterName)
+//        }
+//    }
+    
     var sectionArray = [Int]()
     var dates = [String]()
     
@@ -36,6 +43,11 @@ class TimelineTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getNews()
     }
     
@@ -117,9 +129,9 @@ class TimelineTableViewController: UITableViewController {
         let month = "\(Int(dateArr[1])!)"
         let day = "\(Int(dateArr[2])!)"
         if Date().description.components(separatedBy: " ")[0] == date{
-            return "今天\(month)月\(day)日"
+            return textValue(name: "timeToday_flash") + month + textValue(name: "timeMonth_flash") + day + textValue(name: "timeDay_flash")
         }else{
-            return "\(year)年\(month)月\(day)日"
+            return year + textValue(name: "timeYear_flash") + month + textValue(name: "timeMonth_flash") + day + textValue(name: "timeDay_flash")
         }
     }
     
@@ -263,10 +275,11 @@ class TimelineTableViewController: UITableViewController {
 //    }
     
     func getNews(){
+//        self.cleanOldNewsFlash()
         APIService.shardInstance.fetchFlashNews(language:defaultLanguage) { (searchResult) in
             self.JSONtoData(json: searchResult)
             DispatchQueue.main.async {
-                self.cleanOldNewsFlash()
+//                let filterName = "languageTag = '" + self.defaultLanguage + "' "
                 self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
                 self.tableView.reloadData()
             }
@@ -282,9 +295,9 @@ class TimelineTableViewController: UITableViewController {
                 let date = dateFormatter.date(from: item["publishedTime"].string!)
                 let id = "\(item["_id"].string!)"
                 if realm.object(ofType: NewsFlash.self, forPrimaryKey: id) == nil {
-                    realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!])
+                    realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!,defaultLanguage])
                 } else {
-                    realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!], update: true)
+                    realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!,defaultLanguage], update: true)
                 }
             }
         }
@@ -301,11 +314,12 @@ class TimelineTableViewController: UITableViewController {
     
     func cleanOldNewsFlash() {
         //        let oneWeekBefore = Date.init(timeIntervalSinceNow: -(86400*7))
-        //        let oldObjects = realm.objects(NewsFlash.self).filter("dateTime < %@", oneWeekBefore)
+                let oldObjects = realm.objects(NewsFlash.self)
         //
-        //        try! realm.write {
-        //            realm.delete(oldObjects)
-        //        }
+        
+                try! realm.write {
+                    realm.delete(oldObjects)
+                }
     }
     
     
