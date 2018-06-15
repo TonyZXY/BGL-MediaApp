@@ -17,7 +17,6 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
     var results = try! Realm().objects(AllTransactions.self)
     var indexSelected:Int = 0
     var generalData = generalDetail()
-//    var priceType = "AUD"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,21 +99,31 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
     }
     
     @objc func deleteTransaction(sender:UIButton){
-        let filterId = "id = " + String(sender.tag)
-        let filterName = "coinAbbName = '" + generalData.coinAbbName + "' "
-        let statusItem = realm.objects(AllTransactions.self)
-        let specificTransaction = statusItem.filter(filterId)
-        let coinTransaction = statusItem.filter(filterName)
-        if coinTransaction.count == 1{
-            let coinSelected = realm.objects(MarketTradingPairs.self).filter(filterName)
-            try! realm.write {
-                realm.delete(coinSelected)
+        let confirmAlertCtrl = UIAlertController(title: NSLocalizedString("Delete Transaction", comment: ""), message: NSLocalizedString("Do you want to change the language", comment: ""), preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive) { (_) in
+            let filterId = "id = " + String(sender.tag)
+            let filterName = "coinAbbName = '" + self.generalData.coinAbbName + "' "
+            let statusItem = self.realm.objects(AllTransactions.self)
+            let specificTransaction = statusItem.filter(filterId)
+            let coinTransaction = statusItem.filter(filterName)
+            if coinTransaction.count == 1{
+                let coinSelected = self.realm.objects(MarketTradingPairs.self).filter(filterName)
+                try! self.realm.write {
+                    self.realm.delete(coinSelected)
+                }
             }
+            try! self.realm.write {
+                self.realm.delete(specificTransaction)
+            }
+            self.historyTableView.reloadData()
         }
-        try! realm.write {
-            realm.delete(specificTransaction)
-        }
-        historyTableView.reloadData()
+        confirmAlertCtrl.addAction(confirmAction)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler:nil)
+        confirmAlertCtrl.addAction(cancelAction)
+        self.present(confirmAlertCtrl, animated: true, completion: nil)
+        
+        
+        
     }
     
     lazy var refresher: UIRefreshControl = {

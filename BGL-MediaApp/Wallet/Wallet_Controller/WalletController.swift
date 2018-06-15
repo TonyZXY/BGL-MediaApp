@@ -20,7 +20,6 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     let cryptoCompareClient = CryptoCompareClient()
     var walletResults = [MarketTradingPairs]()
     var displayType:String = "Percent"
-//    let priceType:[String] = ["AUD"]
     var refreshTimer: Timer!
     var coinDetail = SelectCoin()
     var profit:Double = 0
@@ -107,7 +106,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
         var list = [String]()
         let coinSelected = realm.objects(MarketTradingPairs.self)
         for value in allResult{
-            let currencyResult = value.currency.filter{name in return name.name.contains(self.priceType)}
+            let currencyResult = value.currency.filter{name in return name.name.contains(priceType)}
             if list.contains(value.coinName){
                 let indexs = walletResults.index(where: { (item) -> Bool in
                     item.coinName == value.coinName
@@ -166,7 +165,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
                 case .success(let resultData):
                     for results in resultData!{
                         let single = Double(results.value)
-                        GetDataResult().getCryptoCurrencyApi(from: asset.tradingPairsName, to: [self.priceType], price: single, completion: { (success, jsonResult) in
+                        GetDataResult().getCryptoCurrencyApi(from: asset.tradingPairsName, to: [priceType], price: single, completion: { (success, jsonResult) in
                             var pricess:Double = 0
                             for currency in jsonResult{
                                 pricess = currency.value * single

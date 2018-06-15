@@ -37,7 +37,6 @@ class MoreOptionMainViewController: UIViewController, UITableViewDataSource, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         settingTitle.topItem?.title = textValue(name: "settingTitle")
-        
         // Do any additional setup after loading the view, typically from a nib.
         tableView00.delegate = self
         tableView00.dataSource = self

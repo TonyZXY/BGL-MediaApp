@@ -37,7 +37,11 @@ class GlobalMarketController: UIViewController, UICollectionViewDelegate, UIColl
     }
     var refreshTimer: Timer!
     
-    let currency = "AUD $"
+    var currency:String{
+        get{
+            return currecyLogo[priceType]!
+        }
+    }
     
     var tickerDataRealmObjects: Results<TickerDataRealm> {
         get {
@@ -183,7 +187,6 @@ class GlobalMarketController: UIViewController, UICollectionViewDelegate, UIColl
             cell.coinType.text = textValue(name: "globalAverage_market")
             cell.priceChange = [object.percent_change_7d, object.percent_change_24h, object.percent_change_1h][filterDateSelection ?? 0]
             cell.object = object
-            
             return cell
         } else{
             return UICollectionViewCell()
@@ -197,7 +200,7 @@ class GlobalMarketController: UIViewController, UICollectionViewDelegate, UIColl
         } else if collectionView == marketCell.filterDate{
             return CGSize(width:marketCell.filterDate.frame.width / 3, height: marketCell.filterDate.frame.height)
         } else if collectionView == marketCell.coinList{
-            return CGSize(width:marketCell.frame.width-10, height: 100)
+            return CGSize(width:marketCell.frame.width-10, height: 70)
         }else{
             return CGSize()
         }

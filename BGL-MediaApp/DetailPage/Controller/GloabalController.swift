@@ -50,15 +50,15 @@ class GloabalController: UIViewController {
         generalPage.edit.isHidden = true
         generalPage.tradingPairs.text = coinDetail.coinName + "/" + priceType
         generalPage.market.text = "Global average"
-        generalPage.market.font = generalPage.market.font.withSize(10)
         
-        generalPage.marketCapResult.text = currecyLogo[priceType] ?? "" + scientificMethod(number: globalMarketData.market_cap ?? 0.0)
-        generalPage.volumeResult.text = currecyLogo[priceType] ?? "" + scientificMethod(number: globalMarketData.volume_24h ?? 0.0)
+        generalPage.marketCapResult.text = currecyLogo[priceType]! + scientificMethod(number: globalMarketData.market_cap ?? 0.0)
+        generalPage.volumeResult.text = currecyLogo[priceType]! + scientificMethod(number: globalMarketData.volume_24h ?? 0.0)
         generalPage.circulatingSupplyResult.text = scientificMethod(number: globalMarketData.circulating_supply ?? 0.0)
         generalPage.coinSymbol = coinDetail.coinName
         general.coinAbbName = coinDetail.coinName
         coinDetailController.transactionHistoryController.generalData = general
-        generalPage.totalNumber.text = currecyLogo[priceType] ?? "" + scientificMethod(number:globalMarketData.price ?? 0.0)
+        generalPage.defaultCurrencyLable.text = priceType
+        generalPage.totalNumber.text = currecyLogo[priceType]! + scientificMethod(number:globalMarketData.price ?? 0.0)
     }
     
     func addChildViewControllers(childViewControllers:UIViewController,views:UIView){
@@ -81,7 +81,7 @@ class GloabalController: UIViewController {
         let coinNameId = self.getCoinName(coinAbbName: coinDetail.coinName)
         print(coinNameId)
         if coinNameId != 0 {
-            GetDataResult().getMarketCapCoinDetail(coinId: coinNameId, priceType: priceType){(globalMarket,bool) in
+            GetDataResult().getMarketCapCoinDetail(coinId: coinNameId, priceTypes: priceType){(globalMarket,bool) in
                 if bool {
                     DispatchQueue.main.async {
                          self.globalMarketData = globalMarket!

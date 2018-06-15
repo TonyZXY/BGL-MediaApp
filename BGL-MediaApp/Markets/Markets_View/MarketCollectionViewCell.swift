@@ -24,7 +24,7 @@ class MarketCollectionViewCell:UICollectionViewCell{
             var roundedPrice = object?.price ?? 0.0
             roundedPrice = round(roundedPrice * 100) / 100
             coinLabel.text = object?.symbol
-            coinNumber.text = "AUD $" + "\(roundedPrice)"
+            coinNumber.text = currecyLogo[priceType]! + "\(roundedPrice)"
             coinChange.text = "\(priceChange ?? 0.0)"
             guard let percentChange = priceChange else { return }
             if percentChange > 0.0 {
@@ -108,7 +108,7 @@ class MarketCollectionViewCell:UICollectionViewCell{
         addWish.addTarget(self, action: #selector(MarketCollectionViewCell.addOrRemoveWatch), for: .touchUpInside)
         
         //coinImage
-        self.layer.cornerRadius = self.frame.height / 4
+//        self.layer.cornerRadius = self.frame.height / 4
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[v0(50)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":coinImage,"v1":coinLabel,"v3":coinChange,"v4":coinType,"v5":coinNumber]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0(50)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":coinImage,"v1":coinLabel,"v3":coinChange,"v4":coinType,"v5":coinNumber]))
         NSLayoutConstraint(item: coinImage, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0).isActive = true

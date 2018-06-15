@@ -65,23 +65,17 @@ class DefaultLanguageController: UIViewController, UITableViewDataSource, UITabl
         print(realm.configuration.fileURL ?? "")
         
         let confirmAlertCtrl = UIAlertController(title: NSLocalizedString("Change Language", comment: ""), message: NSLocalizedString("Do you want to change the language", comment: ""), preferredStyle: .alert)
-        
-        
         let confirmAction = UIAlertAction(title: NSLocalizedString("Change", comment: ""), style: .destructive) { (_) in
             UserDefaults.standard.set(str, forKey: "defaultLanguage")
             UserDefaults.standard.synchronize()
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
             self.navigationController?.popToRootViewController(animated: true)
-//            exit(EXIT_SUCCESS)
         }
         
         confirmAlertCtrl.addAction(confirmAction)
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler:nil)
         confirmAlertCtrl.addAction(cancelAction)
-        
         self.present(confirmAlertCtrl, animated: true, completion: nil)
-        
-
     }
     
     override func didReceiveMemoryWarning() {

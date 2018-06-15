@@ -126,7 +126,7 @@ class MarketsCoinTableViewCell:UITableViewCell{
             var roundedPrice = object?.price ?? 0.0
             roundedPrice = round(roundedPrice * 100) / 100
             coinLabel.text = object?.symbol
-            coinNumber.text = "AUD $" + "\(roundedPrice)"
+            coinNumber.text = currecyLogo[priceType]! + "\(roundedPrice)"
             coinChange.text = "\(priceChange ?? 0.0)"
             
             coinImage.coinImageSetter(coinName: object!.symbol)
