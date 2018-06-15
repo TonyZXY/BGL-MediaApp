@@ -245,19 +245,30 @@ class TimelineTableViewController: UITableViewController {
     }
   
     
-    private func getNews() {
-        Alamofire.request("http://10.10.6.111:3000/api/flash?languageTag=EN&languageTag=CN", method: .get).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                self.JSONtoData(json: json)
-                DispatchQueue.main.async {
-                    self.cleanOldNewsFlash()
-                    self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
-                    self.tableView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
+//    private func getNews() {
+//        Alamofire.request("http://10.10.6.111:3000/api/flash?languageTag=EN&languageTag=CN", method: .get).validate().responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//                let json = JSON(value)
+//                self.JSONtoData(json: json)
+//                DispatchQueue.main.async {
+//                    self.cleanOldNewsFlash()
+//                    self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
+//                    self.tableView.reloadData()
+//                }
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
+    
+    func getNews(){
+        APIService.shardInstance.fetchFlashNews(language:defaultLanguage) { (searchResult) in
+            self.JSONtoData(json: searchResult)
+            DispatchQueue.main.async {
+                self.cleanOldNewsFlash()
+                self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
+                self.tableView.reloadData()
             }
         }
     }

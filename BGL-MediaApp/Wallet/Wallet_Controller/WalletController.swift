@@ -333,7 +333,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
         totalProfitView.addSubview(totalChange)
         buttonView.addSubview(addTransactionButton)
         
-         languageLabel()
+        languageLabel()
         
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":existTransactionView]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":existTransactionView]))

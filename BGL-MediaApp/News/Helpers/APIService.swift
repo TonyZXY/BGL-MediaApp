@@ -34,6 +34,7 @@ class APIService: NSObject {
     let searchGenuine = "searchgenuine"
     let searchVideo = "searchvideo"
     let searchFlash = "searchFlash"
+    let flash = "flash"
     let selectLanguage:[String:[String]] = ["EN":["EN"],"CN":["CN","EN"]]
     
     
@@ -341,5 +342,35 @@ class APIService: NSObject {
             }
         }
     }
+    
+    func fetchFlashNews(language:String, completion: @escaping (JSON) -> ()) {
+        let url = URL(string: urlString + flash)
+        let para = [languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
+        Alamofire.request(url!, parameters: para).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//                var searchArrayObject = [NewsFlash]()
+//                if let collection = json.array {
+//                    for item in collection {
+//                        let searchObject = NewsFlash()
+//                        searchObject.id = item["_id"].string!
+//                        searchObject.contents = item["shortMassage"].string!
+//                        searchObject.dateTime = dateFormatter.date(from: item["publishedTime"].string!)!
+//                        searchArrayObject.append(searchObject)
+//                    }
+//                }
+                DispatchQueue.main.async {
+                    completion(json)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 
 }
