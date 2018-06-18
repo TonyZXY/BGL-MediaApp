@@ -20,16 +20,25 @@ class MarketController: UIViewController, UICollectionViewDelegate,UICollectionV
         setUpView()
         cancelTouchKeyboard()
         NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeCurrency), name: NSNotification.Name(rawValue: "changeCurrency"), object: nil)
     }
     
+    
     @objc func changeLanguage(){
+        menuBar.collectionView.reloadData()
         global.changeLanguage()
         watchList.watchList.sortDate.reloadData()
-        menuBar.collectionView.reloadData()
+        watchList.watchList.coinList.reloadData()
+    }
+    
+    @objc func changeCurrency(){
+        global.marketCell.coinList.reloadData()
+        watchList.watchList.coinList.reloadData()
     }
     
     deinit {
         NotificationCenter.default.removeObserver("changeLanguage")
+        NotificationCenter.default.removeObserver("changeCurrency")
     }
     
     override func viewDidAppear(_ animated: Bool) {

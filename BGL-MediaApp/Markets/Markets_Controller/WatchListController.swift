@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class WatchListController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, SortPickerViewDelegate {
+class WatchListController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SortPickerViewDelegate {
     let watchList = WatchListView()
     
     
@@ -37,39 +37,88 @@ class WatchListController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return watchList.sortdate.count
+        if collectionView == watchList.sortDate{
+            return watchList.sortdate.count
+        } else if collectionView == watchList.coinList{
+            return coinSymbolInWatchListRealm.count
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SortDate", for: indexPath) as! MarketFilterCollectionView
-        cell.label.text = watchList.sortdate[indexPath.row]
-        return cell
+        if collectionView == watchList.sortDate{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SortDate", for: indexPath) as! MarketFilterCollectionView
+            cell.label.text = watchList.sortdate[indexPath.row]
+            return cell
+        } else if collectionView == watchList.coinList{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MarketCollectionViewCells", for: indexPath) as! MarketCollectionViewCell
+            cell.backgroundColor = color.themeColor()
+            let object = tickerDataRealmObjects[indexPath.row]
+            checkDataRiseFallColor(risefallnumber: [object.percent_change_7d, object.percent_change_24h, object.percent_change_1h][filterDateSelection ?? 0] ?? 0.0, label: cell.coinChange, type: "Percent")
+//            cell.priceChange = [object.percent_change_7d, object.percent_change_24h, object.percent_change_1h][filterDateSelection ?? 0]
+            cell.object = object
+            cell.backgroundColor = ThemeColor().walletCellcolor()
+            return cell
+        } else{
+            return UICollectionViewCell()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width:watchList.sortDate.frame.width / 3, height: watchList.sortDate.frame.height)
+        if collectionView == watchList.sortDate{
+            return CGSize(width:watchList.sortDate.frame.width / 3, height: watchList.sortDate.frame.height)
+        } else if collectionView == watchList.coinList{
+            return CGSize(width:watchList.frame.width-10, height: 70)
+        } else{
+            return CGSize()
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        if collectionView == watchList.sortDate{
+            return 0
+        } else {
+            return CGFloat()
+        }
     }
     
-    //收藏列表
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coinSymbolInWatchListRealm.count
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == watchList.coinList{
+            return 10
+        }else{
+            return CGFloat()
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellid", for: indexPath) as! MarketsCoinTableViewCell
-        cell.backgroundColor = color.themeColor()
-        
-        let object = tickerDataRealmObjects[indexPath.row]
-        
-        cell.priceChange = [object.percent_change_7d, object.percent_change_24h, object.percent_change_1h][filterDateSelection ?? 0]
-        cell.object = object
-        
-        return cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if collectionView == watchList.coinList{
+            return CGSize(width:watchList.frame.width, height: 10)
+        } else{
+            return CGSize()
+        }
     }
+    
+
+    
+//    //收藏列表
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return coinSymbolInWatchListRealm.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cellid", for: indexPath) as! MarketsCoinTableViewCell
+//        cell.backgroundColor = color.themeColor()
+//
+//        let object = tickerDataRealmObjects[indexPath.row]
+//
+//        cell.priceChange = [object.percent_change_7d, object.percent_change_24h, object.percent_change_1h][filterDateSelection ?? 0]
+//        cell.object = object
+//
+//        return cell
+//    }
     
     func getCoinWatchList() {
         let allCoinsSymbol = coinSymbolInWatchListRealm.map {$0.symbol}
@@ -80,17 +129,22 @@ class WatchListController: UIViewController, UICollectionViewDelegate, UICollect
         if collectionView == watchList.sortDate {
             filterDateSelection = indexPath.row
             watchList.coinList.reloadData()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == watchList.coinList{
-            let cell = watchList.coinList.cellForRow(at: indexPath) as! MarketsCoinTableViewCell
+        } else if collectionView == watchList.coinList{
+            let cell = watchList.coinList.cellForItem(at: indexPath) as! MarketCollectionViewCell
             let global = GloabalController()
             global.coinDetail.coinName = cell.coinLabel.text!
             navigationController?.pushViewController(global, animated: true)
         }
     }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if tableView == watchList.coinList{
+//            let cell = watchList.coinList.cellForRow(at: indexPath) as! MarketsCoinTableViewCell
+//            let global = GloabalController()
+//            global.coinDetail.coinName = cell.coinLabel.text!
+//            navigationController?.pushViewController(global, animated: true)
+//        }
+//    }
     
     func reloadDataSortedByName() {
         tickerDataRealmObjects = tickerDataRealmObjects.sorted(byKeyPath: "symbol", ascending: true)

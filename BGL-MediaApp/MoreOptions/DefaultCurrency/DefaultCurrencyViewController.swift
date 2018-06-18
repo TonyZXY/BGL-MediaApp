@@ -64,6 +64,7 @@ class DefaultCurrencyViewController: UIViewController, UITableViewDataSource, UI
         let str = storeData[indexPath.row]
         print(realm.configuration.fileURL ?? "")
         UserDefaults.standard.set(str, forKey: "defaultCurrency")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeCurrency"), object: nil)
         navigationController?.popToRootViewController(animated: true)
     }
 

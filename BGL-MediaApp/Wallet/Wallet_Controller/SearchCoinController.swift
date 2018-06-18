@@ -15,6 +15,7 @@ class SearchCoinController: UIViewController,UITableViewDelegate,UITableViewData
     let cryptoCompareClient = CryptoCompareClient()
     var color = ThemeColor()
     let realm = try! Realm()
+    
     var allCoinObject = [CryptoCompareCoinsRealm]()
     weak var delegate:TransactionFrom?
     var filterObject = [CryptoCompareCoinsRealm]()
@@ -27,13 +28,13 @@ class SearchCoinController: UIViewController,UITableViewDelegate,UITableViewData
         
         
         let result = try! Realm().objects(CryptoCompareCoinsRealm.self)
-        let data = GetDataResult().getExchangeList()
-        let exactMarket = data[(delegate?.getExchangeName())!]
+//        let data = GetDataResult().getExchangeList()
+//        let exactMarket = data[(delegate?.getExchangeName())!]
         for coin in result {
-            let filterCoin = exactMarket?.filter{(name,_) in return name == coin.Name}
-            if filterCoin?.count != 0{
+//            let filterCoin = exactMarket?.filter{(name,_) in return name == coin.Name}
+//            if filterCoin?.count != 0{
                 allCoinObject.append(coin)
-            }
+//            }
         }
     }
     
@@ -85,6 +86,7 @@ class SearchCoinController: UIViewController,UITableViewDelegate,UITableViewData
         let table:CoinTypeTableViewCell = searchResult.cellForRow(at: indexPath) as! CoinTypeTableViewCell
         delegate?.setCoinName(name: table.coinName.text!)
         delegate?.setCoinAbbName(abbName: table.coinNameAbb.text!)
+        delegate?.setExchangesName(exchangeName: "")
         delegate?.setTradingPairsName(tradingPairsName: "")
         delegate?.setTradingPairsFirstType(firstCoinType: [])
         delegate?.setTradingPairsSecondType(secondCoinType: [])
@@ -103,10 +105,10 @@ class SearchCoinController: UIViewController,UITableViewDelegate,UITableViewData
         } else{
             isSearching = true
             //            filteringdata = coinNameItem.filter{coinName in return coinName.lowercased().contains(searchBar.text!.lowercased())}
-            var result = [String]()
-            for n in allCoinObject{
-                result.append(n.Name)
-            }
+//            var result = [String]()
+//            for n in allCoinObject{
+//                result.append(n.Name)
+//            }
             filterObject = allCoinObject.filter({(mod) -> Bool in return mod.Name.lowercased().contains(searchBar.text!.lowercased())})
             searchResult.reloadData()
         }

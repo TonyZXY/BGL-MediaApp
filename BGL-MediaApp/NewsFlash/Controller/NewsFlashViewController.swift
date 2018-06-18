@@ -29,23 +29,32 @@ class NewsFlashViewController: UIViewController {
 //        initLabel()
 //        dateAndTimeLabel.removeFromSuperview()
         initView()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
     }
     
+    @objc func changeLanguage(){
+        setUpNavigationTitle()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver("changeLanguage")
+    }
     
     func initView(){
         view.backgroundColor = ThemeColor().themeColor()
-        let titleLabel = UILabel()
-        titleLabel.text = textValue(name: "navigationTitle_flash")
-        view.backgroundColor = ThemeColor().themeColor()
-        titleLabel.textColor = UIColor.white
-        navigationItem.titleView = titleLabel
+        setUpNavigationTitle()
         navigationController?.navigationBar.barTintColor =  ThemeColor().themeColor()
         navigationController?.navigationBar.isTranslucent = false
-        
         let navigationDoneButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchResult))
         self.navigationItem.setRightBarButton(navigationDoneButton, animated: true)
-        
+
+    }
+    
+    func setUpNavigationTitle(){
+        let titleLabel = UILabel()
+        titleLabel.text = textValue(name: "navigationTitle_flash")
+        titleLabel.textColor = UIColor.white
+        navigationItem.titleView = titleLabel
     }
 
     @objc func searchResult(){

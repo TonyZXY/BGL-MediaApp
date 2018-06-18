@@ -185,7 +185,8 @@ class GlobalMarketController: UIViewController, UICollectionViewDelegate, UIColl
                 object = filteredCoinList[indexPath.row]
             }
             cell.coinType.text = textValue(name: "globalAverage_market")
-            cell.priceChange = [object.percent_change_7d, object.percent_change_24h, object.percent_change_1h][filterDateSelection ?? 0]
+            checkDataRiseFallColor(risefallnumber: [object.percent_change_7d, object.percent_change_24h, object.percent_change_1h][filterDateSelection ?? 0] ?? 0.0, label: cell.coinChange, type: "Percent")
+//            cell.priceChange =  [object.percent_change_7d, object.percent_change_24h, object.percent_change_1h][filterDateSelection ?? 0]
             cell.object = object
             return cell
         } else{
@@ -232,7 +233,6 @@ class GlobalMarketController: UIViewController, UICollectionViewDelegate, UIColl
             return CGSize()
         }
     }
-    
     
     //市场行情列表 行数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -52,7 +52,6 @@ class TimelineTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         var previousDate = "empty"
         for result in results{
             let date = result.dateTime.description.components(separatedBy: " ")[0]
@@ -314,12 +313,12 @@ class TimelineTableViewController: UITableViewController {
     
     func cleanOldNewsFlash() {
         //        let oneWeekBefore = Date.init(timeIntervalSinceNow: -(86400*7))
-                let oldObjects = realm.objects(NewsFlash.self)
-        //
-        
-                try! realm.write {
-                    realm.delete(oldObjects)
-                }
+//                let oldObjects = realm.objects(NewsFlash.self)
+//        //
+//
+//                try! realm.write {
+//                    realm.delete(oldObjects)
+//                }
     }
     
     

@@ -6,7 +6,7 @@
   Copyright © 2018 Xuyang Zheng. All rights reserved.
 */
 mainHint = "开始你的货币交易管理！";
-hintLabel = "我们只需要一个或者多个交易，请通过点击 + 按钮添加你的第一个交易";
+hintLabel = "请通过点击 + 按钮添加你的第一个交易";
 
 //Assets Page
 mainBalance = "总资产";

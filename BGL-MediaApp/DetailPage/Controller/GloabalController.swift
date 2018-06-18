@@ -120,6 +120,7 @@ class GloabalController: UIViewController {
         if let priceChange = candleData.priceChange, let priceChangeRatio = candleData.priceChangeRatio {
             checkDataRiseFallColor(risefallnumber: priceChange, label: coinDetailController.gerneralController.totalRiseFall,type: "number")
             checkDataRiseFallColor(risefallnumber: priceChangeRatio, label: coinDetailController.gerneralController.totalRiseFallPercent,type: "Percent")
+            coinDetailController.gerneralController.totalRiseFallPercent.text = "(" + coinDetailController.gerneralController.totalRiseFallPercent.text! + ")"
         }
     }
 

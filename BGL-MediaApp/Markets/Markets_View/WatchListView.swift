@@ -62,14 +62,23 @@ class WatchListView: UIView{
         return collect
     }()
     
-    //币种列表
-    lazy var coinList:UITableView = {
-        var coinlist=UITableView()
-//        coinlist.backgroundColor = color.themeColor()
-        coinlist.backgroundColor = UIColor.red
-        coinlist.separatorStyle = .none
-        coinlist.rowHeight = 100
-        return coinlist
+//    //币种列表
+//    lazy var coinList:UITableView = {
+//        var coinlist=UITableView()
+////        coinlist.backgroundColor = color.themeColor()
+//        coinlist.backgroundColor = UIColor.red
+//        coinlist.separatorStyle = .none
+//        coinlist.rowHeight = 100
+//        return coinlist
+//    }()
+    
+    lazy var coinList:UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout:layout)
+        collectionView.backgroundColor = color.themeColor()
+        collectionView.register(MarketCollectionViewCell.self, forCellWithReuseIdentifier: "MarketCollectionViewCells")
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
     }()
     
     //筛选日期
@@ -96,9 +105,11 @@ class WatchListView: UIView{
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[v0(200)]-10-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":sortDate,"v1":marketSortPickerView]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[v0(20)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":sortDate,"v1":self,"v2":marketSortPickerView]))
         
+        
+        
         //币种列表
         coinList.translatesAutoresizingMaskIntoConstraints = false
-        coinList.register(MarketsCoinTableViewCell.self, forCellReuseIdentifier: "cellid")
+//        coinList.register(MarketsCoinTableViewCell.self, forCellReuseIdentifier: "cellid")
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":coinList,"v1":marketSortPickerView]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v1]-10-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":coinList,"v1":marketSortPickerView]))
     }

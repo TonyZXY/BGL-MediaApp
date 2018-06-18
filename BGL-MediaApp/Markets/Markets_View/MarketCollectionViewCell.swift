@@ -25,17 +25,16 @@ class MarketCollectionViewCell:UICollectionViewCell{
             roundedPrice = round(roundedPrice * 100) / 100
             coinLabel.text = object?.symbol
             coinNumber.text = currecyLogo[priceType]! + "\(roundedPrice)"
-            coinChange.text = "\(priceChange ?? 0.0)"
-            guard let percentChange = priceChange else { return }
-            if percentChange > 0.0 {
-                coinChange.textColor = .green
-            } else if percentChange == 0.0 {
-                coinChange.textColor = .white
-            } else {
-                coinChange.textColor = .red
-            }
+//            coinChange.text = "\(priceChange ?? 0.0)"
+//            guard let percentChange = priceChange else { return }
+//            if percentChange > 0.0 {
+//                coinChange.textColor = .green
+//            } else if percentChange == 0.0 {
+//                coinChange.textColor = .white
+//            } else {
+//                coinChange.textColor = .red
+//            }
             
-//            coinImageSetter(coinImage: coinImage, coinName: object!.symbol)
             coinImage.coinImageSetter(coinName: object!.symbol)
             
             let watchList = try! Realm().objects(CoinsInWatchListRealm.self).filter("symbol = %@", object!.symbol)
@@ -153,5 +152,6 @@ class MarketCollectionViewCell:UICollectionViewCell{
         try! realm.commitWrite()
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateWatchInWatchList"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeWatchInMarketsCell"), object: nil)
     }
 }

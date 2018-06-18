@@ -188,6 +188,7 @@ class SearchNewsFlashController: UIViewController,UISearchBarDelegate,UITableVie
     lazy var flashTableView:UITableView={
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = ThemeColor().themeColor()
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
