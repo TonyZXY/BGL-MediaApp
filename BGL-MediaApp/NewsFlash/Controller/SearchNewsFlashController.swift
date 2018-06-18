@@ -42,7 +42,7 @@ class SearchNewsFlashController: UIViewController,UISearchBarDelegate,UITableVie
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "flashNews", for: indexPath) as! TimelineTableViewCell
         let object = newsFlashResult[indexPath.row]
-        print(object.id)
+//        print(object.id)
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy, h:ma"
@@ -151,7 +151,7 @@ class SearchNewsFlashController: UIViewController,UISearchBarDelegate,UITableVie
         } else{
             APIService.shardInstance.fetchSearchFlash(keyword: searchBar.text!,language: defaultLanguage) { (searchResult) in
                 self.newsFlashResult.removeAll()
-                print(searchResult.count)
+//                print(searchResult.count)
                 if searchResult.count != 0{
                     for value in searchResult{
                         self.newsFlashResult.append(value)

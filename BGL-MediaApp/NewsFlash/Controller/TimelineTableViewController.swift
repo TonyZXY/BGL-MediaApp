@@ -15,6 +15,7 @@ class TimelineTableViewController: UITableViewController {
     
     let realm = try! Realm()
     var results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
+    var dictionary = [String:Int]()
     
 //    var results:Results<NewsFlash>{
 //        get{
@@ -25,6 +26,7 @@ class TimelineTableViewController: UITableViewController {
     
     var sectionArray = [Int]()
     var dates = [String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,29 +53,27 @@ class TimelineTableViewController: UITableViewController {
         getNews()
     }
     
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var previousDate = "empty"
-        for result in results{
+        
+        sectionArray = [Int](repeating: 0, count: dates.count)
+        
+        for result in results.filter("languageTag = '" + self.defaultLanguage + "' "){
             let date = result.dateTime.description.components(separatedBy: " ")[0]
-            if previousDate != "empty"{
-                if date == previousDate{
-                    sectionArray[sectionArray.count-1] = sectionArray.last! + 1
-                }else{
-                    previousDate = date
-                    sectionArray.append(1)
-                }
-            }else{
-                previousDate = date
-                sectionArray.append(1)
-            }
+            //get index of date in dates
+            let sectionArrayIndex = dates.index(of: date)!
+            sectionArray[sectionArrayIndex] += 1
         }
+
         return sectionArray[section]
-//        return results.count
+
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-    
-        for result in results{
+        
+        dates = []
+        
+        for result in results.filter("languageTag = '" + self.defaultLanguage + "' "){
             let timeArr = result.dateTime.description.components(separatedBy: " ")
             if !dates.contains(timeArr[0]){
                 dates.append(timeArr[0])
@@ -82,10 +82,6 @@ class TimelineTableViewController: UITableViewController {
         return dates.count
     
     }
-    
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Test String for Section Header: \(section)"
-//    }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let width =  tableView.frame.size.width
@@ -107,19 +103,6 @@ class TimelineTableViewController: UITableViewController {
         
         sectionHeaderView.addSubview(label)
         return sectionHeaderView
-        
-//        let label = UILabel()
-//        label.text = convertDateForDisplay(convert: dates[section])
-//        label.textColor = #colorLiteral(red: 0.5019607843, green: 0.8588235294, blue: 0.7176470588, alpha: 1)
-//        label.textAlignment = .center
-//        label.backgroundColor = ThemeColor().themeColor()
-//
-//        label.layer.cornerRadius = tableView.sectionHeaderHeight/2
-//        label.clipsToBounds = true
-//        label.layer.borderWidth = 3
-//        label.layer.borderColor = #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
-
-//        return label
     }
     
     private func convertDateForDisplay(convert date:String) -> String{
@@ -135,29 +118,16 @@ class TimelineTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineTableViewCell", for: indexPath) as! TimelineTableViewCell
-//        var numberOfSkips = 0
-//        if indexPath.section != 0{
         let numberOfSkips = sectionArray.prefix(indexPath.section).reduce(0,+)
-//        }
-//        print("abracadabra")
-//        print(numberOfSkips)
-        
-        let object = results[indexPath.row + numberOfSkips]
-        
-//        if indexPath.section == 1{
-//            object = results[indexPath.row+8]
-//        }
+        let object = results.filter("languageTag = '" + self.defaultLanguage + "' ")[indexPath.row + numberOfSkips]
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy, h:ma"
         
         let bglGreen = #colorLiteral(red: 0.5019607843, green: 0.8588235294, blue: 0.7176470588, alpha: 1)
-        
-//        print(cell.illustrationImageView.frame.size)
-//        print(cell.descriptionLabel.frame.size)
-        
+
         cell.timelinePoint = TimelinePoint(diameter: CGFloat(16.0), color: bglGreen, filled: false)
         cell.timelinePointInside = TimelinePoint(diameter: CGFloat(4.0), color: bglGreen, filled: true, insidePoint: true)
         cell.timeline.backColor = #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
@@ -165,7 +135,7 @@ class TimelineTableViewController: UITableViewController {
         cell.descriptionLabel.text = object.contents
         cell.object = object
         cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: .touchUpInside)
-        
+    
         return cell
     }
     
