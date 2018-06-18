@@ -42,23 +42,24 @@ class TimelineTableViewController: UITableViewController {
         
     }
     
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        self.tableView.reloadData()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getNews()
+//        print(results.filter("languageTag='" + self.defaultLanguage + "'"))
+        self.tableView.reloadData()
+//        getNews()
     }
-    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         sectionArray = [Int](repeating: 0, count: dates.count)
         
-        for result in results.filter("languageTag = '" + self.defaultLanguage + "' "){
+        for result in results.filter("languageTag='" + self.defaultLanguage + "'"){
             let date = result.dateTime.description.components(separatedBy: " ")[0]
             //get index of date in dates
             let sectionArrayIndex = dates.index(of: date)!
@@ -73,7 +74,7 @@ class TimelineTableViewController: UITableViewController {
         
         dates = []
         
-        for result in results.filter("languageTag = '" + self.defaultLanguage + "' "){
+        for result in results.filter("languageTag='" + self.defaultLanguage + "'"){
             let timeArr = result.dateTime.description.components(separatedBy: " ")
             if !dates.contains(timeArr[0]){
                 dates.append(timeArr[0])
@@ -121,7 +122,7 @@ class TimelineTableViewController: UITableViewController {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineTableViewCell", for: indexPath) as! TimelineTableViewCell
         let numberOfSkips = sectionArray.prefix(indexPath.section).reduce(0,+)
-        let object = results.filter("languageTag = '" + self.defaultLanguage + "' ")[indexPath.row + numberOfSkips]
+        let object = results.filter("languageTag='" + self.defaultLanguage + "'")[indexPath.row + numberOfSkips]
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy, h:ma"
@@ -226,22 +227,9 @@ class TimelineTableViewController: UITableViewController {
     }
   
     
-//    private func getNews() {
+
 //        Alamofire.request("http://10.10.6.111:3000/api/flash?languageTag=EN&languageTag=CN", method: .get).validate().responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                self.JSONtoData(json: json)
-//                DispatchQueue.main.async {
-//                    self.cleanOldNewsFlash()
-//                    self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
-//                    self.tableView.reloadData()
-//                }
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }
+
     
     func getNews(){
 //        self.cleanOldNewsFlash()
@@ -249,8 +237,10 @@ class TimelineTableViewController: UITableViewController {
             self.JSONtoData(json: searchResult)
             DispatchQueue.main.async {
 //                let filterName = "languageTag = '" + self.defaultLanguage + "' "
-                self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
+                self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)//.filter("languageTag='" + self.defaultLanguage + "'")
+                
                 self.tableView.reloadData()
+//                print(self.results.count)
             }
         }
     }
@@ -266,7 +256,8 @@ class TimelineTableViewController: UITableViewController {
                 if realm.object(ofType: NewsFlash.self, forPrimaryKey: id) == nil {
                     realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!,defaultLanguage])
                 } else {
-                    realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!,defaultLanguage], update: true)
+                    //update
+//                    realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!], update: true)
                 }
             }
         }
