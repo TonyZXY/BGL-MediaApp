@@ -36,6 +36,7 @@ class MoreOptionMainViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var tableView00: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = ThemeColor().themeColor()
         settingTitle.topItem?.title = textValue(name: "settingTitle")
         // Do any additional setup after loading the view, typically from a nib.
         tableView00.delegate = self
@@ -48,6 +49,10 @@ class MoreOptionMainViewController: UIViewController, UITableViewDataSource, UIT
         NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
     
     @objc func changeLanguage(){
         settingTitle.topItem?.title = textValue(name: "settingTitle")
@@ -55,7 +60,7 @@ class MoreOptionMainViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     deinit {
-        NotificationCenter.default.removeObserver("changeLanguage")
+                NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

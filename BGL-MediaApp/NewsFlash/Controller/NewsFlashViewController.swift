@@ -32,12 +32,17 @@ class NewsFlashViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     @objc func changeLanguage(){
         setUpNavigationTitle()
     }
     
     deinit {
-        NotificationCenter.default.removeObserver("changeLanguage")
+              NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
     }
     
     func initView(){

@@ -19,6 +19,11 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
         setupView()
         searchBar.becomeFirstResponder()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = true
+    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchNewsObject.count + searchGennieObject.count + searchVideoObject.count

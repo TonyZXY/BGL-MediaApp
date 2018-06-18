@@ -39,8 +39,7 @@ class TimelineTableViewController: UITableViewController {
         self.tableView.addSubview(self.refresher)
         
     }
-    
-    
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -48,6 +47,7 @@ class TimelineTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        self.tabBarController?.tabBar.isHidden = false
         getNews()
     }
     

@@ -104,12 +104,17 @@ class SearchCoinController: UIViewController,UITableViewDelegate,UITableViewData
             searchResult.reloadData()
         } else{
             isSearching = true
-            //            filteringdata = coinNameItem.filter{coinName in return coinName.lowercased().contains(searchBar.text!.lowercased())}
-//            var result = [String]()
-//            for n in allCoinObject{
-//                result.append(n.Name)
-//            }
-            filterObject = allCoinObject.filter({(mod) -> Bool in return mod.Name.lowercased().contains(searchBar.text!.lowercased())})
+            filterObject.removeAll()
+            var simplyNameReault = allCoinObject.filter({(mod) -> Bool in return mod.Name.lowercased().contains(searchBar.text!.lowercased())})
+            let fullNameResult = allCoinObject.filter({(mod) -> Bool in return mod.CoinName.lowercased().contains(searchBar.text!.lowercased())})
+            simplyNameReault += fullNameResult
+            var list = [String]()
+            for value in simplyNameReault{
+                if !list.contains(value.CoinName){
+                    list.append(value.CoinName)
+                    filterObject.append(value)
+                }
+            }
             searchResult.reloadData()
         }
     }

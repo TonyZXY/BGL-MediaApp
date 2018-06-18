@@ -23,6 +23,10 @@ class MarketController: UIViewController, UICollectionViewDelegate,UICollectionV
         NotificationCenter.default.addObserver(self, selector: #selector(changeCurrency), name: NSNotification.Name(rawValue: "changeCurrency"), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tabBarController?.tabBar.isHidden = false
+    }
     
     @objc func changeLanguage(){
         menuBar.collectionView.reloadData()
@@ -37,8 +41,8 @@ class MarketController: UIViewController, UICollectionViewDelegate,UICollectionV
     }
     
     deinit {
-        NotificationCenter.default.removeObserver("changeLanguage")
-        NotificationCenter.default.removeObserver("changeCurrency")
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "changeCurrency"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

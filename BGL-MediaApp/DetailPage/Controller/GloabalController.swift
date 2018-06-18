@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+
 class GloabalController: UIViewController {
     var menuitems = ["General","Transactions","Alerts"]
     let cryptoCompareClient = CryptoCompareClient()
@@ -32,7 +33,12 @@ class GloabalController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(setPriceChange), name: NSNotification.Name(rawValue: "setPriceChange"), object: nil)
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "setPriceChange"), object: nil)
     }

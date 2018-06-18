@@ -6,6 +6,13 @@
   Copyright © 2018 Xuyang Zheng. All rights reserved.
 */
 
+//TabBar
+wallet_tab = "Asset";
+market_tab = "Market";
+flash_tab = "Flash News";
+news_tab = "News";
+more_tab = "More";
+
 //Assets Page Hint page
 mainHint = "Your portfolio starts here!";
 hintLabel = "We just need one or more transactions.Add your first transaction via the + button below";
@@ -77,8 +84,6 @@ originArticle_newsPage = "Origin";
 video_newsPage = "Video";
 encyclopedia_newsPage = "Enc";
 analyse_newsPage = "Analyse";
-
-
 
 //News Search Page
 news_searchNews = "News";

@@ -43,6 +43,7 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     //The First Time load the Page
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBarItem.title = "sdfs"
         setWalletData()
         setUpBasicView()
 //        SetDataResult().writeJsonExchange()

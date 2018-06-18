@@ -58,10 +58,10 @@
             </objects>
             <point key="canvasLocation" x="188" y="-1012"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="3Mh-df-t8l">
             <objects>
-                <tabBarController id="es6-dM-P9s" sceneMemberID="viewController">
+                <tabBarController id="es6-dM-P9s" customClass="MainTabBarController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="n1N-YU-9Bc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -69,6 +69,7 @@
                         <viewLayoutGuide key="safeArea" id="979-U3-Aue"/>
                     </tabBar>
                     <connections>
+                        <outlet property="mainTabBar" destination="n1N-YU-9Bc" id="cmr-u6-Ld0"/>
                         <segue destination="vDn-uj-q1H" kind="relationship" relationship="viewControllers" id="nd7-vx-J5K"/>
                         <segue destination="yJ1-Ou-v1F" kind="relationship" relationship="viewControllers" id="s2h-5k-24p"/>
                         <segue destination="vMw-TG-Mm2" kind="relationship" relationship="viewControllers" id="5Lc-Aj-3RZ"/>

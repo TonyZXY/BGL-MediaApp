@@ -26,6 +26,10 @@ class SearchNewsFlashController: UIViewController,UISearchBarDelegate,UITableVie
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = true
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
            if tableView == flashTableView{

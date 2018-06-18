@@ -28,6 +28,11 @@ class WebMainViewController: UIViewController, UITableViewDataSource, UITableVie
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

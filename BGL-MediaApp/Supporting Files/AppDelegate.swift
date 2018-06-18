@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = ThemeColor().themeColor()
         
+        
+        
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         
         if launchedBefore{

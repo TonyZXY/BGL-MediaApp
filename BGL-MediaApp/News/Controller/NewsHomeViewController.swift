@@ -48,7 +48,7 @@ class NewsHomeViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     deinit {
-        NotificationCenter.default.removeObserver("changeLanguage")
+                NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
     }
 
     lazy var selectView: UICollectionView = {
