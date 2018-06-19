@@ -73,6 +73,11 @@ timeYear_flash = "-";
 timeMonth_flash = "-";
 timeDay_flash = "";
 
+//Flash News Search Results
+searchLabel_flash = "Search Result:";
+searchResult_flash = "records";
+searchNull_flash = "No records";
+
 //News Page
 news_newsPage = "News";
 origin_newsPage = "Origin";
@@ -89,6 +94,9 @@ analyse_newsPage = "Analyse";
 news_searchNews = "News";
 origin_searchNews = "Origin";
 video_searchNews = "Video";
+searchLabel_news = "Search Result:";
+searchResult_news = "records";
+searchNull_news = "No records";
 
 //Detail Page
 allTimeProfit_detail_detail = "All Time Profit";
@@ -154,7 +162,7 @@ eur_default = "European Dollar (EUR)";
 jpy_default = "Japanese Yen (JPY)";
 
 //Language Page
-chinese_language = "Chinese";
+chinese_language = "简体中文";
 english_language = "English";
 alertTitle_language = "Change Language";
 alertHint_language = "Do you want to change application language";

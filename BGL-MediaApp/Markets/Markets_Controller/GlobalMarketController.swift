@@ -100,6 +100,7 @@ class GlobalMarketController: UIViewController, UICollectionViewDelegate, UIColl
         marketCell.totalCollectionView.reloadData()
         marketCell.coinList.reloadData()
         marketCell.filterDate.reloadData()
+        sortdoneclick()
     }
     
     

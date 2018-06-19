@@ -73,6 +73,11 @@ timeYear_flash = "年";
 timeMonth_flash = "月";
 timeDay_flash = "日";
 
+//Flash News Search Results
+searchLabel_flash = "搜索结果:";
+searchResult_flash = "条";
+searchNull_flash = "暂无搜索结果";
+
 //News Page
 news_newsPage = "新闻";
 origin_newsPage = "原创";
@@ -89,6 +94,9 @@ analyse_newsPage = "分析";
 news_searchNews = "新闻";
 origin_searchNews = "原创";
 video_searchNews = "视频";
+searchLabel_news = "搜索结果:";
+searchResult_news = "条";
+searchNull_news = "暂无搜索结果";
 
 //Detail Page
 allTimeProfit_detail_detail = "总收益";
@@ -154,8 +162,8 @@ eur_default = "欧元 (EUR)";
 jpy_default = "日元 (JPY)";
 
 //Language Page
-chinese_language = "中文";
-english_language = "英文";
+chinese_language = "简体中文";
+english_language = "English";
 alertTitle_language = "语言设置";
 alertHint_language = "请确认是否改变应用语言";
 alertCancel_language = "取消";

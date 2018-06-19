@@ -26,7 +26,13 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchNewsObject.count + searchGennieObject.count + searchVideoObject.count
+        let total = searchNewsObject.count + searchGennieObject.count + searchVideoObject.count
+        if total == 0{
+             searchCount.text = textValue(name: "searchNull_news")
+        }else {
+            searchCount.text =  textValue(name: "searchLabel_news") + String(total) + textValue(name: "searchResult_news")
+        }
+        return total
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -231,12 +237,26 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
         view.backgroundColor = ThemeColor().themeColor()
         view.addSubview(searchBar)
         view.addSubview(cellListView)
+        view.addSubview(searchCount)
         
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":cellListView]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-5-[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":cellListView]))
+        
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":searchCount]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-0-[v1]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":searchCount]))
+        
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchCount,"v1":cellListView]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-5-[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchCount,"v1":cellListView]))
     }
+    
+    var searchCount:UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.white
+        label.backgroundColor = ThemeColor().bglColor()
+        //        label.layer.backgroundColor = ThemeColor().bglColor() as! CGColor
+        return label
+    }()
     
     lazy var searchBar:UISearchBar={
         var searchBar = UISearchBar()

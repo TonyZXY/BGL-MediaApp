@@ -87,7 +87,7 @@ class TimelineTableViewController: UITableViewController {
         let width =  tableView.frame.size.width
         let sectionHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: tableView.sectionHeaderHeight))
         sectionHeaderView.backgroundColor = ThemeColor().themeColor()
-        
+        tableView.scrollsToTop = true
 //        let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.sectionHeaderHeight))
        let label = UILabel(frame: CGRect(x: 20, y: 0, width: width-2*20, height: tableView.sectionHeaderHeight))
         

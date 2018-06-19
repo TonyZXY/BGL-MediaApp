@@ -93,7 +93,6 @@ class WatchListView: UIView{
         addSubview(coinList)
         
         
-        
         //排序按钮
         marketSortPickerView.translatesAutoresizingMaskIntoConstraints = false
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[v0]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":marketSortPickerView,"v1":self]))

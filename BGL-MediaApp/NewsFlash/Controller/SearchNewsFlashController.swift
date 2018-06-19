@@ -33,7 +33,14 @@ class SearchNewsFlashController: UIViewController,UISearchBarDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
            if tableView == flashTableView{
+            if newsFlashResult.count == 0{
+                 searchCount.text = textValue(name: "searchNull_flash")
+            } else {
+                searchCount.text = textValue(name: "searchLabel_flash") + " " + String(newsFlashResult.count) + " " + textValue(name: "searchResult_flash")
+            }
+            searchCount.backgroundColor = ThemeColor().bglColor()
             return newsFlashResult.count
+            
            } else {
             return 0
         }
@@ -170,13 +177,26 @@ class SearchNewsFlashController: UIViewController,UISearchBarDelegate,UITableVie
     func setupView(){
         view.backgroundColor = ThemeColor().themeColor()
         view.addSubview(searchBar)
+        view.addSubview(searchCount)
         view.addSubview(flashTableView)
         
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":flashTableView]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-5-[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":flashTableView]))
+        
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":searchCount]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-0-[v1]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchBar,"v1":searchCount]))
+        
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchCount,"v1":flashTableView]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-5-[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchCount,"v1":flashTableView]))
     }
+    
+    var searchCount:UILabel = {
+       var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.white
+//        label.layer.backgroundColor = ThemeColor().bglColor() as! CGColor
+        return label
+    }()
     
     lazy var searchBar:UISearchBar={
         var searchBar = UISearchBar()

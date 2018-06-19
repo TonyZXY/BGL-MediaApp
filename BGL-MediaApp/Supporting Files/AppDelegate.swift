@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = ThemeColor().themeColor()
         
-        
+        UINavigationBar.appearance().tintColor = UIColor.white
         
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         

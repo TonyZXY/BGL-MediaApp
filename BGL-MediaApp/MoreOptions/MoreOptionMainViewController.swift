@@ -36,6 +36,7 @@ class MoreOptionMainViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var tableView00: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isTranslucent = false
         view.backgroundColor = ThemeColor().themeColor()
         settingTitle.topItem?.title = textValue(name: "settingTitle")
         // Do any additional setup after loading the view, typically from a nib.

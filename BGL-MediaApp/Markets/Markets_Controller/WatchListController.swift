@@ -101,25 +101,6 @@ class WatchListController: UIViewController, UICollectionViewDelegate, UICollect
         }
     }
     
-
-    
-//    //收藏列表
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return coinSymbolInWatchListRealm.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cellid", for: indexPath) as! MarketsCoinTableViewCell
-//        cell.backgroundColor = color.themeColor()
-//
-//        let object = tickerDataRealmObjects[indexPath.row]
-//
-//        cell.priceChange = [object.percent_change_7d, object.percent_change_24h, object.percent_change_1h][filterDateSelection ?? 0]
-//        cell.object = object
-//
-//        return cell
-//    }
-    
     func getCoinWatchList() {
         let allCoinsSymbol = coinSymbolInWatchListRealm.map {$0.symbol}
         tickerDataRealmObjects = try! Realm().objects(TickerDataRealm.self).filter("symbol in %@", Array(allCoinsSymbol))
@@ -136,15 +117,6 @@ class WatchListController: UIViewController, UICollectionViewDelegate, UICollect
             navigationController?.pushViewController(global, animated: true)
         }
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if tableView == watchList.coinList{
-//            let cell = watchList.coinList.cellForRow(at: indexPath) as! MarketsCoinTableViewCell
-//            let global = GloabalController()
-//            global.coinDetail.coinName = cell.coinLabel.text!
-//            navigationController?.pushViewController(global, animated: true)
-//        }
-//    }
     
     func reloadDataSortedByName() {
         tickerDataRealmObjects = tickerDataRealmObjects.sorted(byKeyPath: "symbol", ascending: true)
@@ -175,13 +147,6 @@ class WatchListController: UIViewController, UICollectionViewDelegate, UICollect
     
     func setUpView(){
         view.addSubview(watchList)
-//        
-//        sortItems.append(textValue(name: "sortByLetter_market"))
-//        sortItems.append(textValue(name: "sortByHighestPrice_market"))
-//        filterDateitems.append(textValue(name: "filterByWeek_market"))
-//        filterDateitems.append(textValue(name: "filterByDay_market"))
-//        filterDateitems.append(textValue(name: "filterByHour_market"))
-        
         watchList.coinList.backgroundColor = ThemeColor().themeColor()
         watchList.sortDate.delegate = self
         watchList.sortDate.dataSource = self

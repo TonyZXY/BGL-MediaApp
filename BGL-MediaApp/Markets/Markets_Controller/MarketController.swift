@@ -33,6 +33,7 @@ class MarketController: UIViewController, UICollectionViewDelegate,UICollectionV
         global.changeLanguage()
         watchList.watchList.sortDate.reloadData()
         watchList.watchList.coinList.reloadData()
+        watchList.watchList.marketSortPickerView.setPickerViewDoneButton()
     }
     
     @objc func changeCurrency(){
