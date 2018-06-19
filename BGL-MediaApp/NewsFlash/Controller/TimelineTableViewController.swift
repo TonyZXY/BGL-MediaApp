@@ -45,15 +45,15 @@ class TimelineTableViewController: UITableViewController {
         self.tableView.backgroundColor = ThemeColor().themeColor()
         self.tableView.separatorStyle = .none
         self.tableView.addSubview(self.refresher)
+        self.tableView.setContentOffset(.zero, animated: false)
 
     }
     
     @objc func changeLanguage(){
+        
         getNews()
         self.tableView.reloadData()
-//        viewDidAppear(false)
-    
-        self.tableView.reloadData()
+
     }
     
     deinit {
@@ -61,16 +61,17 @@ class TimelineTableViewController: UITableViewController {
     }
     
 
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        self.tableView.reloadData()
-//    }
-//    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.automaticallyAdjustsScrollViewInsets = false
+        self.tableView.reloadData()
+    }
+//
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 //        getNews()
-//        self.tableView.reloadData()
-//    }
+        self.tableView.reloadData()
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -153,7 +154,7 @@ class TimelineTableViewController: UITableViewController {
         cell.descriptionLabel.text = object.contents
         cell.object = object
         cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: .touchUpInside)
-        print("returning cell \(indexPath.row)")
+        
         return cell
     }
     
