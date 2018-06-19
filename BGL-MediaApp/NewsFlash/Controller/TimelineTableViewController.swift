@@ -16,6 +16,7 @@ class TimelineTableViewController: UITableViewController {
     let realm = try! Realm()
     var results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
     var dictionary = [String:Int]()
+    var resultsUpdated = false
     
 //    var results:Results<NewsFlash>{
 //        get{
@@ -30,7 +31,7 @@ class TimelineTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.resultsUpdated = false
         let timelineTableViewCellNib = UINib(nibName: "TimelineTableViewCell", bundle: Bundle(for: TimelineTableViewCell.self))
         self.tableView.register(timelineTableViewCellNib, forCellReuseIdentifier: "TimelineTableViewCell")
         
@@ -49,10 +50,8 @@ class TimelineTableViewController: UITableViewController {
     }
     
     @objc func changeLanguage(){
-        
         getNews()
-        
-
+//        self.viewDidLoad()
     }
     
     deinit {
@@ -62,15 +61,19 @@ class TimelineTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if self.resultsUpdated {
+            self.tableView.reloadData()
+            self.resultsUpdated = false
+        }
         
-        self.tableView.reloadData()
     }
-//
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        getNews()
-        self.tableView.reloadData()
-    }
+
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+////        getNews()
+//        self.tableView.reloadData()
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -258,6 +261,7 @@ class TimelineTableViewController: UITableViewController {
             DispatchQueue.main.async {
 //                let filterName = "languageTag = '" + self.defaultLanguage + "' "
                 self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)//.filter("languageTag='" + self.defaultLanguage + "'")
+                self.resultsUpdated = true
                 self.tableView.reloadData()
 //                print(self.results.count)
             }
