@@ -16,6 +16,7 @@ class TimelineTableViewController: UITableViewController {
     let realm = try! Realm()
     var results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
     var dictionary = [String:Int]()
+    var resultsUpdated = false
     
 //    var results:Results<NewsFlash>{
 //        get{
@@ -30,35 +31,56 @@ class TimelineTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.resultsUpdated = false
         let timelineTableViewCellNib = UINib(nibName: "TimelineTableViewCell", bundle: Bundle(for: TimelineTableViewCell.self))
         self.tableView.register(timelineTableViewCellNib, forCellReuseIdentifier: "TimelineTableViewCell")
+        
+        //request news on start up of the app
+        getNews()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
         
         //Prevent empty rows
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = ThemeColor().themeColor()
         self.tableView.separatorStyle = .none
         self.tableView.addSubview(self.refresher)
-        
-    }
-        
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        self.tableView.setContentOffset(.zero, animated: false)
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        self.tabBarController?.tabBar.isHidden = false
+    @objc func changeLanguage(){
         getNews()
+//        self.viewDidLoad()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver("changeLanguage")
+    }
+    
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.resultsUpdated {
+            self.tableView.reloadData()
+            self.resultsUpdated = false
+        }
+        
+    }
+
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+////        getNews()
+//        self.tableView.reloadData()
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         sectionArray = [Int](repeating: 0, count: dates.count)
+        let resultSet = self.defaultLanguage == "CN" ? self.results : results.filter("languageTag='" + self.defaultLanguage + "'")
         
-        for result in results.filter("languageTag = '" + self.defaultLanguage + "' "){
+        for result in resultSet{
             let date = result.dateTime.description.components(separatedBy: " ")[0]
             //get index of date in dates
             let sectionArrayIndex = dates.index(of: date)!
@@ -72,8 +94,8 @@ class TimelineTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         dates = []
-        
-        for result in results.filter("languageTag = '" + self.defaultLanguage + "' "){
+        let resultSet = self.defaultLanguage == "CN" ? self.results : results.filter("languageTag='" + self.defaultLanguage + "'")
+        for result in resultSet{
             let timeArr = result.dateTime.description.components(separatedBy: " ")
             if !dates.contains(timeArr[0]){
                 dates.append(timeArr[0])
@@ -121,7 +143,8 @@ class TimelineTableViewController: UITableViewController {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineTableViewCell", for: indexPath) as! TimelineTableViewCell
         let numberOfSkips = sectionArray.prefix(indexPath.section).reduce(0,+)
-        let object = results.filter("languageTag = '" + self.defaultLanguage + "' ")[indexPath.row + numberOfSkips]
+        let resultSet = self.defaultLanguage == "CN" ? self.results : results.filter("languageTag='" + self.defaultLanguage + "'")
+        let object = resultSet[indexPath.row + numberOfSkips]
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy, h:ma"
@@ -135,7 +158,7 @@ class TimelineTableViewController: UITableViewController {
         cell.descriptionLabel.text = object.contents
         cell.object = object
         cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: .touchUpInside)
-    
+        
         return cell
     }
     
@@ -223,25 +246,13 @@ class TimelineTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
         cell.selectionStyle = .none
+
     }
   
     
-//    private func getNews() {
+
 //        Alamofire.request("http://10.10.6.111:3000/api/flash?languageTag=EN&languageTag=CN", method: .get).validate().responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                self.JSONtoData(json: json)
-//                DispatchQueue.main.async {
-//                    self.cleanOldNewsFlash()
-//                    self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
-//                    self.tableView.reloadData()
-//                }
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }
+
     
     func getNews(){
 //        self.cleanOldNewsFlash()
@@ -249,8 +260,10 @@ class TimelineTableViewController: UITableViewController {
             self.JSONtoData(json: searchResult)
             DispatchQueue.main.async {
 //                let filterName = "languageTag = '" + self.defaultLanguage + "' "
-                self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)
+                self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)//.filter("languageTag='" + self.defaultLanguage + "'")
+                self.resultsUpdated = true
                 self.tableView.reloadData()
+//                print(self.results.count)
             }
         }
     }
@@ -266,7 +279,9 @@ class TimelineTableViewController: UITableViewController {
                 if realm.object(ofType: NewsFlash.self, forPrimaryKey: id) == nil {
                     realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!,defaultLanguage])
                 } else {
-                    realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!,defaultLanguage], update: true)
+                    
+//                    print("updating")
+                    realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!], update: true)
                 }
             }
         }
