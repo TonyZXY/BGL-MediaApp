@@ -34,26 +34,43 @@ class TimelineTableViewController: UITableViewController {
         let timelineTableViewCellNib = UINib(nibName: "TimelineTableViewCell", bundle: Bundle(for: TimelineTableViewCell.self))
         self.tableView.register(timelineTableViewCellNib, forCellReuseIdentifier: "TimelineTableViewCell")
         
+        //request news on start up of the app
+        getNews()
+        self.tableView.reloadData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
+        
         //Prevent empty rows
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = ThemeColor().themeColor()
         self.tableView.separatorStyle = .none
         self.tableView.addSubview(self.refresher)
-        
+
+    }
+    
+    @objc func changeLanguage(){
+        getNews()
+        self.tableView.reloadData()
+//        viewDidAppear(false)
+    
+        self.tableView.reloadData()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver("changeLanguage")
     }
     
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tableView.reloadData()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        print(results.filter("languageTag='" + self.defaultLanguage + "'"))
-        self.tableView.reloadData()
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        self.tableView.reloadData()
+//    }
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
 //        getNews()
-    }
+//        self.tableView.reloadData()
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -136,7 +153,7 @@ class TimelineTableViewController: UITableViewController {
         cell.descriptionLabel.text = object.contents
         cell.object = object
         cell.shareButton.addTarget(self, action: #selector(shareButtonClicked), for: .touchUpInside)
-    
+        print("returning cell \(indexPath.row)")
         return cell
     }
     
@@ -224,6 +241,7 @@ class TimelineTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
         cell.selectionStyle = .none
+
     }
   
     
@@ -238,8 +256,7 @@ class TimelineTableViewController: UITableViewController {
             DispatchQueue.main.async {
 //                let filterName = "languageTag = '" + self.defaultLanguage + "' "
                 self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)//.filter("languageTag='" + self.defaultLanguage + "'")
-                
-                self.tableView.reloadData()
+//                self.tableView.reloadData()
 //                print(self.results.count)
             }
         }
@@ -256,8 +273,9 @@ class TimelineTableViewController: UITableViewController {
                 if realm.object(ofType: NewsFlash.self, forPrimaryKey: id) == nil {
                     realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!,defaultLanguage])
                 } else {
-                    //update
-//                    realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!], update: true)
+                    
+//                    print("updating")
+                    realm.create(NewsFlash.self, value: [id, date!, item["shortMassage"].string!], update: true)
                 }
             }
         }
@@ -285,6 +303,7 @@ class TimelineTableViewController: UITableViewController {
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         getNews()
+        self.tableView.reloadData()
         self.refresher.endRefreshing()
     }
 }
