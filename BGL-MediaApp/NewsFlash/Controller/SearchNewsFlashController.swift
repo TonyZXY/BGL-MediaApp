@@ -190,10 +190,12 @@ class SearchNewsFlashController: UIViewController,UISearchBarDelegate,UITableVie
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-5-[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchCount,"v1":flashTableView]))
     }
     
-    var searchCount:UILabel = {
-       var label = UILabel()
+    var searchCount:paddingLabel = {
+       var label = paddingLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.white
+        label.insetEdge = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+//        label.frame = UIEdgeInsetsMake(0, 20, 0, 20)
 //        label.layer.backgroundColor = ThemeColor().bglColor() as! CGColor
         return label
     }()
@@ -217,4 +219,11 @@ class SearchNewsFlashController: UIViewController,UISearchBarDelegate,UITableVie
         tableView.dataSource = self
         return tableView
     }()
+}
+
+class paddingLabel:UILabel{
+    open var insetEdge:UIEdgeInsets!
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, insetEdge))
+    }
 }

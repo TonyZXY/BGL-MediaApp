@@ -105,7 +105,9 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
             let filterName = "coinAbbName = '" + self.generalData.coinAbbName + "' "
             let statusItem = self.realm.objects(AllTransactions.self)
             let specificTransaction = statusItem.filter(filterId)
+       
             let coinTransaction = statusItem.filter(filterName)
+//                 print(coinTransaction.count)
             if coinTransaction.count == 1{
                 let coinSelected = self.realm.objects(MarketTradingPairs.self).filter(filterName)
                 try! self.realm.write {
@@ -116,6 +118,7 @@ class TransactionsHistoryController: UIViewController,UITableViewDataSource,UITa
                 self.realm.delete(specificTransaction)
             }
             self.historyTableView.reloadData()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deleteTransaction"), object: nil)
         }
         confirmAlertCtrl.addAction(confirmAction)
         let cancelAction = UIAlertAction(title: NSLocalizedString(textValue(name: "alertCancel_history"), comment: ""), style: .cancel, handler:nil)

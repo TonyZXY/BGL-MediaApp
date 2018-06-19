@@ -43,24 +43,33 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     //The First Time load the Page
     override func viewDidLoad() {
         super.viewDidLoad()
-        setWalletData()
         setUpBasicView()
+        checkTransaction()
+        setWalletData()
+        reloadData()
 //        SetDataResult().writeJsonExchange()
 //        SetDataResult().writeMarketCapCoinList()
 //        GetDataResult().getCoinList()
         print(allResult)
         print(all)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: NSNotification.Name(rawValue: "reloadWallet"), object: nil)
-        if let defaultCurrency = UserDefaults.standard.value(forKey: "defaultCurrency") as? String{
-            print(defaultCurrency)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: NSNotification.Name(rawValue: "deleteTransaction"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: NSNotification.Name(rawValue: "changeCurrency"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "deleteTransaction"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadWallet"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "changeCurrency"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
     }
     
     //Every Time the Page appear will active this method
     override func viewWillAppear(_ animated: Bool) {
-        checkTransaction()
-        setWalletData()
-        reloadData()
+//        checkTransaction()
+//        setWalletData()
+//        reloadData()
         tabBarController?.tabBar.isHidden = false
     }
     
@@ -73,6 +82,10 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
         } else {
             setupView()
         }
+    }
+    
+    @objc func changeLanguage(){
+        checkTransaction()
     }
     
     //TableView Cell Number
@@ -150,8 +163,11 @@ class WalletController: UIViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     @objc func refreshData(){
+        checkTransaction()
         setWalletData()
         reloadData()
+//        setWalletData()
+//        reloadData()
     }
     
     func reloadData(){

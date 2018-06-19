@@ -249,11 +249,12 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-5-[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":searchCount,"v1":cellListView]))
     }
     
-    var searchCount:UILabel = {
-        var label = UILabel()
+    var searchCount:paddingLabel = {
+        var label = paddingLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.white
         label.backgroundColor = ThemeColor().bglColor()
+        label.insetEdge = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         //        label.layer.backgroundColor = ThemeColor().bglColor() as! CGColor
         return label
     }()
