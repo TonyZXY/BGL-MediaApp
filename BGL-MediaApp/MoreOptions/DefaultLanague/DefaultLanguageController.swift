@@ -49,7 +49,7 @@ class DefaultLanguageController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "languageTableCell", for: indexPath) as UITableViewCell
         cell.textLabel?.text = filteredData[indexPath.row]
-        if storeData[indexPath.row] == self.defaultLanguage{
+        if storeData[indexPath.row] == defaultLanguage{
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
         }
         cell.textLabel?.textColor = #colorLiteral(red: 0.3294117647, green: 0.7019607843, blue: 0.6901960784, alpha: 0.8015839041)

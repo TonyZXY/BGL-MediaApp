@@ -112,7 +112,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
             objects.append(value)
         }
         let object = objects[indexPath.row]
-        let newController = NewsDetailWebViewController()
+        
         
         if object.type != "section"{
             if object.type == "video"{
@@ -126,6 +126,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
                 videoDetailViewController.video = video
                 navigationController?.pushViewController(videoDetailViewController, animated: true)
             } else {
+                let newController = NewsDetailWebViewController()
                 newController.news = (object.title, object.url) as? (title: String, url: String)
                 navigationController?.pushViewController(newController, animated: true)
             }
@@ -190,6 +191,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
                     section.type = "section"
                     self.searchNewsObject.append(section)
                     for value in searchResult{
+                        value.type = "news"
                         self.searchNewsObject.append(value)
                     }
                 }
@@ -205,6 +207,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
                     section.type = "section"
                     self.searchGennieObject.append(section)
                     for value in searchResult{
+                        value.type = "origin"
                         self.searchGennieObject.append(value)
                     }
                 }
@@ -220,6 +223,7 @@ class SearchNewsController: UIViewController,UICollectionViewDelegate,UICollecti
                     section.type = "section"
                     self.searchVideoObject.append(section)
                     for value in searchResult{
+                        value.type = "video"
                         self.searchVideoObject.append(value)
                     }
                 }

@@ -9,20 +9,21 @@
 import Foundation
 import UIKit
 
+var defaultLanguage:String {
+    get{
+        var language:String = ""
+        if let defaultCurrency = UserDefaults.standard.value(forKey: "defaultLanguage") as? String{
+            language = defaultCurrency
+            return language
+        } else {
+            return language
+        }
+    }
+}
 
 
 extension UIViewController{
-    var defaultLanguage:String {
-        get{
-            var language:String = ""
-            if let defaultCurrency = UserDefaults.standard.value(forKey: "defaultLanguage") as? String{
-                language = defaultCurrency
-                return language
-            } else {
-                return language
-            }
-        }
-    }
+    
     
 //    var bundal:Bundle{
 //        get{

@@ -29,6 +29,7 @@ class NewsListViewController: UIViewController, UICollectionViewDataSource,UICol
     var newsArrayList: Results<News>?
     
     var selectionOptionOne: [String] = ["国内", "国际", "深度", "趋势"]
+    
     var selectionTag:[String]{
         return [textValue(name: "native_newsPage"),textValue(name: "international_newsPage"),textValue(name: "deep_newsPage"),textValue(name: "trend_newsPage")]
     }

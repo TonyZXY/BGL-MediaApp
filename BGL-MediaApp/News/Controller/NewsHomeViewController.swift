@@ -45,6 +45,10 @@ class NewsHomeViewController: UIViewController, UICollectionViewDataSource, UICo
     
     @objc func changeLanguage(){
         menuBar.collectionView.reloadData()
+        newsController.fetchData()
+        newsController.selectionView.reloadData()
+        genuineController.fetchData()
+        genuineController.cellListView.reloadData()
     }
     
     deinit {

@@ -78,7 +78,7 @@ class TimelineTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         sectionArray = [Int](repeating: 0, count: dates.count)
-        let resultSet = self.defaultLanguage == "CN" ? self.results : results.filter("languageTag='" + self.defaultLanguage + "'")
+        let resultSet = defaultLanguage == "CN" ? self.results : results.filter("languageTag='" + defaultLanguage + "'")
         
         for result in resultSet{
             let date = result.dateTime.description.components(separatedBy: " ")[0]
@@ -94,7 +94,7 @@ class TimelineTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         dates = []
-        let resultSet = self.defaultLanguage == "CN" ? self.results : results.filter("languageTag='" + self.defaultLanguage + "'")
+        let resultSet = defaultLanguage == "CN" ? self.results : results.filter("languageTag='" + defaultLanguage + "'")
         for result in resultSet{
             let timeArr = result.dateTime.description.components(separatedBy: " ")
             if !dates.contains(timeArr[0]){
@@ -143,7 +143,7 @@ class TimelineTableViewController: UITableViewController {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineTableViewCell", for: indexPath) as! TimelineTableViewCell
         let numberOfSkips = sectionArray.prefix(indexPath.section).reduce(0,+)
-        let resultSet = self.defaultLanguage == "CN" ? self.results : results.filter("languageTag='" + self.defaultLanguage + "'")
+        let resultSet = defaultLanguage == "CN" ? self.results : results.filter("languageTag='" + defaultLanguage + "'")
         let object = resultSet[indexPath.row + numberOfSkips]
         
         let dateFormatter = DateFormatter()

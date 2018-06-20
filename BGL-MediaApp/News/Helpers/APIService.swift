@@ -15,9 +15,9 @@ import RealmSwift
 
 class APIService: NSObject {
     static let shardInstance = APIService()
-
+    
     let realm = try! Realm()
-
+    
     //Connection Strings
     let urlString = "http://10.10.6.111:3000/api/"
     let localNews = "getNewsLocaleOnly"
@@ -36,41 +36,43 @@ class APIService: NSObject {
     let searchFlash = "searchFlash"
     let flash = "flash"
     let selectLanguage:[String:[String]] = ["EN":["EN"],"CN":["CN","EN"]]
-
-    
     
     // fetch Offline News data (from database)
     func fetchNewsOffline(contentType: String, completion: @escaping (Results<News>) -> ()) {
         switch contentType {
         case "国内", "国际":
             DispatchQueue.main.async {
-                let result = try! Realm().objects(News.self).sorted(byKeyPath: "_id", ascending: false).filter("\(self.newsLocaleQuery) = %@", contentType)
+                let results = try! Realm().objects(News.self).sorted(byKeyPath: "_id", ascending: false)
+                let result = defaultLanguage == "CN" ? results : results.filter("\(self.languageQuery) = %@", defaultLanguage)
                 completion(result)
             }
         default:
             DispatchQueue.main.async {
-                let result = try! Realm().objects(News.self).sorted(byKeyPath: "_id", ascending: false).filter("\(self.newsContentQuery) = %@", contentType)
+                let results = try! Realm().objects(News.self).sorted(byKeyPath: "_id", ascending: false)
+                let result = defaultLanguage == "CN" ? results : results.filter("\(self.languageQuery) = %@", defaultLanguage)
                 completion(result)
             }
         }
     }
-
+    
     // fetch Offline Genuine data (from database)
     func fetchGenuineOffline(contentType: String, completion: @escaping (Results<Genuine>) -> ()) {
         DispatchQueue.main.async {
-            let result = try! Realm().objects(Genuine.self).sorted(byKeyPath: "_id", ascending: false).filter("\(self.genuineQuery) = %@", contentType)
+            let results = try! Realm().objects(Genuine.self).sorted(byKeyPath: "_id", ascending: false).filter("\(self.genuineQuery) = %@", contentType)
+            let result = defaultLanguage == "CN" ? results : results.filter("\(self.languageQuery) = %@", defaultLanguage)
             completion(result)
         }
     }
-
+    
     // fetch Offine Video data (from database)
     func fetchVideoOffline(completion: @escaping (Results<Video>) -> ()) {
         DispatchQueue.main.async {
-            let result = try! Realm().objects(Video.self).sorted(byKeyPath: "_id", ascending: false)
+            let results = try! Realm().objects(Video.self).sorted(byKeyPath: "_id", ascending: false)
+            let result = defaultLanguage == "CN" ? results : results.filter("\(self.languageQuery) = %@", defaultLanguage)
             completion(result)
         }
     }
-
+    
     // Fetch News data from API
     func fetchNewsData(contentType: String, currentNumber: Int, language:String, completion: @escaping (Results<News>) -> ()) {
         switch contentType { // switch locale tag
@@ -79,14 +81,16 @@ class APIService: NSObject {
             
             let para = [newsLocaleQuery: contentType, "skip": currentNumber, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
             
-//            let para = [newsLocaleQuery: contentType, "skip": currentNumber] as [String: Any]
+            //            let para = [newsLocaleQuery: contentType, "skip": currentNumber] as [String: Any]
             Alamofire.request(url!, parameters: para).responseJSON { (responsein) in
                 switch responsein.result {
                 case .success(let value):
                     let json = JSON(value)
                     self.decodeNewsJSON(json: json) // sent to RealmSwift to store into database
                     DispatchQueue.main.async { // get data from database
-                        let result = try! Realm().objects(News.self).sorted(byKeyPath: "_id", ascending: false).filter("\(self.newsLocaleQuery) = %@", contentType)
+                        
+                        let results = try! Realm().objects(News.self).sorted(byKeyPath: "_id", ascending: false).filter("\(self.newsLocaleQuery) = %@", contentType)
+                        let result = defaultLanguage == "CN" ? results : results.filter("\(self.languageQuery) = %@", defaultLanguage)
                         completion(result)
                     }
                 case .failure(let error):
@@ -95,15 +99,16 @@ class APIService: NSObject {
             }
         default: // if content tag
             let url = URL(string: urlString + contentNews)
-             let para = [newsContentQuery: contentNews, "skip": currentNumber, languageQuery: language] as [String: Any]
-//            let para = [newsContentQuery: contentNews, "skip": currentNumber] as [String: Any]
+            let para = [newsContentQuery: contentNews, "skip": currentNumber, languageQuery: language] as [String: Any]
+            //            let para = [newsContentQuery: contentNews, "skip": currentNumber] as [String: Any]
             Alamofire.request(url!, parameters: para).responseJSON { (responsion) in
                 switch responsion.result {
                 case .success(let value):
                     let json = JSON(value)
                     self.decodeNewsJSON(json: json) // send to database
                     DispatchQueue.main.async { // get data form database
-                        let result = try! Realm().objects(News.self).sorted(byKeyPath: "_id", ascending: false).filter("\(self.newsContentQuery) = %@", contentType)
+                        let results = try! Realm().objects(News.self).sorted(byKeyPath: "_id", ascending: false).filter("\(self.newsContentQuery) = %@", contentType)
+                        let result = defaultLanguage == "CN" ? results : results.filter("\(self.languageQuery) = %@", defaultLanguage)
                         completion(result)
                     }
                 case .failure(let error):
@@ -112,19 +117,20 @@ class APIService: NSObject {
             }
         }
     }
-
+    
     // get Genuine data from API
     func fetchGenuineData(contentType: String, currentNumber: Int, language:String,completion: @escaping (Results<Genuine>) -> ()) {
         let url = URL(string: urlString + contentGenuine)
-         let para = [genuineQuery: contentType, "skip": currentNumber, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
-//        let para = [genuineQuery: contentType, "skip": currentNumber] as [String: Any]
+        let para = [genuineQuery: contentType, "skip": currentNumber, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
+        //        let para = [genuineQuery: contentType, "skip": currentNumber] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 self.decodeGenuineJSON(json: json) // store data into database
                 DispatchQueue.main.async { // get data from database
-                    let result = try! Realm().objects(Genuine.self).sorted(byKeyPath: "_id", ascending: false).filter("\(self.genuineQuery) = %@", contentType)
+                    let results = try! Realm().objects(Genuine.self).sorted(byKeyPath: "_id", ascending: false).filter("\(self.genuineQuery) = %@", contentType)
+                    let result = defaultLanguage == "CN" ? results : results.filter("\(self.languageQuery) = %@", defaultLanguage)
                     completion(result)
                 }
             case .failure(let error):
@@ -132,19 +138,20 @@ class APIService: NSObject {
             }
         }
     }
-
+    
     // get Video data from API
     func fetchVideoData(currentNumber: Int,language:String, completion: @escaping (Results<Video>) -> ()) {
         let url = URL(string: urlString + video)
-           let para = ["skip": currentNumber, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
-//        let para = ["skip": currentNumber] as [String: Any]
+        let para = ["skip": currentNumber, languageQuery: selectLanguage[language] ?? "nil"] as [String: Any]
+        //        let para = ["skip": currentNumber] as [String: Any]
         Alamofire.request(url!, parameters: para).responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 self.decodeVideoJSON(json: json) // store data into database
                 DispatchQueue.main.async { // get data from database
-                    let result = try! Realm().objects(Video.self).sorted(byKeyPath: "_id", ascending: false)
+                    let results = try! Realm().objects(Video.self).sorted(byKeyPath: "_id", ascending: false)
+                    let result = defaultLanguage == "CN" ? results : results.filter("\(self.languageQuery) = %@", defaultLanguage)
                     completion(result)
                 }
             case .failure(let error):
@@ -152,7 +159,7 @@ class APIService: NSObject {
             }
         }
     }
-
+    
     // decode JSON and store into database
     func decodeNewsJSON(json: JSON) {
         realm.beginWrite()
@@ -167,9 +174,9 @@ class APIService: NSObject {
                 let author = item["author"].string!
                 let localeTag = item["localeTag"].string!
                 let contentTag = item["contentTag"].string!
-
+                
                 if realm.object(ofType: News.self, forPrimaryKey: id) == nil {
-                    realm.create(News.self, value: [id, title, newsDescription, imageURL, url, publishedTime, author, localeTag, contentTag])
+                    realm.create(News.self, value: [id, title, newsDescription, imageURL, url, publishedTime, author, localeTag, contentTag, defaultLanguage])
                 } else {
                     realm.create(News.self, value: [id, title, newsDescription, imageURL, url, publishedTime, author, localeTag, contentTag], update: true)
                 }
@@ -177,7 +184,7 @@ class APIService: NSObject {
         }
         try! realm.commitWrite()
     }
-
+    
     func decodeGenuineJSON(json: JSON) {
         realm.beginWrite()
         if let collection = json.array {
@@ -190,9 +197,9 @@ class APIService: NSObject {
                 let publishedTime = item["publishedTime"].string!.timeFormatter()
                 let author = item["author"].string!
                 let genuineTag = item["genuineTag"].string!
-
+                
                 if realm.object(ofType: Genuine.self, forPrimaryKey: id) == nil {
-                    realm.create(Genuine.self, value: [id, title, genuineDescription, imageURL, url, publishedTime, author, genuineTag])
+                    realm.create(Genuine.self, value: [id, title, genuineDescription, imageURL, url, publishedTime, author, genuineTag,defaultLanguage])
                 } else {
                     realm.create(Genuine.self, value: [id, title, genuineDescription, imageURL, url, publishedTime, author, genuineTag], update: true)
                 }
@@ -200,7 +207,7 @@ class APIService: NSObject {
         }
         try! realm.commitWrite()
     }
-
+    
     func decodeVideoJSON(json: JSON) {
         realm.beginWrite()
         if let collection = json.array {
@@ -214,9 +221,9 @@ class APIService: NSObject {
                 let author = item["author"].string!
                 let localeTag = item["localeTag"].string!
                 let typeTag = item["typeTag"].string!
-
+                
                 if realm.object(ofType: Video.self, forPrimaryKey: id) == nil {
-                    realm.create(Video.self, value: [id, title, videoDescription, imageURL, url, publishedTime, author, localeTag, typeTag])
+                    realm.create(Video.self, value: [id, title, videoDescription, imageURL, url, publishedTime, author, localeTag, typeTag,defaultLanguage])
                 } else {
                     realm.create(Video.self, value: [id, title, videoDescription, imageURL, url, publishedTime, author, localeTag, typeTag], update: true)
                 }
@@ -224,7 +231,7 @@ class APIService: NSObject {
         }
         try! realm.commitWrite()
     }
-
+    
     
     func fetchSearchNews(keyword:String,language:String, completion: @escaping ([SearchObject]) -> ()) {
         let url = URL(string: urlString + searchNews)
@@ -352,18 +359,18 @@ class APIService: NSObject {
             case .success(let value):
                 let json = JSON(value)
                 
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-//                var searchArrayObject = [NewsFlash]()
-//                if let collection = json.array {
-//                    for item in collection {
-//                        let searchObject = NewsFlash()
-//                        searchObject.id = item["_id"].string!
-//                        searchObject.contents = item["shortMassage"].string!
-//                        searchObject.dateTime = dateFormatter.date(from: item["publishedTime"].string!)!
-//                        searchArrayObject.append(searchObject)
-//                    }
-//                }
+                //                let dateFormatter = DateFormatter()
+                //                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                //                var searchArrayObject = [NewsFlash]()
+                //                if let collection = json.array {
+                //                    for item in collection {
+                //                        let searchObject = NewsFlash()
+                //                        searchObject.id = item["_id"].string!
+                //                        searchObject.contents = item["shortMassage"].string!
+                //                        searchObject.dateTime = dateFormatter.date(from: item["publishedTime"].string!)!
+                //                        searchArrayObject.append(searchObject)
+                //                    }
+                //                }
                 DispatchQueue.main.async {
                     completion(json)
                 }
@@ -373,5 +380,5 @@ class APIService: NSObject {
         }
     }
     
-
+    
 }
