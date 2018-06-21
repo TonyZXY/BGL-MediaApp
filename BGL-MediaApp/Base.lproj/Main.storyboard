@@ -844,6 +844,7 @@
                         <segue destination="MFK-H8-Jps" kind="show" identifier="notifiOption" id="IPd-Vp-UeJ"/>
                         <segue destination="9gs-ku-6Bq" kind="show" identifier="otherOption" id="h01-JX-SOA"/>
                         <segue destination="BmY-4x-KTT" kind="show" identifier="defaultLanguage" id="Dah-BA-3au"/>
+                        <segue destination="aBc-mO-nhV" kind="show" identifier="alertNotification" id="XtR-0h-pqz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Udf-dj-9iX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -872,6 +873,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajf-Qb-cEL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2743" y="790"/>
+        </scene>
+        <!--Alert Notification Controller-->
+        <scene sceneID="IUz-N6-mRA">
+            <objects>
+                <viewController id="aBc-mO-nhV" customClass="AlertNotificationController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jkb-lC-aR0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="hHV-DA-peR"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mpO-ny-Lki" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7833" y="2696"/>
         </scene>
         <!--Default Language Controller-->
         <scene sceneID="0xO-W7-Et8">

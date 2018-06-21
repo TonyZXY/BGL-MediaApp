@@ -262,6 +262,7 @@ class TimelineTableViewController: UITableViewController {
 //                let filterName = "languageTag = '" + self.defaultLanguage + "' "
                 self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)//.filter("languageTag='" + self.defaultLanguage + "'")
                 self.resultsUpdated = true
+                print(self.results)
                 self.tableView.reloadData()
 //                print(self.results.count)
             }

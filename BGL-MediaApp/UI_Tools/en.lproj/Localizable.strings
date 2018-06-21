@@ -140,6 +140,7 @@ notification_cell = "Notification Option";
 display_cell = "Display Option";
 other_cell = "Other Option";
 language_cell = "Language";
+alert_cell = "Alert";
 
 //About Us Page
 title_about = "About Blockchain Global";

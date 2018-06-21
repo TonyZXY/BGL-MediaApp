@@ -159,6 +159,7 @@
 		5765939A20D0AEC400298EF5 /* MarketsCoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765939020D0AEC300298EF5 /* MarketsCoinTableViewCell.swift */; };
 		5765939B20D0AEC400298EF5 /* MarketsTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765939120D0AEC400298EF5 /* MarketsTotalView.swift */; };
 		57E0AFF220D76AA300A81529 /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57E0AFF020D76AA300A81529 /* Main.strings */; };
+		57E5DFB920DB3650006269AF /* AlertNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5DFB820DB3650006269AF /* AlertNotificationController.swift */; };
 		65CA633090F1F7BCDAFE405B /* Pods_BGL_MediaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -322,6 +323,7 @@
 		57E0AFF120D76AA300A81529 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Main.strings; sourceTree = "<group>"; };
 		57E0AFF320D76AB900A81529 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "BGL-MediaApp/en.lproj/Main.strings"; sourceTree = SOURCE_ROOT; };
 		57E0AFF420D76AD600A81529 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "../zh-Hans-CN.lproj/Main.strings"; sourceTree = "<group>"; };
+		57E5DFB820DB3650006269AF /* AlertNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertNotificationController.swift; sourceTree = "<group>"; };
 		EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BGL_MediaApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -378,6 +380,7 @@
 		1AFE404020C4F7FC002D8137 /* MoreOptions */ = {
 			isa = PBXGroup;
 			children = (
+				57E5DFB520DB35F7006269AF /* Alert */,
 				5765935F20C7AA0A00298EF5 /* DefaultLanague */,
 				1AFE404120C4F7FC002D8137 /* AboutUs */,
 				1AFE404320C4F7FC002D8137 /* DefaultCurrency */,
@@ -868,6 +871,14 @@
 			path = DefaultLanague;
 			sourceTree = "<group>";
 		};
+		57E5DFB520DB35F7006269AF /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				57E5DFB820DB3650006269AF /* AlertNotificationController.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1007,6 +1018,7 @@
 				1AFE411520C4F7FE002D8137 /* GloabalController.swift in Sources */,
 				1AFE415E20C4F7FE002D8137 /* HistoricalDataStruct.swift in Sources */,
 				1AFE413120C4F7FE002D8137 /* APIErrors.swift in Sources */,
+				57E5DFB920DB3650006269AF /* AlertNotificationController.swift in Sources */,
 				1AFE412520C4F7FE002D8137 /* MainView.swift in Sources */,
 				1AFE413720C4F7FE002D8137 /* MarketCapEndpoint.swift in Sources */,
 				1AFE414620C4F7FE002D8137 /* WalletDetail.swift in Sources */,
