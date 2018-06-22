@@ -61,7 +61,7 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="3Mh-df-t8l">
             <objects>
-                <tabBarController id="es6-dM-P9s" customClass="MainTabBarController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomePage" id="es6-dM-P9s" customClass="MainTabBarController" customModule="BGL_MediaApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="n1N-YU-9Bc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

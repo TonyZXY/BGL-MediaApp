@@ -14,8 +14,8 @@ class MainTabBarController: UITabBarController {
     @IBOutlet weak var mainTabBar: UITabBar!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setUpTab()
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(setUpTab), name: NSNotification.Name(rawValue: "changeLanguage"), object: nil)
 //
