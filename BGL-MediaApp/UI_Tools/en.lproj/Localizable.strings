@@ -169,3 +169,8 @@ alertTitle_language = "Change Language";
 alertHint_language = "Do you want to change application language";
 alertCancel_language = "Cancel";
 alertChange_language = "Change";
+
+//Alert Page
+flashNews_alert = "Flash News Notification";
+price_alert = "Currency Alert";
+edit_alert = "Edit Currency";

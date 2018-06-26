@@ -169,3 +169,8 @@ alertTitle_language = "语言设置";
 alertHint_language = "请确认是否改变应用语言";
 alertCancel_language = "取消";
 alertChange_language = "确认";
+
+//Alert Page
+flashNews_alert = "快讯推送通知";
+price_alert = "货币价格提醒";
+edit_alert = "设置需要提醒的货币";

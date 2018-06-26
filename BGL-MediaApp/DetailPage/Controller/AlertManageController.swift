@@ -1,31 +1,30 @@
 //
-//  AlertController.swift
-//  news app for blockchain
+//  AlertManageController.swift
+//  BGL-MediaApp
 //
-//  Created by Bruce Feng on 21/5/18.
-//  Copyright © 2018 Sheng Li. All rights reserved.
+//  Created by Bruce Feng on 22/6/18.
+//  Copyright © 2018 Xuyang Zheng. All rights reserved.
 //
 
 import UIKit
 
-class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSource{
+struct ExpandableNames{
+    var isExpanded:Bool
+    let name:[String]
+}
 
+class AlertManageController: UIViewController,UITableViewDelegate,UITableViewDataSource{
+
+    
     var twoDimension = [ExpandableNames(isExpanded: true, name: ["a","sf"]),ExpandableNames(isExpanded: true, name: ["sdf","sfsdfsf"])]
-    
+
     var showIndexPaths = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-        // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        tabBarController?.tabBar.isHidden = true
-    }
-    
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
@@ -33,28 +32,27 @@ class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSourc
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         
-        let coinImage = UIImageView(image: UIImage(named: "navigation_arrow.png"))
-        coinImage.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        coinImage.clipsToBounds = true
+            let coinImage = UIImageView(image: UIImage(named: "navigation_arrow.png"))
+            coinImage.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            coinImage.clipsToBounds = true
         
-        coinImage.contentMode = UIViewContentMode.scaleAspectFit
-        coinImage.translatesAutoresizingMaskIntoConstraints = false
-        
+            coinImage.contentMode = UIViewContentMode.scaleAspectFit
+            coinImage.translatesAutoresizingMaskIntoConstraints = false
+
         let coinLabel = UILabel()
         coinLabel.translatesAutoresizingMaskIntoConstraints = false
         coinLabel.text = "haha"
         
         
-        //        let myTextField = UITextField()
-        //        let bottomLine = CALayer()
-        //        bottomLine.frame = CGRect(x: 0.0, y: myTextField.frame.height - 1, width: myTextField.frame.width, height: 1.0)
-        //        bottomLine.backgroundColor = UIColor.white.cgColor
-        //        myTextField.borderStyle = UITextBorderStyle.none
-        //        myTextField.layer.addSublayer(bottomLine)
-        
+//        let myTextField = UITextField()
+//        let bottomLine = CALayer()
+//        bottomLine.frame = CGRect(x: 0.0, y: myTextField.frame.height - 1, width: myTextField.frame.width, height: 1.0)
+//        bottomLine.backgroundColor = UIColor.white.cgColor
+//        myTextField.borderStyle = UITextBorderStyle.none
+//        myTextField.layer.addSublayer(bottomLine)
         let button = UIButton(type:.system)
-        button.setTitle("Close", for: .normal)
-        //        button.backgroundColor = ThemeColor().bglColor()
+        button.setTitle("Edit", for: .normal)
+//        button.backgroundColor = ThemeColor().bglColor()
         button.setTitleColor(UIColor.white, for: .normal)
         button.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
         button.tag = section
@@ -68,16 +66,16 @@ class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSourc
         sectionView.addSubview(coinLabel)
         sectionView.backgroundColor = ThemeColor().bglColor()
         button.translatesAutoresizingMaskIntoConstraints = false
-        //        views.translatesAutoresizingMaskIntoConstraints = false
+//        views.translatesAutoresizingMaskIntoConstraints = false
+
         
-        
-        
-        
+
+      
         
         sectionView.layer.borderWidth = 1
         
         NSLayoutConstraint(item: button, attribute: .centerY, relatedBy: .equal, toItem: sectionView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: coinImage, attribute: .centerY, relatedBy: .equal, toItem: sectionView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+         NSLayoutConstraint(item: coinImage, attribute: .centerY, relatedBy: .equal, toItem: sectionView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: coinLabel, attribute: .centerY, relatedBy: .equal, toItem: sectionView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
         sectionView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[v0(30)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":coinImage]))
         sectionView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0(30)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":coinImage]))
@@ -98,7 +96,7 @@ class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSourc
         twoDimension[section].isExpanded = !isExpanded
         
         
-        button.setTitle(isExpanded ? "Open":"Close", for: .normal)
+        button.setTitle(isExpanded ? "Edit":"Edit", for: .normal)
         
         if !isExpanded{
             alertTableView.insertRows(at: indexPaths, with: .fade)
@@ -126,58 +124,22 @@ class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "editAlertCell", for: indexPath) as! AlertTableViewCell
-        //        let name = twoDimension[indexPath.section].name[indexPath.row]
+//        let name = twoDimension[indexPath.section].name[indexPath.row]
         cell.compareLabel.text = twoDimension[indexPath.section].name[indexPath.row]
         
-        //        cell.textLabel?.text = name
+//        cell.textLabel?.text = name
         return cell
     }
     
     func setUpView(){
-        view.backgroundColor = ThemeColor().themeColor()
-        
-        let addButton = UIButton()
-        addButton.setTitle("➕", for: .normal)
-        addButton.titleLabel?.font = addButton.titleLabel?.font.withSize(25)
-        addButton.backgroundColor = UIColor.white
-        addButton.layer.cornerRadius = 25
-        addButton.addTarget(self, action: #selector(addAlert), for: .touchUpInside)
-        
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        
         view.addSubview(alertTableView)
-        alertTableView.addSubview(addButton)
         
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":alertTableView]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":alertTableView]))
-        
-//        NSLayoutConstraint(item: addButton, attribute: .top, relatedBy: .equal, toItem: alertTableView, attribute: .top, multiplier: 1, constant: 0).isActive = true
-//        NSLayoutConstraint(item: addButton, attribute: .trailing, relatedBy: .equal, toItem: alertTableView, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
-//
-        
-//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[v0(50)]-100-[v1]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":addButton,"v1":alertTableView]))
-//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v1]-50-[v0(50)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":addButton,"v1":alertTableView]))
-        
-        NSLayoutConstraint(item: addButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 50).isActive = true
-        NSLayoutConstraint(item: addButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 50).isActive = true
-        NSLayoutConstraint(item: addButton, attribute: .centerX, relatedBy: .equal, toItem: alertTableView, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: addButton, attribute: .centerY, relatedBy: .equal, toItem: alertTableView, attribute: .centerY, multiplier: 1, constant: 150).isActive = true
-
-    }
-    
-    @objc func addAlert(){
-        let addAlert = AlertManageController()
-        navigationController?.pushViewController(addAlert, animated: true)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     lazy var alertTableView:UITableView = {
-        var tableView = UITableView()
+       var tableView = UITableView()
         tableView.backgroundColor = ThemeColor().themeColor()
         tableView.register(AlertTableViewCell.self, forCellReuseIdentifier: "editAlertCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false

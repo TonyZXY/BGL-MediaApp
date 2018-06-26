@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             GetDataResult().getCoinList()
             UserDefaults.standard.set("AUD", forKey: "defaultCurrency")
             UserDefaults.standard.set("EN", forKey: "defaultLanguage")
+            UserDefaults.standard.set(false, forKey: "flashSwitch")
+            UserDefaults.standard.set(false, forKey: "priceSwitch")
             UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
         return true
