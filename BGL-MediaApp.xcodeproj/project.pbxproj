@@ -122,6 +122,8 @@
 		1AFE417720C51987002D8137 /* NewsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE417620C51986002D8137 /* NewsCellView.swift */; };
 		54AA25E820DB5FC30026701A /* OnBoardingUIPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA25E720DB5FC30026701A /* OnBoardingUIPageViewController.swift */; };
 		54AA25EA20DB63240026701A /* OnBoardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA25E920DB63240026701A /* OnBoardingPageViewController.swift */; };
+		54AA25F620DCD76E0026701A /* RegisterationPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA25F520DCD76E0026701A /* RegisterationPageViewController.swift */; };
+		54AA25F820DCD77C0026701A /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA25F720DCD77C0026701A /* LoginPageViewController.swift */; };
 		5750AC6120D1021A00ACDABE /* TimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5750AC5B20D1021A00ACDABE /* TimelineTableViewCell.xib */; };
 		5750AC6220D1021A00ACDABE /* DataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5750AC5C20D1021A00ACDABE /* DataCell.swift */; };
 		5750AC6320D1021A00ACDABE /* FlashSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5750AC5D20D1021A00ACDABE /* FlashSearchTableViewCell.swift */; };
@@ -283,6 +285,8 @@
 		52014D454945527EF240756D /* Pods-BGL-MediaApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.debug.xcconfig"; sourceTree = "<group>"; };
 		54AA25E720DB5FC30026701A /* OnBoardingUIPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingUIPageViewController.swift; sourceTree = "<group>"; };
 		54AA25E920DB63240026701A /* OnBoardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPageViewController.swift; sourceTree = "<group>"; };
+		54AA25F520DCD76E0026701A /* RegisterationPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationPageViewController.swift; sourceTree = "<group>"; };
+		54AA25F720DCD77C0026701A /* LoginPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
 		56D92E4D774CE980869C74BC /* Pods-BGL-MediaApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.release.xcconfig"; sourceTree = "<group>"; };
 		5750AC5B20D1021A00ACDABE /* TimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimelineTableViewCell.xib; sourceTree = "<group>"; };
 		5750AC5C20D1021A00ACDABE /* DataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCell.swift; sourceTree = "<group>"; };
@@ -836,6 +840,8 @@
 		54AA25F420DCC07C0026701A /* LoginAndRegister */ = {
 			isa = PBXGroup;
 			children = (
+				54AA25F520DCD76E0026701A /* RegisterationPageViewController.swift */,
+				54AA25F720DCD77C0026701A /* LoginPageViewController.swift */,
 			);
 			path = LoginAndRegister;
 			sourceTree = "<group>";
@@ -1098,6 +1104,7 @@
 				1AFE410220C4F7FE002D8137 /* NewsMenuCell.swift in Sources */,
 				1AFE412C20C4F7FE002D8137 /* TransTimeCell.swift in Sources */,
 				1AFE411D20C4F7FE002D8137 /* CoinDetailData.swift in Sources */,
+				54AA25F820DCD77C0026701A /* LoginPageViewController.swift in Sources */,
 				1AFE413C20C4F7FE002D8137 /* WalletController.swift in Sources */,
 				1AFE412220C4F7FE002D8137 /* HistoryLine.swift in Sources */,
 				1AFE416320C4F7FE002D8137 /* IntervalBarCollectionViewCell.swift in Sources */,
@@ -1115,6 +1122,7 @@
 				5765936920CA696100298EF5 /* test.swift in Sources */,
 				1AFE412A20C4F7FE002D8137 /* TransDateCell.swift in Sources */,
 				1AFE414820C4F7FE002D8137 /* GetDataResult.swift in Sources */,
+				54AA25F620DCD76E0026701A /* RegisterationPageViewController.swift in Sources */,
 				1AFE416B20C4F7FE002D8137 /* ScientificMethod.swift in Sources */,
 				5765938020D0AE6300298EF5 /* GlobalMarketController.swift in Sources */,
 				1AFE410A20C4F7FE002D8137 /* Extensions.swift in Sources */,

@@ -25,14 +25,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if launchedBefore{
             print("launched before")
-        
+    
             //set flag to false for debugging purpose
-                        UserDefaults.standard.set(false, forKey: "launchedBefore")
+            UserDefaults.standard.set(false, forKey: "launchedBefore")
+    
+            
+            if UserDefaults.standard.bool(forKey: "isLoggedIn"){
+                window = UIWindow(frame:UIScreen.main.bounds)
+                let mainViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomePage") as UIViewController
+                window?.rootViewController = mainViewController
+                window?.makeKeyAndVisible()
+            }else{
+                print("User is not logged in")
+            }
             
         } else{
-            
             print("first time launch")
-            
+            print(UserDefaults.standard.bool(forKey: "isLoggedIn"))
             window = UIWindow(frame:UIScreen.main.bounds)
             let mainViewController = OnBoardingUIPageViewController()
             window?.rootViewController = mainViewController

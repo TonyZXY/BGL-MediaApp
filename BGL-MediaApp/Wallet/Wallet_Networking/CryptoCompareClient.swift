@@ -84,6 +84,8 @@ class CryptoCompareClient: APIClient{
         
     }
     
+    
+    
     func getTradePrices(from: String, to: String?=nil, exchange: String?=nil, completion: @escaping (Result<Price?, APIError>) -> Void) {
         
         let fsym = "fsym=" + from
