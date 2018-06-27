@@ -39,9 +39,9 @@ class AlertTableViewCell:UITableViewCell{
     var swithButton:UISwitch = {
         var switchButton = UISwitch()
         switchButton.isOn = false
-        switchButton.thumbTintColor = UIColor.red
-        switchButton.tintColor = UIColor.green
-        switchButton.onTintColor = ThemeColor().bglColor()
+//        switchButton.thumbTintColor = UIColor.red
+//        switchButton.tintColor = UIColor.green
+//        switchButton.onTintColor = ThemeColor().bglColor()
         switchButton.translatesAutoresizingMaskIntoConstraints = false
         return switchButton
     }()
@@ -49,6 +49,7 @@ class AlertTableViewCell:UITableViewCell{
     var compareLabel:UILabel = {
        var label = UILabel()
         label.text = "haha"
+        label.font = label.font.withSize(20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -56,6 +57,7 @@ class AlertTableViewCell:UITableViewCell{
     var dateLabel:UILabel = {
         var label = UILabel()
         label.text = "haha"
+        label.font = label.font.withSize(12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -63,6 +65,7 @@ class AlertTableViewCell:UITableViewCell{
     var coinDetailLabel:UILabel = {
         var label = UILabel()
         label.text = "haha"
+        label.font = label.font.withSize(12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

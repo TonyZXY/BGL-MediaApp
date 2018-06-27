@@ -7,17 +7,53 @@
 //
 
 import UIKit
+import RealmSwift
+
+struct alertResult{
+    var isExpanded:Bool = true
+    var coinName:String = ""
+    var coinAbbName:String = ""
+    var name:[alertObject] = [alertObject]()
+}
 
 class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSource{
-
-    var twoDimension = [ExpandableNames(isExpanded: true, name: ["a","sf"]),ExpandableNames(isExpanded: true, name: ["sdf","sfsdfsf"])]
+    var realm = try! Realm()
+    var alerts:[alertResult] = [alertResult]()
+    var allAlert:[alertResult]{
+        get{
+            var allResult = [alertResult]()
+            let results = realm.objects(alertObject.self)
+            let coinNameResults = realm.objects(alertCoinNames.self)
+            for value in coinNameResults{
+                var alertResults = alertResult()
+                let speCoin = results.filter("coinName = '" + value.coinName + "' ")
+                alertResults.isExpanded = true
+                alertResults.coinName = value.coinName
+                for data in speCoin{
+                    alertResults.name.append(data)
+                }
+                allResult.append(alertResults)
+            }
+            return allResult
+        }
+    }
+    
+    
+    
+    var twoDimension = [ExpandableNames(isExpanded: true, name: ["ds"]),ExpandableNames(isExpanded: true, name: ["sdf","sfsdfsf"])]
     
     var showIndexPaths = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        alerts = allAlert
+        NotificationCenter.default.addObserver(self, selector: #selector(addAlerts), name: NSNotification.Name(rawValue: "addAlert"), object: nil)
         // Do any additional setup after loading the view.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "addAlert"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +61,10 @@ class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSourc
         tabBarController?.tabBar.isHidden = true
     }
     
+    
+    @objc func addAlerts(){
+        alertTableView.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
@@ -36,13 +76,13 @@ class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSourc
         let coinImage = UIImageView(image: UIImage(named: "navigation_arrow.png"))
         coinImage.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         coinImage.clipsToBounds = true
-        
+        coinImage.coinImageSetter(coinName: alerts[section].name[0].coinAbbName, width: 30, height: 30, fontSize: 5)
         coinImage.contentMode = UIViewContentMode.scaleAspectFit
         coinImage.translatesAutoresizingMaskIntoConstraints = false
         
         let coinLabel = UILabel()
         coinLabel.translatesAutoresizingMaskIntoConstraints = false
-        coinLabel.text = "haha"
+        coinLabel.text = alerts[section].coinName
         
         
         //        let myTextField = UITextField()
@@ -90,12 +130,12 @@ class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSourc
     @objc func handleExpandClose(button:UIButton ){
         let section = button.tag
         var indexPaths = [IndexPath]()
-        for row in twoDimension[section].name.indices{
+        for row in alerts[section].name.indices{
             let indexPath = IndexPath(row:row,section:section)
             indexPaths.append(indexPath)
         }
-        let isExpanded = twoDimension[section].isExpanded
-        twoDimension[section].isExpanded = !isExpanded
+        let isExpanded = alerts[section].isExpanded
+        alerts[section].isExpanded = !isExpanded
         
         
         button.setTitle(isExpanded ? "Open":"Close", for: .normal)
@@ -114,22 +154,39 @@ class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSourc
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return twoDimension.count
+        return alerts.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !twoDimension[section].isExpanded{
+        if !alerts[section].isExpanded{
             return 0
         }
-        return twoDimension[section].name.count
+        return alerts[section].name.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "editAlertCell", for: indexPath) as! AlertTableViewCell
         //        let name = twoDimension[indexPath.section].name[indexPath.row]
-        cell.compareLabel.text = twoDimension[indexPath.section].name[indexPath.row]
+      
+        let object = alerts[indexPath.section].name[indexPath.row]
+        var compare:String = ""
+        if object.status == true{
+            compare = ">"
+        }else if object.status == false{
+            compare = "<"
+        } else {
+            compare = "="
+        }
         
-        //        cell.textLabel?.text = name
+        let compareLabel = "1 " + object.coinAbbName + " " + compare + " " + String(object.compare)
+        let coinDetail = object.exchangName + " - " + object.coinAbbName + "/" + object.tradingPairs
+        let dateToString = DateFormatter()
+        dateToString.dateFormat = "EEEE, dd MMMM yyyy HH:mm"
+        dateToString.locale = Locale(identifier: "en_AU")
+        let timess = dateToString.string(from: object.dateTime)
+        cell.dateLabel.text = timess
+        cell.compareLabel.text = compareLabel
+        cell.coinDetailLabel.text = coinDetail
         return cell
     }
     
@@ -148,10 +205,12 @@ class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSourc
         
         view.addSubview(alertTableView)
         alertTableView.addSubview(addButton)
-        
+         view.addSubview(alertButton)
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":alertTableView]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":alertTableView]))
-        
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":alertTableView]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":alertButton]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v1]-3-[v0(80)]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":alertButton,"v1":alertTableView]))
+
 //        NSLayoutConstraint(item: addButton, attribute: .top, relatedBy: .equal, toItem: alertTableView, attribute: .top, multiplier: 1, constant: 0).isActive = true
 //        NSLayoutConstraint(item: addButton, attribute: .trailing, relatedBy: .equal, toItem: alertTableView, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
 //
@@ -183,6 +242,23 @@ class AlertController: UIViewController,UITableViewDelegate,UITableViewDataSourc
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
+//        tableView.separatorStyle = .none
         return tableView
     }()
+    
+    lazy var alertButton:UIButton = {
+        var button = UIButton(type: .system)
+        button.setTitle(textValue(name: "addAlert_alert"), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = ThemeColor().bglColor()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(addNewAlert), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func addNewAlert(){
+        let alert = AlertManageController()
+        navigationController?.pushViewController(alert, animated: true)
+    }
+    
 }

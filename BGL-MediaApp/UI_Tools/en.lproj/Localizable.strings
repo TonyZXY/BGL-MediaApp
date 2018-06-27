@@ -174,3 +174,10 @@ alertChange_language = "Change";
 flashNews_alert = "Flash News Notification";
 price_alert = "Currency Alert";
 edit_alert = "Edit Currency";
+addAlert_alert = "Add alert";
+
+//Alert Edit Page
+exampleLabel_alert = "Market Price";
+alertDone_alert = "Done";
+
+

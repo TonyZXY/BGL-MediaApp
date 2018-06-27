@@ -161,6 +161,8 @@
 		5765939A20D0AEC400298EF5 /* MarketsCoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765939020D0AEC300298EF5 /* MarketsCoinTableViewCell.swift */; };
 		5765939B20D0AEC400298EF5 /* MarketsTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765939120D0AEC400298EF5 /* MarketsTotalView.swift */; };
 		5782E74120E192550062CBF7 /* alertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782E74020E192550062CBF7 /* alertTableViewCell.swift */; };
+		5782E74320E1D32A0062CBF7 /* priceNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782E74220E1D32A0062CBF7 /* priceNotificationCell.swift */; };
+		5782E74520E2FF490062CBF7 /* AlertCoinName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782E74420E2FF490062CBF7 /* AlertCoinName.swift */; };
 		57E0AFF220D76AA300A81529 /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57E0AFF020D76AA300A81529 /* Main.strings */; };
 		57E5DFB920DB3650006269AF /* AlertNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5DFB820DB3650006269AF /* AlertNotificationController.swift */; };
 		65CA633090F1F7BCDAFE405B /* Pods_BGL_MediaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF117585BD5B564B1951D07 /* Pods_BGL_MediaApp.framework */; };
@@ -326,6 +328,8 @@
 		5765939020D0AEC300298EF5 /* MarketsCoinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketsCoinTableViewCell.swift; sourceTree = "<group>"; };
 		5765939120D0AEC400298EF5 /* MarketsTotalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketsTotalView.swift; sourceTree = "<group>"; };
 		5782E74020E192550062CBF7 /* alertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertTableViewCell.swift; sourceTree = "<group>"; };
+		5782E74220E1D32A0062CBF7 /* priceNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = priceNotificationCell.swift; sourceTree = "<group>"; };
+		5782E74420E2FF490062CBF7 /* AlertCoinName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCoinName.swift; sourceTree = "<group>"; };
 		57E0AFF120D76AA300A81529 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Main.strings; sourceTree = "<group>"; };
 		57E0AFF320D76AB900A81529 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "BGL-MediaApp/en.lproj/Main.strings"; sourceTree = SOURCE_ROOT; };
 		57E0AFF420D76AD600A81529 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "../zh-Hans-CN.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -521,6 +525,7 @@
 				1AFE408B20C4F7FD002D8137 /* TransactionHistory */,
 				1AFE409120C4F7FD002D8137 /* MainView.swift */,
 				5782E74020E192550062CBF7 /* alertTableViewCell.swift */,
+				5782E74220E1D32A0062CBF7 /* priceNotificationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -884,6 +889,7 @@
 			children = (
 				57E5DFB820DB3650006269AF /* AlertNotificationController.swift */,
 				57165C3A20DC8CA500583969 /* AlertObject.swift */,
+				5782E74420E2FF490062CBF7 /* AlertCoinName.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1150,7 +1156,9 @@
 				1AFE416920C4F7FE002D8137 /* CoinImageSetter.swift in Sources */,
 				1AFE40F020C4F7FE002D8137 /* OtherOptionViewController.swift in Sources */,
 				1AFE411620C4F7FE002D8137 /* DetailController.swift in Sources */,
+				5782E74320E1D32A0062CBF7 /* priceNotificationCell.swift in Sources */,
 				57165C3B20DC8CA500583969 /* AlertObject.swift in Sources */,
+				5782E74520E2FF490062CBF7 /* AlertCoinName.swift in Sources */,
 				1AFE415720C4F7FE002D8137 /* CancelTouchKeyboard.swift in Sources */,
 				1AFE411E20C4F7FE002D8137 /* AllLossView.swift in Sources */,
 				1AFE412620C4F7FE002D8137 /* TransNumberCell.swift in Sources */,

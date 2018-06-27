@@ -174,3 +174,8 @@ alertChange_language = "确认";
 flashNews_alert = "快讯推送通知";
 price_alert = "货币价格提醒";
 edit_alert = "设置需要提醒的货币";
+addAlert_alert = "添加提醒";
+
+//Alert Edit Page
+exampleLabel_alert = "参考市场价格";
+alertDone_alert = "完成";
