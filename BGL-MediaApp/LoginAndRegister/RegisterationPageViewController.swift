@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class RegisterationPageViewController: UIViewController {
     
@@ -14,28 +16,28 @@ class RegisterationPageViewController: UIViewController {
     
     let fullNameLabel: UILabel = {
        let label = UILabel()
-        label.text = "Full Name"
+        label.text = "Full Name  *"
         label.bounds = CGRect(x: 0, y: 0, width: 70, height: 50)
         return label
     }()
     
     let emailLabel: UILabel = {
         let label = UILabel()
-        label.text = "Email"
+        label.text = "Email  *"
         label.bounds = CGRect(x: 0, y: 0, width: 70, height: 50)
         return label
     }()
     
     let passwordLabel: UILabel = {
         let label = UILabel()
-        label.text = "Password"
+        label.text = "Password  *"
         label.bounds = CGRect(x: 0, y: 0, width: 150, height: 50)
         return label
     }()
     
     let reEnterPasswordLabel: UILabel = {
         let label = UILabel()
-        label.text = "Re-enter password"
+        label.text = "Confirm Password  *"
         label.bounds = CGRect(x: 0, y: 0, width: 150, height: 50)
         return label
     }()
@@ -145,11 +147,60 @@ class RegisterationPageViewController: UIViewController {
         if (fullNameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! ||  (reEnterPasswordTextField.text?.isEmpty)! {
             notificationLabel.text = "Please provide all information necessary"
             notificationLabel.isHidden = false
-        }else{
-            notificationLabel.text = "Write some code send to server."
+        } else if passwordTextField.text == reEnterPasswordTextField.text {
+            let parameter = ["fullName": fullNameTextField.text!, "email": emailTextField.text!, "password": passwordTextField.text!, "age": ageTextField.text!, "gender": genderTextField.text!]
+
+            let (message, success) = LoginPageViewController().checkUsernameAndPassword(username: emailTextField.text!, password: passwordTextField.text!)
+            if success {
+               
+                registerRequestToServer(parameter: parameter){(res,pass) in
+                    if pass {
+                        self.notificationLabel.text = "Registration Complete. Now login user. "
+                        print(res["token"])
+                        self.notificationLabel.isHidden = false
+                    } else{
+                        self.notificationLabel.text = "Registration. Error code \(res["code"])"
+                        self.notificationLabel.isHidden = false
+                    }
+                }
+                
+                
+                notificationLabel.text = "Write some code send to server."
+                notificationLabel.isHidden = false
+            } else {
+                self.notificationLabel.text = message
+                self.notificationLabel.isHidden = false
+            }
+        } else {
+            notificationLabel.text = "Password does not match"
             notificationLabel.isHidden = false
         }
     }
+    
+    func registerRequestToServer(parameter: [String : String], completion:@escaping (JSON, Bool)->Void){
+        
+        let url = URL(string: "http://10.10.6.218:3030/userLogin/register")
+        var urlRequest = URLRequest(url: url!)
+        urlRequest.httpMethod = "POST"
+        let httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: [])
+        urlRequest.httpBody = httpBody
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //        urlRequest.setValue("gmail.com",email)
+        
+        Alamofire.request(urlRequest).response { (response) in
+            if let data = response.data{
+                let res = JSON(data)
+                if res["success"].bool!{
+                    completion(res,true)
+                }else {
+                    completion(res,false)
+                }
+            }
+        }
+        
+        
+    }
+        
     
     func combineViews(combine view1: UILabel, with view2: LeftPaddedTextField) -> UIView {
         let newView = UIView()
@@ -273,11 +324,6 @@ class RegisterationPageViewController: UIViewController {
         
         
     }
-    
-
-    
-    
-    
     
     @objc func closePage(sender: UIButton){
         self.dismiss(animated: true, completion: nil)

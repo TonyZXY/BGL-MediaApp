@@ -165,29 +165,52 @@ class LoginPageViewController: UIViewController {
         }else{
             let un = emailTextField.text!
             let pw = passwordTextField.text!
-            
-
-            checkUsernameAndPasswordCombination(username: un, password: pw){(res,pass) in
-                if pass {
-                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "logIn"), object: nil)
-                    self.cancelButton.setTitle("Close", for: .normal)
-                    self.notificationLabel.textColor = UIColor.lightGray
-                    self.notificationLabel.text = "Login successfull, press close below."
-                    self.notificationLabel.isHidden = false
-                } else{
-                    self.notificationLabel.text = "Login failed. Error code \(res["code"])"
-                    self.notificationLabel.isHidden = false
+            let (message, success) = checkUsernameAndPassword(username: un, password: pw)
+            if success{
+                loginRequestToServer(username: un, password: pw){(res,pass) in
+                    if pass {
+                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "logIn"), object: nil)
+                        self.cancelButton.setTitle("Close", for: .normal)
+                        self.notificationLabel.textColor = UIColor.lightGray
+                        self.notificationLabel.text = "Login successfull, press close below."
+                        self.notificationLabel.isHidden = false
+                    } else{
+                        self.notificationLabel.text = "Login failed. Error code \(res["code"])"
+                        self.notificationLabel.isHidden = false
+                    }
                 }
+            } else{
+                self.notificationLabel.text = message
+                self.notificationLabel.isHidden = false
             }
         }
     }
     
-    func checkUsernameAndPasswordCombination(username: String,password: String,completion:@escaping (JSON, Bool)->Void){
+    func checkUsernameAndPassword(username: String, password: String) -> (String?, Bool) {
+//        print(username)
+//        print(password)
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        if emailPredicate.evaluate(with: username){
+            let passwordFormat = "^((?!.*[\\s])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$&*])(?=.*\\d).{8,15})$"
+            let passwordPredicate = NSPredicate(format:"SELF MATCHES %@", passwordFormat)
+            if passwordPredicate.evaluate(with: password){
+                return (nil,true)
+            }else{
+                return ("Wrong password format", false)
+            }
+        } else{
+            return ("Wrong email format", false)
+        }
+        return ("should not be displaying this", false)
+    }
+    
+    func loginRequestToServer(username: String,password: String,completion:@escaping (JSON, Bool)->Void){
         
         
         let parameters = ["username": username, "password":password]
-        let url = URL(string: "http://10.10.6.218:3030/test/login")
+        let url = URL(string: "http://10.10.6.218:3030/userLogin/login")
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "POST"
         let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
