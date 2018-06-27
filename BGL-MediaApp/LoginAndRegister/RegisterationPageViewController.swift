@@ -10,9 +10,11 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class RegisterationPageViewController: UIViewController {
+class RegisterationPageViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource{
     
 //    var keyboardIsShown = false
+    var pickOption = ["Male", "Female"]
+    var titlePickOption = ["Mr","Mrs","Ms","Miss","Dr","Sir"]
     
     let fullNameLabel: UILabel = {
        let label = UILabel()
@@ -44,7 +46,7 @@ class RegisterationPageViewController: UIViewController {
     
     let ageLabel: UILabel = {
         let label = UILabel()
-        label.text = "Age"
+        label.text = "Title"
         label.bounds = CGRect(x: 0, y: 0, width: 150, height: 50)
         return label
     }()
@@ -100,6 +102,8 @@ class RegisterationPageViewController: UIViewController {
         return textField
     }()
     
+    
+    
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .lightGray
@@ -119,13 +123,62 @@ class RegisterationPageViewController: UIViewController {
         return button
     }()
     
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = ThemeColor().themeColor()
         setUp()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     
+        let genderPickerView = UIPickerView()
+        genderPickerView.delegate = self
+        genderPickerView.tag = 1
+        genderTextField.inputView = genderPickerView
+        
+        let titlePickerView = UIPickerView()
+        titlePickerView.delegate = self
+        titlePickerView.tag = 0
+        ageTextField.inputView = titlePickerView
+        
+        
+        
     }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView.tag == 1{
+            return pickOption.count
+        } else {
+            return titlePickOption.count
+        }
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        if pickerView.tag == 1{
+            return pickOption[row]
+        } else {
+            return titlePickOption[row]
+        }
+    
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if pickerView.tag == 1{
+            genderTextField.text = pickOption[row]
+        } else {
+            ageTextField.text = titlePickOption[row]
+        }
+    
+    }
+    
     
     let notificationLabel: UILabel = {
         let label = UILabel()
@@ -324,6 +377,7 @@ class RegisterationPageViewController: UIViewController {
         
         
     }
+    
     
     @objc func closePage(sender: UIButton){
         self.dismiss(animated: true, completion: nil)
