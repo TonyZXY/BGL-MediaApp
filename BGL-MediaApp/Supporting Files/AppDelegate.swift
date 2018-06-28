@@ -50,9 +50,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SetDataResult().writeJsonExchange()
             SetDataResult().writeMarketCapCoinList()
             GetDataResult().getCoinList()
+            UserDefaults.standard.set(false, forKey: "flashSwitch")
+            UserDefaults.standard.set(false, forKey: "priceSwitch")
             UserDefaults.standard.set("AUD", forKey: "defaultCurrency")
             UserDefaults.standard.set("EN", forKey: "defaultLanguage")
-//            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
         return true
     }
