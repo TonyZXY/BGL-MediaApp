@@ -181,6 +181,7 @@ class TimelineTableViewController: UITableViewController {
         self.present(activityVC,animated: true, completion:nil)
     }
     
+    
     func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint, withSize size: CGFloat) -> UIImage {
         let textColor = UIColor.black
         
@@ -262,7 +263,7 @@ class TimelineTableViewController: UITableViewController {
 //                let filterName = "languageTag = '" + self.defaultLanguage + "' "
                 self.results = try! Realm().objects(NewsFlash.self).sorted(byKeyPath: "dateTime", ascending: false)//.filter("languageTag='" + self.defaultLanguage + "'")
                 self.resultsUpdated = true
-                print(self.results)
+//                print(self.results)
                 self.tableView.reloadData()
 //                print(self.results.count)
             }
