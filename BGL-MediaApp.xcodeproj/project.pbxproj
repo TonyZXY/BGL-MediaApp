@@ -138,6 +138,10 @@
 		5750AC7220D103B800ACDABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5750AC7120D103B800ACDABE /* Assets.xcassets */; };
 		5750AC7420D1F48700ACDABE /* SearchNewsFlashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5750AC7320D1F48700ACDABE /* SearchNewsFlashController.swift */; };
 		5750AC7620D7625800ACDABE /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5750AC7520D7625800ACDABE /* MainTabBarController.swift */; };
+		575EE98A20E46958001E6180 /* RegisterationPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575EE98520E46958001E6180 /* RegisterationPageViewController.swift */; };
+		575EE98B20E46958001E6180 /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575EE98620E46958001E6180 /* LoginPageViewController.swift */; };
+		575EE98C20E46958001E6180 /* OnBoardingUIPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575EE98820E46958001E6180 /* OnBoardingUIPageViewController.swift */; };
+		575EE98D20E46958001E6180 /* OnBoardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575EE98920E46958001E6180 /* OnBoardingPageViewController.swift */; };
 		5765936120C7AA3E00298EF5 /* DefaultLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */; };
 		5765936520CA3E9100298EF5 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936420CA3E9100298EF5 /* InitialView.swift */; };
 		5765936720CA46AD00298EF5 /* SDSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5765936620CA46AD00298EF5 /* SDSViewController.swift */; };
@@ -260,10 +264,6 @@
 		1AFE40E920C4F7FD002D8137 /* ScientificMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScientificMethod.swift; sourceTree = "<group>"; };
 		1AFE40EA20C4F7FD002D8137 /* ThemeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		52014D454945527EF240756D /* Pods-BGL-MediaApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.debug.xcconfig"; sourceTree = "<group>"; };
-		54AA25E720DB5FC30026701A /* OnBoardingUIPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingUIPageViewController.swift; sourceTree = "<group>"; };
-		54AA25E920DB63240026701A /* OnBoardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPageViewController.swift; sourceTree = "<group>"; };
-		54AA25F520DCD76E0026701A /* RegisterationPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationPageViewController.swift; sourceTree = "<group>"; };
-		54AA25F720DCD77C0026701A /* LoginPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
 		56D92E4D774CE980869C74BC /* Pods-BGL-MediaApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BGL-MediaApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BGL-MediaApp/Pods-BGL-MediaApp.release.xcconfig"; sourceTree = "<group>"; };
 		57165C3A20DC8CA500583969 /* AlertObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertObject.swift; sourceTree = "<group>"; };
 		57165C3C20DCBF0100583969 /* AlertManageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManageController.swift; sourceTree = "<group>"; };
@@ -307,6 +307,10 @@
 		5750AC7120D103B800ACDABE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5750AC7320D1F48700ACDABE /* SearchNewsFlashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNewsFlashController.swift; sourceTree = "<group>"; };
 		5750AC7520D7625800ACDABE /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		575EE98520E46958001E6180 /* RegisterationPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterationPageViewController.swift; sourceTree = "<group>"; };
+		575EE98620E46958001E6180 /* LoginPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
+		575EE98820E46958001E6180 /* OnBoardingUIPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingUIPageViewController.swift; sourceTree = "<group>"; };
+		575EE98920E46958001E6180 /* OnBoardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingPageViewController.swift; sourceTree = "<group>"; };
 		5765936020C7AA3E00298EF5 /* DefaultLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLanguageController.swift; sourceTree = "<group>"; };
 		5765936420CA3E9100298EF5 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		5765936620CA46AD00298EF5 /* SDSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDSViewController.swift; sourceTree = "<group>"; };
@@ -372,6 +376,8 @@
 		1AFE402D20C4F7DC002D8137 /* BGL-MediaApp */ = {
 			isa = PBXGroup;
 			children = (
+				575EE98420E46958001E6180 /* LoginAndRegister */,
+				575EE98720E46958001E6180 /* OnBoardingPage */,
 				57165DDA20E076DD00583969 /* News */,
 				5750AC5120D1013D00ACDABE /* NewsFlash */,
 				1AFE406D20C4F7FC002D8137 /* Base.lproj */,
@@ -878,6 +884,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		575EE98420E46958001E6180 /* LoginAndRegister */ = {
+			isa = PBXGroup;
+			children = (
+				575EE98520E46958001E6180 /* RegisterationPageViewController.swift */,
+				575EE98620E46958001E6180 /* LoginPageViewController.swift */,
+			);
+			path = LoginAndRegister;
+			sourceTree = "<group>";
+		};
+		575EE98720E46958001E6180 /* OnBoardingPage */ = {
+			isa = PBXGroup;
+			children = (
+				575EE98820E46958001E6180 /* OnBoardingUIPageViewController.swift */,
+				575EE98920E46958001E6180 /* OnBoardingPageViewController.swift */,
+			);
+			path = OnBoardingPage;
+			sourceTree = "<group>";
+		};
 		5765935F20C7AA0A00298EF5 /* DefaultLanague */ = {
 			isa = PBXGroup;
 			children = (
@@ -1065,7 +1089,7 @@
 				1AFE415820C4F7FE002D8137 /* TickerDataFetcherV2.swift in Sources */,
 				5765936120C7AA3E00298EF5 /* DefaultLanguageController.swift in Sources */,
 				1AFE413820C4F7FE002D8137 /* Endpoint.swift in Sources */,
-				54AA25E820DB5FC30026701A /* OnBoardingUIPageViewController.swift in Sources */,
+				575EE98B20E46958001E6180 /* LoginPageViewController.swift in Sources */,
 				1AFE415C20C4F7FE002D8137 /* DefaultViewController.swift in Sources */,
 				1AFE416020C4F7FE002D8137 /* CandleStickChart.swift in Sources */,
 				1AFE40F520C4F7FE002D8137 /* NotificationViewController.swift in Sources */,
@@ -1092,9 +1116,9 @@
 				5750AC6920D1022400ACDABE /* NewsInFlashNewsRealm.swift in Sources */,
 				1AFE412720C4F7FE002D8137 /* TransExpensesCell.swift in Sources */,
 				1AFE413E20C4F7FE002D8137 /* MarketTradingPairs.swift in Sources */,
+				575EE98D20E46958001E6180 /* OnBoardingPageViewController.swift in Sources */,
 				1AFE412C20C4F7FE002D8137 /* TransTimeCell.swift in Sources */,
 				1AFE411D20C4F7FE002D8137 /* CoinDetailData.swift in Sources */,
-				54AA25F820DCD77C0026701A /* LoginPageViewController.swift in Sources */,
 				1AFE413C20C4F7FE002D8137 /* WalletController.swift in Sources */,
 				1AFE412220C4F7FE002D8137 /* HistoryLine.swift in Sources */,
 				1AFE416320C4F7FE002D8137 /* IntervalBarCollectionViewCell.swift in Sources */,
@@ -1122,7 +1146,6 @@
 				1AFE412420C4F7FE002D8137 /* HistoryPoint.swift in Sources */,
 				1AFE412F20C4F7FE002D8137 /* WalletsCell.swift in Sources */,
 				5765939A20D0AEC400298EF5 /* MarketsCoinTableViewCell.swift in Sources */,
-				54AA25EA20DB63240026701A /* OnBoardingPageViewController.swift in Sources */,
 				1AFE412820C4F7FE002D8137 /* TransTradePairsCell.swift in Sources */,
 				5750AC7620D7625800ACDABE /* MainTabBarController.swift in Sources */,
 				1AFE413D20C4F7FE002D8137 /* SearchCoinController.swift in Sources */,
@@ -1164,6 +1187,7 @@
 				5782E74320E1D32A0062CBF7 /* priceNotificationCell.swift in Sources */,
 				57165C3B20DC8CA500583969 /* AlertObject.swift in Sources */,
 				5782E74520E2FF490062CBF7 /* AlertCoinName.swift in Sources */,
+				575EE98C20E46958001E6180 /* OnBoardingUIPageViewController.swift in Sources */,
 				1AFE415720C4F7FE002D8137 /* CancelTouchKeyboard.swift in Sources */,
 				1AFE411E20C4F7FE002D8137 /* AllLossView.swift in Sources */,
 				1AFE412620C4F7FE002D8137 /* TransNumberCell.swift in Sources */,
@@ -1180,6 +1204,7 @@
 				5765938620D0AE9500298EF5 /* TickerDataRealm.swift in Sources */,
 				57165DFF20E076DE00583969 /* Genuine.swift in Sources */,
 				57165DF920E076DE00583969 /* SearchNewsController.swift in Sources */,
+				575EE98A20E46958001E6180 /* RegisterationPageViewController.swift in Sources */,
 				1AFE411C20C4F7FE002D8137 /* GlobalMarket.swift in Sources */,
 				1AFE40EC20C4F7FE002D8137 /* DefaultCurrencyViewController.swift in Sources */,
 				1AFE413320C4F7FE002D8137 /* CryptoCompareEndpoint.swift in Sources */,
