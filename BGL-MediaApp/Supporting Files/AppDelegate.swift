@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.statusBarStyle = .lightContent
         UITabBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = ThemeColor().themeColor()
-        
+        //vdcds
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         
         if launchedBefore{
