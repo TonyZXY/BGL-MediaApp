@@ -16,9 +16,9 @@ class RegisterationPageViewController: UIViewController, UIPickerViewDelegate, U
     var pickOption = ["Male", "Female"]
     var titlePickOption = ["Mr","Mrs","Ms","Miss","Dr","Sir"]
     
-    let fullNameLabel: UILabel = {
+    let firstNameLabel: UILabel = {
        let label = UILabel()
-        label.text = "Full Name  *"
+        label.text = "First Name  *"
         label.bounds = CGRect(x: 0, y: 0, width: 70, height: 50)
         return label
     }()
@@ -44,21 +44,21 @@ class RegisterationPageViewController: UIViewController, UIPickerViewDelegate, U
         return label
     }()
     
-    let ageLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Title"
         label.bounds = CGRect(x: 0, y: 0, width: 150, height: 50)
         return label
     }()
     
-    let genderLabel: UILabel = {
+    let lastNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Gender"
+        label.text = "Last Name  *"
         label.bounds = CGRect(x: 0, y: 0, width: 150, height: 50)
         return label
     }()
     
-    let fullNameTextField: LeftPaddedTextField = {
+    let firstNameTextField: LeftPaddedTextField = {
         let textField = LeftPaddedTextField()
         textField.placeholder = ""
         textField.backgroundColor = .white
@@ -88,14 +88,14 @@ class RegisterationPageViewController: UIViewController, UIPickerViewDelegate, U
         return textField
     }()
     
-    let ageTextField: LeftPaddedTextField = {
+    let titleTextField: LeftPaddedTextField = {
         let textField = LeftPaddedTextField()
         textField.placeholder = ""
         textField.backgroundColor = .white
         return textField
     }()
     
-    let genderTextField: LeftPaddedTextField = {
+    let lastNameTextField: LeftPaddedTextField = {
         let textField = LeftPaddedTextField()
         textField.placeholder = ""
         textField.backgroundColor = .white
@@ -132,15 +132,12 @@ class RegisterationPageViewController: UIViewController, UIPickerViewDelegate, U
         setUp()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     
-        let genderPickerView = UIPickerView()
-        genderPickerView.delegate = self
-        genderPickerView.tag = 1
-        genderTextField.inputView = genderPickerView
+
         
         let titlePickerView = UIPickerView()
         titlePickerView.delegate = self
         titlePickerView.tag = 0
-        ageTextField.inputView = titlePickerView
+        titleTextField.inputView = titlePickerView
         
         
         
@@ -151,31 +148,23 @@ class RegisterationPageViewController: UIViewController, UIPickerViewDelegate, U
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView.tag == 1{
-            return pickOption.count
-        } else {
-            return titlePickOption.count
-        }
+     
+        return titlePickOption.count
+        
         
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        if pickerView.tag == 1{
-            return pickOption[row]
-        } else {
-            return titlePickOption[row]
-        }
+    
+        return titlePickOption[row]
+    
     
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    
+        titleTextField.text = titlePickOption[row]
         
-        if pickerView.tag == 1{
-            genderTextField.text = pickOption[row]
-        } else {
-            ageTextField.text = titlePickOption[row]
-        }
     
     }
     
@@ -197,11 +186,11 @@ class RegisterationPageViewController: UIViewController, UIPickerViewDelegate, U
         }, completion: nil)
         
         
-        if (fullNameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! ||  (reEnterPasswordTextField.text?.isEmpty)! {
+        if (firstNameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! ||  (reEnterPasswordTextField.text?.isEmpty)! || (lastNameTextField.text?.isEmpty)! {
             notificationLabel.text = "Please provide all information necessary"
             notificationLabel.isHidden = false
         } else if passwordTextField.text == reEnterPasswordTextField.text {
-            let parameter = ["fullName": fullNameTextField.text!, "email": emailTextField.text!, "password": passwordTextField.text!, "age": ageTextField.text!, "gender": genderTextField.text!]
+            let parameter = ["firstName": firstNameTextField.text!, "email": emailTextField.text!, "password": passwordTextField.text!, "title": titleTextField.text!, "lastName": lastNameTextField.text!]
 
             let (message, success) = LoginPageViewController().checkUsernameAndPassword(username: emailTextField.text!, password: passwordTextField.text!)
             if success {
@@ -304,27 +293,46 @@ class RegisterationPageViewController: UIViewController, UIPickerViewDelegate, U
     
     
     func setUp(){
-    
         
-        let fullNameView = combineViews(combine: fullNameLabel, with: fullNameTextField)
-        view.addSubview(fullNameView)
-        fullNameView.translatesAutoresizingMaskIntoConstraints = false
-        fullNameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 80).isActive = true
-        fullNameView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        fullNameView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        fullNameView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        let titleView = combineViews(combine: titleLabel, with: titleTextField)
+        view.addSubview(titleView)
+        titleView.translatesAutoresizingMaskIntoConstraints = false
+        
+//        titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 80).isActive = false
+//        titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20).isActive = true
+        
+        titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 80).isActive = true
+        titleView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        titleView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        titleView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         view.addSubview(notificationLabel)
         notificationLabel.translatesAutoresizingMaskIntoConstraints = false
-        notificationLabel.bottomAnchor.constraint(equalTo: fullNameView.topAnchor, constant: -5).isActive = true
+        notificationLabel.bottomAnchor.constraint(equalTo: titleView.topAnchor, constant: -5).isActive = true
         notificationLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         notificationLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         notificationLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+        let firstNameView = combineViews(combine: firstNameLabel, with: firstNameTextField)
+        view.addSubview(firstNameView)
+        firstNameView.translatesAutoresizingMaskIntoConstraints = false
+        firstNameView.topAnchor.constraint(equalTo: titleView.bottomAnchor,constant: 5).isActive = true
+        firstNameView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        firstNameView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        firstNameView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        let lastNameView = combineViews(combine: lastNameLabel , with: lastNameTextField)
+        view.addSubview(lastNameView)
+        lastNameView.translatesAutoresizingMaskIntoConstraints = false
+        lastNameView.topAnchor.constraint(equalTo: firstNameView.bottomAnchor,constant: 5).isActive = true
+        lastNameView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        lastNameView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        lastNameView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
         let emailView = combineViews(combine: emailLabel, with: emailTextField)
         view.addSubview(emailView)
         emailView.translatesAutoresizingMaskIntoConstraints = false
-        emailView.topAnchor.constraint(equalTo: fullNameView.bottomAnchor,constant: 5).isActive = true
+        emailView.topAnchor.constraint(equalTo: lastNameView.bottomAnchor,constant: 5).isActive = true
         emailView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         emailView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         emailView.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -345,32 +353,17 @@ class RegisterationPageViewController: UIViewController, UIPickerViewDelegate, U
         reEnterPasswordView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         reEnterPasswordView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
-        let ageView = combineViews(combine: ageLabel, with: ageTextField)
-        view.addSubview(ageView)
-        ageView.translatesAutoresizingMaskIntoConstraints = false
-        ageView.topAnchor.constraint(equalTo: reEnterPasswordView.bottomAnchor,constant: 5).isActive = true
-        ageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        ageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        ageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        let genderView = combineViews(combine: genderLabel , with: genderTextField)
-        view.addSubview(genderView)
-        genderView.translatesAutoresizingMaskIntoConstraints = false
-        genderView.topAnchor.constraint(equalTo: ageView.bottomAnchor,constant: 5).isActive = true
-        genderView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        genderView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        genderView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         view.addSubview(registerButton)
         registerButton.translatesAutoresizingMaskIntoConstraints = false
-        registerButton.topAnchor.constraint(equalTo: genderView.bottomAnchor, constant: 5).isActive = true
+        registerButton.topAnchor.constraint(equalTo: reEnterPasswordView.bottomAnchor, constant: 5).isActive = true
         registerButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         registerButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
         registerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         view.addSubview(cancelButton)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.topAnchor.constraint(equalTo: genderView.bottomAnchor, constant: 5).isActive = true
+        cancelButton.topAnchor.constraint(equalTo: reEnterPasswordView.bottomAnchor, constant: 5).isActive = true
         cancelButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         cancelButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         cancelButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
